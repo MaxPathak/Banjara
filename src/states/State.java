@@ -1,8 +1,8 @@
 package src.states;
 
-import src.Game;
-
 import java.awt.Graphics;
+
+import src.Handler;
 
 public abstract class State {
     
@@ -18,10 +18,10 @@ public abstract class State {
 
     //Common methods
 
-    protected Game game;
+    protected Handler handler;
 
-    public State(Game game) {
-        this.game = game;
+    public State(Handler handler) {
+        this.handler = handler;
     }
 
     public abstract void update();

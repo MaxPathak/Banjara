@@ -10,7 +10,7 @@ public class Tile {
     public static Tile dirtTile = new DirtTile(1);
     public static Tile bushTile = new BushTile(2);
 
-    public static final int TILEWIDTH = 48, TILEHEIGHT = 48;
+    public static final int TILEWIDTH = 40, TILEHEIGHT = 40;
 
     protected BufferedImage img;
     protected final int id;

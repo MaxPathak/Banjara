@@ -1,23 +1,25 @@
 package src.states;
 
-import src.Game;
-import src.tiles.Tile;
-import src.maps.Map;
-import src.entities.creatures.Player;
-
 import java.awt.Graphics;
+
+import src.Handler;
+import src.entities.creatures.Player;
+import src.maps.Map;
+import src.tiles.Tile;
 
 public class GameState extends State {
 
     private Player player;
     private Map map;
 
-    public GameState(Game game) {
-        super(game);
-        player = new Player(game, 0, 0);
-        map = new Map(game, "data/maps/map01.txt");
-        
-        game.getGameCamera().move(0, 0);
+    public GameState(Handler handler) {
+        super(handler);
+        player = new Player(handler, 0, 0);
+        map = new Map(handler, "data/maps/map01.txt");
+        handler.setMap(map);
+        handler.getGameCamera().move(0, 0);
+        player.setX((float) handler.getMap().getSpawnX() * Tile.TILEWIDTH);
+        player.setY((float) handler.getMap().getSpawnY() * Tile.TILEHEIGHT);
     }
 
     @Override

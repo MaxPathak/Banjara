@@ -1,8 +1,10 @@
 package src.display;
 
-import javax.swing.JFrame;
+import java.awt.Canvas;
+import java.awt.Dimension;
+
 import javax.swing.ImageIcon;
-import java.awt.*;
+import javax.swing.JFrame;
 
 public class Display {
     
@@ -29,7 +31,7 @@ public class Display {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 
-        ImageIcon icon = new ImageIcon("/icon/icon.png");
+        ImageIcon icon = new ImageIcon("icon/icon.png");
         frame.setIconImage(icon.getImage());
 
         //Initialize the Canvas where we can draw
