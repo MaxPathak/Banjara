@@ -7,7 +7,7 @@ import src.tiles.Tile;
 public abstract class Creature extends Entity {
 
     public static final int DEFAULT_HEALTH = 10;
-    public static final float DEFAULT_SPEED = 3.0f;
+    public static final float DEFAULT_SPEED = 4.0f;
     public static final int DEFAULT_CREATURE_WIDTH = 48,
                             DEFAULT_CREATURE_HEIGHT = 48;
 
@@ -26,10 +26,15 @@ public abstract class Creature extends Entity {
     public void move() {
         moveX();
         moveY();
+        //System.out.println("x: " + x + ", y: " + y);
     }
 
     public void moveX() {
-        if(xMove > 0) { // Move right
+        if(x + xMove < 0) {
+            x = 0;
+        } else if(x + xMove + bounds.width > handler.getMap().getWidth() * Tile.TILEWIDTH) {
+            x = handler.getMap().getWidth() * Tile.TILEWIDTH - bounds.width;
+        } else if(xMove > 0) { // Move right
             int tx = (int) (x + xMove + bounds.width - 1) / Tile.TILEWIDTH;
 
             for(int i = 0; i < bounds.height; i++) {
@@ -53,7 +58,11 @@ public abstract class Creature extends Entity {
     }
 
     public void moveY() {
-        if(yMove < 0) { // Move up
+        if(y + yMove < 0) {
+            y = 0;
+        } else if(y + yMove + bounds.height > handler.getMap().getHeight() * Tile.TILEHEIGHT) {
+            y = handler.getMap().getHeight() * Tile.TILEHEIGHT - bounds.height;
+        } else if(yMove < 0) { // Move up
             int ty = (int) (y + yMove) / Tile.TILEHEIGHT;
         
             for(int i = 0; i < bounds.width; i++) {
