@@ -13,7 +13,7 @@ import org.json.simple.parser.*;
 public class JSONMapReader  
 {
 
-    public static void main(String[] args) throws Exception {   readFile(); }
+    //public static void main(String[] args) throws Exception {   readFile(); }
     public static void readFile() throws Exception  
     { 
 
@@ -43,10 +43,10 @@ public class JSONMapReader
 
             Iterator itr = tilesets.iterator();
 
-            while (itr.hasNext()) {
+            /*while (itr.hasNext()) {
                 mapItr = ((Map) itr.next()).entrySet().iterator();
                 while ()
-            }
+            }*/
 
 
         } catch (FileNotFoundException e) {

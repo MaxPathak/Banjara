@@ -23,13 +23,13 @@ public class Map {
     }
 
     public void render(Graphics g) {
-        int xStart = 0;
-        int xEnd = 0;
-        int yStart = 0;
-        int yEnd = 0;
+        int xStart = (int) Math.max(0, game.getGameCamera().getxOffset() / Tile.TILEWIDTH);
+        int xEnd = (int) Math.min(width, (game.getGameCamera().getxOffset() + game.getWidth()) / Tile.TILEWIDTH + 1);
+        int yStart = (int) Math.max(0, game.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
+        int yEnd = (int) Math.min(height, (game.getGameCamera().getyOffset() + game.getHeight()) / Tile.TILEHEIGHT + 1);
 
-        for(int y = 0; y < height; y++) {
-            for(int x = 0; x < width; x++) {
+        for(int y = yStart; y < yEnd; y++) {
+            for(int x = xStart; x < xEnd; x++) {
                 getTile(x, y).render(g, (int) (x * Tile.TILEWIDTH - game.getGameCamera().getxOffset()),
                      (int) (y * Tile.TILEHEIGHT - game.getGameCamera().getyOffset()));
             }
