@@ -1,1 +1,1 @@
-./rules/Outside_A2_rule.tmx
+./rules/Outside_rules.tmx
