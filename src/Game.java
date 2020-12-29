@@ -29,8 +29,6 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
-    private BufferedImage testImage;
-
     // States
     public State gameState;
     public State menuState;
@@ -61,7 +59,6 @@ public class Game implements Runnable {
         display.getFrame().addMouseMotionListener(mouseManager);
         display.getCanvas().addMouseListener(mouseManager);
         display.getCanvas().addMouseMotionListener(mouseManager);
-        testImage = ImageLoader.loadImage("/img/title/title.jpg");
         Assets.init();
 
         handler = new Handler(this);
@@ -95,8 +92,6 @@ public class Game implements Runnable {
         {
             g.setColor(Color.WHITE);
 
-            //Title Screen
-            g.drawImage(testImage, 0, 0, width, height, null);
             
             int marginx = 10, marginy = 10, thickness = 5;
             //g.setColor(Color.RED);

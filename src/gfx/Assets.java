@@ -7,11 +7,13 @@ public class Assets {
 
     private static final int characterWidth = 48, characterHeight = 48;
 
-    public static BufferedImage player, grass, dirt, tree, bush, cchest, ochest;
-    public static BufferedImage[] player_down, player_left, player_right, player_up;
+    public static BufferedImage player, grass, dirt, tree, bush, cchest, ochest, title;
+    public static BufferedImage[] player_down, player_left, player_right, player_up, start_btn;
     
     public static void init() {
         
+        title = ImageLoader.loadImage("/img/title/title.jpg");
+
         SpriteSheet Outside_A2 = new SpriteSheet(ImageLoader.loadImage("/img/tilesets/Outside_A2.png"));
         grass = Outside_A2.crop(width * 0, height * 0, width, height, 1);
         dirt = Outside_A2.crop(width * 0, height * 4 * 2, width, height, 1);
@@ -45,6 +47,10 @@ public class Assets {
         SpriteSheet Chest = new SpriteSheet(ImageLoader.loadImage("/img/characters/!Chest.png"));
         cchest = Chest.crop(characterWidth * 0, characterHeight * 0, width, height, 2);
         ochest = Chest.crop(characterWidth * 0, characterHeight * 2, width, height, 2);
+
+        start_btn = new BufferedImage[2];
+        start_btn[0] = ImageLoader.loadImage("/img/system/start_btn_blue[0].png");
+        start_btn[1] = ImageLoader.loadImage("/img/system/start_btn_blue[1].png");
 
     }
 
