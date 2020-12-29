@@ -1,5 +1,6 @@
 package src.entities.creatures;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
@@ -17,10 +18,10 @@ public class Player extends Creature {
     public Player(Handler handler, float x, float y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
 
-        bounds.width = 28;
-        bounds.height = 28;
-        bounds.x = 10;
-        bounds.y = 20;
+        bounds.width = (int) (width * 0.6) - 1;
+        bounds.height = (int) (height * 0.4);
+        bounds.x = (width - bounds.width) / 2;
+        bounds.y = height - bounds.height;
 
         // Animations
         int animSpeed = 375;
@@ -66,16 +67,11 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-        //g.drawImage(Assets.player, (int) (x - bounds.x - handler.getGameCamera().getxOffset()), (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
-        
-        /*g.setColor(Color.white);
-        //g.drawRect((int) (x - 2*bounds.x - handler.getGameCamera().getxOffset()), (int) (y - 2*bounds.y - handler.getGameCamera().getyOffset()), width + 2*bounds.x, height + bounds.y);
-        g.drawRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset() + bounds.height), 32, 32);
-        g.drawRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset() - bounds.height), 32, 32);
-        g.drawRect((int) (x - bounds.x - handler.getGameCamera().getxOffset()), (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height);*/
-        //g.setColor(Color.red);
-        //g.fillRect((int) ( x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+
         g.drawImage(getCurrentAnimationFrame(), (int) (x - bounds.x - handler.getGameCamera().getxOffset()), (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
+
+        g.setColor(Color.red);
+        g.fillRect((int) ( x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
     }
     
     private BufferedImage getCurrentAnimationFrame() {

@@ -7,7 +7,7 @@ public class Assets {
 
     private static final int characterWidth = 48, characterHeight = 48;
 
-    public static BufferedImage player, grass, dirt, tree, bush;
+    public static BufferedImage player, grass, dirt, tree, bush, cchest, ochest;
     public static BufferedImage[] player_down, player_left, player_right, player_up;
     
     public static void init() {
@@ -41,6 +41,11 @@ public class Assets {
         player_up[0] = Actor1.crop(characterWidth * 1, characterHeight * 3, width, height, 2);
         player_up[1] = Actor1.crop(characterWidth * 0, characterHeight * 3, width, height, 2);
         player_up[2] = Actor1.crop(characterWidth * 2, characterHeight * 3, width, height, 2);
+
+        SpriteSheet Chest = new SpriteSheet(ImageLoader.loadImage("/img/characters/!Chest.png"));
+        cchest = Chest.crop(characterWidth * 0, characterHeight * 0, width, height, 2);
+        ochest = Chest.crop(characterWidth * 0, characterHeight * 2, width, height, 2);
+
     }
 
 }

@@ -4,34 +4,29 @@ import java.awt.Graphics;
 
 import src.Handler;
 import src.entities.creatures.Player;
+import src.entities.statics.Chest;
 import src.maps.Map;
 import src.tiles.Tile;
 
 public class GameState extends State {
 
-    private Player player;
     private Map map;
 
     public GameState(Handler handler) {
         super(handler);
-        player = new Player(handler, 0, 0);
         map = new Map(handler, "data/maps/map01.txt");
         handler.setMap(map);
         handler.getGameCamera().move(0, 0);
-        player.setX((float) handler.getMap().getSpawnX() * Tile.TILEWIDTH);
-        player.setY((float) handler.getMap().getSpawnY() * Tile.TILEHEIGHT);
     }
 
     @Override
     public void update() {
         map.update();
-        player.update();
     }
 
     @Override
     public void render(Graphics g) {
         map.render(g);
-        player.render(g);
         /*Tile.tiles[0].render(g, 0, 0);
         Tile.tiles[1].render(g, 48, 0);
         Tile.tiles[2].render(g, 48*2, 0);*/

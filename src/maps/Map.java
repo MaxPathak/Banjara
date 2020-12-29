@@ -3,6 +3,9 @@ package src.maps;
 import java.awt.Graphics;
 
 import src.Handler;
+import src.entities.EntityManager;
+import src.entities.creatures.Player;
+import src.entities.statics.Chest;
 import src.tiles.Tile;
 import src.utils.Utils;
 
@@ -12,14 +15,21 @@ public class Map {
     private int width, height;
     private int spawnX, spawnY;
     private int[][] tiles;
+    private EntityManager entityManager;
 
     public Map(Handler handler, String path) {
         this.handler = handler;
+        entityManager = new EntityManager(handler, new Player(handler, 0, 0));
+        entityManager.addEntity(new Chest(handler, 5 * Tile.TILEWIDTH, 5 * Tile.TILEHEIGHT));
+
         loadMap(path);
+
+        entityManager.getPlayer().setX((float) spawnX * Tile.TILEWIDTH);
+        entityManager.getPlayer().setY((float) spawnY * Tile.TILEHEIGHT);
     }
 
     public void update() {
-
+        entityManager.update();
     }
 
     public void render(Graphics g) {
@@ -34,6 +44,7 @@ public class Map {
                      (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset()));
             }
         }
+        entityManager.render(g);
     }
 
     public Tile getTile(int x, int y) {
@@ -102,6 +113,14 @@ public class Map {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
+
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
     
 }
