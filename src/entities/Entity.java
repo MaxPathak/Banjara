@@ -1,7 +1,6 @@
 package src.entities;
 
 import java.awt.Graphics;
-
 import java.awt.Rectangle;
 
 import src.Handler;
@@ -38,7 +37,7 @@ public abstract class Entity {
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
-        return new Rectangle((int) (x /*+ bounds.x*/ + xOffset), (int) (y /*+ bounds.y*/ + yOffset), bounds.width, bounds.height);
+        return new Rectangle((int) (x + xOffset), (int) (y + yOffset), bounds.width, bounds.height);
     }
 
     public float getX() {

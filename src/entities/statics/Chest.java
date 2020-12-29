@@ -16,7 +16,7 @@ public class Chest extends StaticEntity {
         
         open = false;
 
-        bounds.width = (int) (width * 0.8) - 1;
+        bounds.width = (int) (width * 0.6) - 1;
         bounds.height = (int) (height * 0.4);
         bounds.x = (width - bounds.width) / 2;
         bounds.y = height - bounds.height;
@@ -34,8 +34,8 @@ public class Chest extends StaticEntity {
         } else {
             g.drawImage(Assets.ochest, (int) (x - bounds.x - handler.getGameCamera().getxOffset()), (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
         }
-        g.setColor(Color.red);
-        g.fillRect((int) ( x - handler.getGameCamera().getxOffset()), (int) (y- handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+        /*g.setColor(Color.red);
+        g.fillRect((int) ( x - handler.getGameCamera().getxOffset()), (int) (y- handler.getGameCamera().getyOffset()), bounds.width, bounds.height);*/
     }
 
 }

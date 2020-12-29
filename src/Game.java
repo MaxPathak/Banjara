@@ -1,6 +1,5 @@
 package src;
 
-import src.Handler;
 import src.display.Display;
 import src.gfx.Assets;
 import src.gfx.GameCamera;
@@ -16,6 +15,7 @@ import java.awt.image.BufferedImage;
 //Temporary Imports
 import src.gfx.ImageLoader;
 import src.input.KeyManager;
+import src.input.MouseManager;
 
 
 public class Game implements Runnable {
@@ -32,11 +32,12 @@ public class Game implements Runnable {
     private BufferedImage testImage;
 
     // States
-    private State gameState;
-    private State menuState;
+    public State gameState;
+    public State menuState;
     
     // Input
     private KeyManager keyManager;
+    private MouseManager mouseManager;
 
     // Camera
     private GameCamera gameCamera;
@@ -49,12 +50,17 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
+        mouseManager = new MouseManager();
     }
 
     private void init() {
         //Initialize the Display object
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
+        display.getFrame().addMouseListener(mouseManager);
+        display.getFrame().addMouseMotionListener(mouseManager);
+        display.getCanvas().addMouseListener(mouseManager);
+        display.getCanvas().addMouseMotionListener(mouseManager);
         testImage = ImageLoader.loadImage("/img/title/title.jpg");
         Assets.init();
 
@@ -63,7 +69,7 @@ public class Game implements Runnable {
 
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
-        State.setState(gameState);
+        State.setState(menuState);
     }
     
     private void update() {
@@ -151,6 +157,10 @@ public class Game implements Runnable {
     
     public KeyManager getKeyManager() {
         return keyManager;
+    }
+    
+    public MouseManager getMouseManager() {
+        return mouseManager;
     }
     
     public GameCamera getGameCamera() {

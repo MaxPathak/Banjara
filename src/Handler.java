@@ -4,6 +4,7 @@ import src.Game;
 import src.gfx.GameCamera;
 import src.maps.Map;
 import src.input.KeyManager;
+import src.input.MouseManager;
 
 public class Handler {
     
@@ -20,6 +21,10 @@ public class Handler {
 
     public KeyManager getKeyManager() {
         return game.getKeyManager();
+    }
+
+    public MouseManager getMouseManager() {
+        return game.getMouseManager();
     }
     
     public int getWidth() {
