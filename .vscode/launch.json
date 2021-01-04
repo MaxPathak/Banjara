@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Launcher",
+            "request": "launch",
+            "mainClass": "src.Launcher",
+            "projectName": "Banjara_605cc5d1"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
