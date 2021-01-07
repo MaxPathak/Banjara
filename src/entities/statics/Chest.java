@@ -37,15 +37,17 @@ public class Chest extends StaticEntity {
     @Override
     public void render(Graphics g) {
         if (!open) {
-            g.drawImage(Assets.cchest, (int) (pX - bounds.x - handler.getGameCamera().getxOffset()),
-                    (int) (pY - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
+            g.drawImage(Assets.cchest, (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
+                    (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
         } else {
-            g.drawImage(Assets.ochest, (int) (pX - bounds.x - handler.getGameCamera().getxOffset()),
-                    (int) (pY - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
+            g.drawImage(Assets.ochest, (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
+                    (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
         }
-        g.setColor(Color.red);
-        g.fillRect((int) (pX - handler.getGameCamera().getxOffset()), (int) (pY - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
+        /*
+         * g.setColor(Color.red); g.fillRect((int) (pX -
+         * handler.getGameCamera().getxOffset()), (int) (pY -
+         * handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+         */
     }
 
     @Override

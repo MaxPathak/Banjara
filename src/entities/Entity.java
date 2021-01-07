@@ -11,8 +11,7 @@ import src.tiles.Tile;
 public abstract class Entity {
 
     protected Handler handler;
-    protected float pX, pY;
-    protected int x, y;
+    protected float x, y;
     protected int width, height;
     protected Rectangle bounds, ar;
     protected int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
@@ -21,10 +20,8 @@ public abstract class Entity {
 
     public Entity(Handler handler, int x, int y, int width, int height) {
         this.handler = handler;
-        this.x = x;
-        this.y = y;
-        this.pX = x * Tile.TILEWIDTH;
-        this.pY = y * Tile.TILEHEIGHT;
+        this.x = x * Tile.TILEWIDTH;
+        this.y = y * Tile.TILEHEIGHT;
         this.width = width;
         this.height = height;
         this.trigger = 0;
@@ -60,7 +57,7 @@ public abstract class Entity {
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
-        return new Rectangle((int) (pX + xOffset), (int) (pY + yOffset), bounds.width, bounds.height);
+        return new Rectangle((int) (x + xOffset), (int) (y + yOffset), bounds.width, bounds.height);
     }
 
     public float getX() {
@@ -69,7 +66,7 @@ public abstract class Entity {
 
     public void setX(int x) {
         this.x = x;
-        this.pX = x * Tile.TILEWIDTH;
+        this.x = x * Tile.TILEWIDTH;
     }
 
     public float getY() {
@@ -78,7 +75,7 @@ public abstract class Entity {
 
     public void setY(int y) {
         this.y = y;
-        this.pY = y * Tile.TILEHEIGHT;
+        this.y = y * Tile.TILEHEIGHT;
     }
 
     public int getWidth() {

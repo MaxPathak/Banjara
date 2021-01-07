@@ -31,58 +31,58 @@ public abstract class Creature extends Entity {
     }
 
     public void moveX() {
-        if (pX + xMove < 0) {
-            pX = 0;
-        } else if (pX + xMove + bounds.width > handler.getMap().getWidth() * Tile.TILEWIDTH) {
-            pX = handler.getMap().getWidth() * Tile.TILEWIDTH - bounds.width;
+        if (x + xMove < 0) {
+            x = 0;
+        } else if (x + xMove + bounds.width > handler.getMap().getWidth() * Tile.TILEWIDTH) {
+            x = handler.getMap().getWidth() * Tile.TILEWIDTH - bounds.width;
         } else if (xMove > 0) { // Move right
-            int tx = (int) (pX + xMove + bounds.width - 1) / Tile.TILEWIDTH;
+            int tx = (int) (x + xMove + bounds.width - 1) / Tile.TILEWIDTH;
 
             for (int i = 0; i < bounds.height; i++) {
-                if (collisionWithTile(tx, (int) (pY + i) / Tile.TILEHEIGHT)) {
-                    pX = tx * Tile.TILEWIDTH - bounds.width;
+                if (collisionWithTile(tx, (int) (y + i) / Tile.TILEHEIGHT)) {
+                    x = tx * Tile.TILEWIDTH - bounds.width;
                     return;
                 }
             }
-            pX += xMove;
+            x += xMove;
         } else if (xMove < 0) { // Move left
-            int tx = (int) (pX + xMove) / Tile.TILEWIDTH;
+            int tx = (int) (x + xMove) / Tile.TILEWIDTH;
 
             for (int i = 0; i < bounds.height; i++) {
-                if (collisionWithTile(tx, (int) (pY + i) / Tile.TILEHEIGHT)) {
-                    pX = tx * Tile.TILEWIDTH + Tile.TILEWIDTH;
+                if (collisionWithTile(tx, (int) (y + i) / Tile.TILEHEIGHT)) {
+                    x = tx * Tile.TILEWIDTH + Tile.TILEWIDTH;
                     return;
                 }
             }
-            pX += xMove;
+            x += xMove;
         }
     }
 
     public void moveY() {
-        if (pY + yMove < 0) {
-            pY = 0;
-        } else if (pY + yMove + bounds.height > handler.getMap().getHeight() * Tile.TILEHEIGHT) {
-            pY = handler.getMap().getHeight() * Tile.TILEHEIGHT - bounds.height;
+        if (y + yMove < 0) {
+            y = 0;
+        } else if (y + yMove + bounds.height > handler.getMap().getHeight() * Tile.TILEHEIGHT) {
+            y = handler.getMap().getHeight() * Tile.TILEHEIGHT - bounds.height;
         } else if (yMove < 0) { // Move up
-            int ty = (int) (pY + yMove) / Tile.TILEHEIGHT;
+            int ty = (int) (y + yMove) / Tile.TILEHEIGHT;
 
             for (int i = 0; i < bounds.width; i++) {
-                if (collisionWithTile((int) (pX + i) / Tile.TILEWIDTH, ty)) {
-                    pY = ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT;
+                if (collisionWithTile((int) (x + i) / Tile.TILEWIDTH, ty)) {
+                    y = ty * Tile.TILEHEIGHT + Tile.TILEHEIGHT;
                     return;
                 }
             }
-            pY += yMove;
+            y += yMove;
         } else if (yMove > 0) { // Move down
-            int ty = (int) (pY + yMove + bounds.height - 1) / Tile.TILEHEIGHT;
+            int ty = (int) (y + yMove + bounds.height - 1) / Tile.TILEHEIGHT;
 
             for (int i = 0; i < bounds.width; i++) {
-                if (collisionWithTile((int) (pX + i) / Tile.TILEWIDTH, ty)) {
-                    pY = ty * Tile.TILEHEIGHT - bounds.height;
+                if (collisionWithTile((int) (x + i) / Tile.TILEWIDTH, ty)) {
+                    y = ty * Tile.TILEHEIGHT - bounds.height;
                     return;
                 }
             }
-            pY += yMove;
+            y += yMove;
         }
     }
 

@@ -44,8 +44,8 @@ public class Player extends Creature {
 
     private void action() {
         ar.width = ar.height = arSize;
-        ar.x = (int) pX;
-        ar.y = (int) pY;
+        ar.x = (int) x;
+        ar.y = (int) y;
         switch (direction) {
             case UP:
                 ar.width = bounds.width;
@@ -115,16 +115,18 @@ public class Player extends Creature {
     @Override
     public void render(Graphics g) {
 
-        g.drawImage(getCurrentAnimationFrame(), (int) (pX - bounds.x - handler.getGameCamera().getxOffset()),
-                (int) (pY - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
+        g.drawImage(getCurrentAnimationFrame(), (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
+                (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
 
-        g.setColor(Color.red);
-        g.fillRect((int) (pX - handler.getGameCamera().getxOffset()), (int) (pY - handler.getGameCamera().getyOffset()),
-                bounds.width, bounds.height);
+        /*
+         * g.setColor(Color.red); g.fillRect((int) (pX -
+         * handler.getGameCamera().getxOffset()), (int) (pY -
+         * handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+         * g.setColor(Color.black); g.fillRect((int) (ar.x -
+         * handler.getGameCamera().getxOffset()), (int) (ar.y -
+         * handler.getGameCamera().getyOffset()), ar.width, ar.height);
+         */
 
-        g.setColor(Color.black);
-        g.fillRect((int) (ar.x - handler.getGameCamera().getxOffset()),
-                (int) (ar.y - handler.getGameCamera().getyOffset()), ar.width, ar.height);
     }
 
     @Override
