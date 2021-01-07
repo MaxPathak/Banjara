@@ -13,6 +13,7 @@ public abstract class Entity {
     protected int x, y;
     protected int width, height;
     protected Rectangle bounds;
+    protected int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
 
     public Entity(Handler handler, int x, int y, int width, int height) {
         this.handler = handler;
@@ -22,6 +23,7 @@ public abstract class Entity {
         this.pY = y * Tile.TILEHEIGHT;
         this.width = width;
         this.height = height;
+        this.trigger = 0;
 
         bounds = new Rectangle(0, 0, width, height);
     }
@@ -29,6 +31,8 @@ public abstract class Entity {
     public abstract void update();
 
     public abstract void render(Graphics g);
+
+    public abstract void event();
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
         for (Entity e : handler.getMap().getEntityManager().getEntities()) {

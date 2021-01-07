@@ -2,6 +2,7 @@ package src.entities.creatures;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import src.Handler;
@@ -30,6 +31,12 @@ public class Player extends Creature {
         anim_left = new Animation(animSpeed, Assets.player_left);
         anim_right = new Animation(animSpeed, Assets.player_right);
         anim_up = new Animation(animSpeed, Assets.player_up);
+    }
+
+    private void action() {
+        Rectangle ar = new Rectangle();
+        int arSize = bounds.width;
+
     }
 
     private void getInput() {
@@ -79,6 +86,12 @@ public class Player extends Creature {
         // g.setColor(Color.red); g.fillRect((int) ( x -
         // handler.getGameCamera().getxOffset()), (int) (y -
         // handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+    }
+
+    @Override
+    public void event() {
+        // TODO Auto-generated method stub
+
     }
 
     private BufferedImage getCurrentAnimationFrame() {

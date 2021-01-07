@@ -12,23 +12,28 @@ public class KeyManager implements KeyListener {
     private boolean[] keys;
     public Global.Direction direction = Global.Direction.DOWN;
     public boolean moving;
-    
+    public boolean interact;
+
     private int keyVals[];
     private ArrayList<Integer> keyArr = new ArrayList<Integer>();
 
-	public KeyManager() {
+    public KeyManager() {
         keys = new boolean[256];
         moving = false;
+        interact = false;
         keyVals = new int[] { KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D };
-	}
+    }
 
     public void update() {
         moving = false;
+
+        interact = keys[KeyEvent.VK_Z];
+
         ListIterator<Integer> li = keyArr.listIterator(keyArr.size());
 
-        while(li.hasPrevious()) {
-            for(int i = 0, j = li.previous(); i < keyVals.length; i++) {
-                if(keyVals[i] == j) {
+        while (li.hasPrevious()) {
+            for (int i = 0, j = li.previous(); i < keyVals.length; i++) {
+                if (keyVals[i] == j) {
                     direction = Global.Direction.values()[i];
                     moving = true;
                     return;
@@ -39,7 +44,7 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(!keyArr.contains(e.getKeyCode())) {
+        if (!keyArr.contains(e.getKeyCode())) {
             keys[e.getKeyCode()] = true;
             keyArr.add(e.getKeyCode());
         }
@@ -47,7 +52,7 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        if(keyArr.contains(e.getKeyCode())) {
+        if (keyArr.contains(e.getKeyCode())) {
             keys[e.getKeyCode()] = false;
             keyArr.remove(keyArr.indexOf(e.getKeyCode()));
         }
@@ -58,5 +63,9 @@ public class KeyManager implements KeyListener {
         // TODO Auto-generated method stub
 
     }
-    
+
+    public boolean isInteracting() {
+        return interact;
+    }
+
 }

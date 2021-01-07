@@ -1,10 +1,14 @@
 package src.entities.statics;
 
 import java.awt.Graphics;
+
+import javax.swing.Action;
+
 import java.awt.Color;
 
 import src.Handler;
 import src.gfx.Assets;
+import src.input.KeyManager;
 import src.tiles.Tile;
 
 public class Chest extends StaticEntity {
@@ -41,6 +45,14 @@ public class Chest extends StaticEntity {
          * handler.getGameCamera().getxOffset()), (int) (y-
          * handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
          */
+    }
+
+    @Override
+    public void event() {
+        if (handler.getGame().getKeyManager().isInteracting()) {
+
+        }
+
     }
 
 }
