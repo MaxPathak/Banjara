@@ -2,8 +2,10 @@ package src.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 
 import src.Handler;
+import src.global.Global.Direction;
 import src.tiles.Tile;
 
 public abstract class Entity {
@@ -12,8 +14,10 @@ public abstract class Entity {
     protected float pX, pY;
     protected int x, y;
     protected int width, height;
-    protected Rectangle bounds;
+    protected Rectangle bounds, ar;
     protected int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
+
+    protected ArrayList<Direction> dFix;
 
     public Entity(Handler handler, int x, int y, int width, int height) {
         this.handler = handler;
@@ -25,6 +29,7 @@ public abstract class Entity {
         this.height = height;
         this.trigger = 0;
 
+        dFix = new ArrayList<Direction>();
         bounds = new Rectangle(0, 0, width, height);
     }
 
@@ -33,6 +38,16 @@ public abstract class Entity {
     public abstract void render(Graphics g);
 
     public abstract void event();
+
+    public Entity checkEntityInteractions() {
+        for (Entity e : handler.getMap().getEntityManager().getEntities()) {
+            if (e.equals(this))
+                continue;
+            if (e.getCollisionBounds(0f, 0f).intersects(ar))
+                return e;
+        }
+        return null;
+    }
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
         for (Entity e : handler.getMap().getEntityManager().getEntities()) {

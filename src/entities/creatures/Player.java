@@ -6,19 +6,28 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import src.Handler;
+import src.entities.Entity;
 import src.gfx.Animation;
 import src.gfx.Assets;
 import src.global.Global;
+import src.global.Global.Direction;
 
 public class Player extends Creature {
 
+    private static final int DEFAULT_AR_SIZE = 5;
+
     // Animations
     private Animation anim_down, anim_left, anim_right, anim_up;
+
     private Global.Direction direction = Global.Direction.DOWN;
+
     private boolean isSnapped = true;
+    private int arSize = DEFAULT_AR_SIZE;
 
     public Player(Handler handler, int x, int y) {
         super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+
+        ar = new Rectangle();
 
         bounds.width = (int) (width * 0.6) - 1;
         bounds.height = (int) (height * 0.4);
@@ -34,8 +43,33 @@ public class Player extends Creature {
     }
 
     private void action() {
-        Rectangle ar = new Rectangle();
-        int arSize = bounds.width;
+        ar.width = ar.height = arSize;
+        ar.x = (int) pX;
+        ar.y = (int) pY;
+        switch (direction) {
+            case UP:
+                ar.width = bounds.width;
+                ar.y -= arSize;
+                break;
+            case DOWN:
+                ar.width = bounds.width;
+                ar.y += bounds.height;
+                break;
+            case LEFT:
+                ar.height = bounds.height;
+                ar.x -= arSize;
+                break;
+            case RIGHT:
+                ar.height = bounds.height;
+                ar.x += bounds.width;
+                break;
+        }
+
+        Entity e;
+        if ((e = checkEntityInteractions()) != null) {
+            if (handler.getGame().getKeyManager().isInteracting())
+                e.event();
+        }
 
     }
 
@@ -74,6 +108,7 @@ public class Player extends Creature {
         // Movement
         getInput();
         move();
+        action();
         handler.getGameCamera().centerOnEntity(this);
     }
 
@@ -83,9 +118,13 @@ public class Player extends Creature {
         g.drawImage(getCurrentAnimationFrame(), (int) (pX - bounds.x - handler.getGameCamera().getxOffset()),
                 (int) (pY - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
 
-        // g.setColor(Color.red); g.fillRect((int) ( x -
-        // handler.getGameCamera().getxOffset()), (int) (y -
-        // handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
+        g.setColor(Color.red);
+        g.fillRect((int) (pX - handler.getGameCamera().getxOffset()), (int) (pY - handler.getGameCamera().getyOffset()),
+                bounds.width, bounds.height);
+
+        g.setColor(Color.black);
+        g.fillRect((int) (ar.x - handler.getGameCamera().getxOffset()),
+                (int) (ar.y - handler.getGameCamera().getyOffset()), ar.width, ar.height);
     }
 
     @Override
@@ -121,6 +160,20 @@ public class Player extends Creature {
         }
         anim_down.setIndex(0);
         return anim_down.getCurrentFrame();
+    }
+
+    public Direction getOppDirection() {
+        switch (direction) {
+            case DOWN:
+                return Direction.UP;
+            case LEFT:
+                return Direction.RIGHT;
+            case RIGHT:
+                return Direction.LEFT;
+            case UP:
+                return Direction.DOWN;
+        }
+        return Direction.UP;
     }
 
 }
