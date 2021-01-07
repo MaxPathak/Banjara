@@ -7,7 +7,7 @@ import src.input.KeyManager;
 import src.input.MouseManager;
 
 public class Handler {
-    
+
     private Game game;
     private Map map;
 
@@ -26,7 +26,7 @@ public class Handler {
     public MouseManager getMouseManager() {
         return game.getMouseManager();
     }
-    
+
     public int getWidth() {
         return game.getWidth();
     }
@@ -50,5 +50,5 @@ public class Handler {
     public void setMap(Map map) {
         this.map = map;
     }
-    
+
 }

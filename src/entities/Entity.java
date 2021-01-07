@@ -4,18 +4,22 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import src.Handler;
+import src.tiles.Tile;
 
 public abstract class Entity {
-    
+
     protected Handler handler;
-    protected float x, y;
+    protected float pX, pY;
+    protected int x, y;
     protected int width, height;
     protected Rectangle bounds;
 
-    public Entity(Handler handler, float x, float y, int width, int height) {
+    public Entity(Handler handler, int x, int y, int width, int height) {
         this.handler = handler;
         this.x = x;
         this.y = y;
+        this.pX = x * Tile.TILEWIDTH;
+        this.pY = y * Tile.TILEHEIGHT;
         this.width = width;
         this.height = height;
 
@@ -27,33 +31,35 @@ public abstract class Entity {
     public abstract void render(Graphics g);
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
-        for(Entity e : handler.getMap().getEntityManager().getEntities()) {
-            if(e.equals(this))
+        for (Entity e : handler.getMap().getEntityManager().getEntities()) {
+            if (e.equals(this))
                 continue;
-            if(e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
+            if (e.getCollisionBounds(0f, 0f).intersects(getCollisionBounds(xOffset, yOffset)))
                 return true;
         }
         return false;
     }
 
     public Rectangle getCollisionBounds(float xOffset, float yOffset) {
-        return new Rectangle((int) (x + xOffset), (int) (y + yOffset), bounds.width, bounds.height);
+        return new Rectangle((int) (pX + xOffset), (int) (pY + yOffset), bounds.width, bounds.height);
     }
 
     public float getX() {
         return x;
     }
 
-    public void setX(float x) {
+    public void setX(int x) {
         this.x = x;
+        this.pX = x * Tile.TILEWIDTH;
     }
 
     public float getY() {
         return y;
     }
 
-    public void setY(float y) {
+    public void setY(int y) {
         this.y = y;
+        this.pY = y * Tile.TILEHEIGHT;
     }
 
     public int getWidth() {
