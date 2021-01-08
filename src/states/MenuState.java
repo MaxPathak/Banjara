@@ -14,6 +14,13 @@ import src.ui.UIObject;
 
 public class MenuState extends State {
 
+    int fps = 30;
+    double timePerTick = 1000000000 / fps; // nano seconds / fps to slow down
+    double delta = 0;
+    long now;
+    long lastTime = System.nanoTime();
+    long timer = 0;
+
     private UIManager uiManager;
 
     public MenuState(Handler handler) {
@@ -67,7 +74,21 @@ public class MenuState extends State {
          * State.setState(handler.getGame().gameState); }
          */
 
-        getInput();
+        // Reduce how many times update and render are called
+        now = System.nanoTime();
+        delta += (now - lastTime) / timePerTick / ((handler.getKeyManager().emptyKeys()) ? 1 : 5);
+        timer += now - lastTime;
+        lastTime = now;
+
+        if (delta >= 0.1) {
+            getInput();
+            delta--;
+        }
+
+        if (timer >= 1000000000) {
+            timer = 0;
+        }
+
         uiManager.update();
     }
 
@@ -108,12 +129,14 @@ public class MenuState extends State {
         switch (direction) {
             case UP:
                 if (i > 0) {
+                    // System.out.println("UP");
                     uiManager.getObjects().get(i).setFocused(false);
                     uiManager.getObjects().get(i - 1).setFocused(true);
                 }
                 break;
             case DOWN:
                 if (i < size - 1) {
+                    // System.out.println("DOWN");
                     uiManager.getObjects().get(i).setFocused(false);
                     uiManager.getObjects().get(i + 1).setFocused(true);
                 }

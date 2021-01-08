@@ -89,4 +89,8 @@ public class KeyManager implements KeyListener {
         return -1;
     }
 
+    public boolean emptyKeys() {
+        return keyArr.size() == 0;
+    }
+
 }
