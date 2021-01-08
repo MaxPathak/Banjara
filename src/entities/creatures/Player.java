@@ -77,7 +77,7 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
-        direction = handler.getKeyManager().direction;
+        direction = handler.getKeyManager().playerDirection;
 
         if (handler.getKeyManager().moving) {
             switch (direction) {

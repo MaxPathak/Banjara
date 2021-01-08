@@ -10,6 +10,7 @@ public abstract class UIObject {
     protected int width, height;
     protected Rectangle bounds;
     protected boolean focused = false;
+    protected boolean blinking = false;
 
     public UIObject(float x, float y, int width, int height) {
         this.x = x;
@@ -85,6 +86,18 @@ public abstract class UIObject {
 
     public void setFocused(boolean focused) {
         this.focused = focused;
+    }
+
+    public boolean isBlinking() {
+        return blinking;
+    }
+
+    public void setBlinking(boolean blinking) {
+        this.blinking = blinking;
+    }
+
+    public void toggleBlinking() {
+        blinking = !blinking;
     }
 
 }

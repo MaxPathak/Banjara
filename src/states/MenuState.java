@@ -3,6 +3,7 @@ package src.states;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ListIterator;
+import java.util.TimerTask;
 
 import src.Handler;
 import src.gfx.Assets;
@@ -11,22 +12,42 @@ import src.ui.ClickListener;
 import src.ui.UIImageButton;
 import src.ui.UIManager;
 import src.ui.UIObject;
+import src.utils.TimedEvent;
 
 public class MenuState extends State {
 
-    int fps = 30;
-    double timePerTick = 1000000000 / fps; // nano seconds / fps to slow down
-    double delta = 0;
-    long now;
-    long lastTime = System.nanoTime();
-    long timer = 0;
-
     private UIManager uiManager;
+    private TimedEvent timedEvent;
 
     public MenuState(Handler handler) {
         super(handler);
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
+
+        timedEvent = new TimedEvent();
+        timedEvent.add(new TimerTask() {
+            @Override
+            public void run() {
+                handler.getGame().getKeyManager().getArrowKey();
+            }
+        }, 0, 170);
+        timedEvent.add(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("MenuState 500");
+            }
+        }, 0, 500);
+
+        timedEvent.add(new TimerTask() {
+            @Override
+            public void run() {
+                if (uiManager.getFocusedObject() != null) {
+                    uiManager.getFocusedObject().toggleBlinking();
+                }
+            }
+        }, 0, 500);
+
+        handler.getTimedEvent().merge(timedEvent);
 
         final int totalButtons = 3;
         int buttonIndex = 0;
@@ -39,8 +60,11 @@ public class MenuState extends State {
                     @Override
                     public void onClick() {
                         handler.getMouseManager().setUIManager(null);
+                        timedEvent.stopAll();
+                        System.out.println("Stopped Menu State Events");
+                        handler.getTimedEvent().separate(timedEvent);
                         State.setState(handler.getGame().gameState);
-                        handler.getKeyManager().direction = Direction.DOWN;
+                        handler.getKeyManager().playerDirection = Direction.DOWN;
                     }
                 }));
         // Options
@@ -74,20 +98,18 @@ public class MenuState extends State {
          * State.setState(handler.getGame().gameState); }
          */
 
-        // Reduce how many times update and render are called
-        now = System.nanoTime();
-        delta += (now - lastTime) / timePerTick / ((handler.getKeyManager().emptyKeys()) ? 1 : 5);
-        timer += now - lastTime;
-        lastTime = now;
+        /*
+         * // Reduce how many times update and render are called now =
+         * System.nanoTime(); delta += (now - lastTime) / timePerTick /
+         * ((handler.getKeyManager().emptyKeys()) ? 1 : 5); timer += now - lastTime;
+         * lastTime = now;
+         * 
+         * if (delta >= 0.1) { getInput(); delta--; }
+         * 
+         * if (timer >= 1000000000) { timer = 0; }
+         */
 
-        if (delta >= 0.1) {
-            getInput();
-            delta--;
-        }
-
-        if (timer >= 1000000000) {
-            timer = 0;
-        }
+        getInput();
 
         uiManager.update();
     }

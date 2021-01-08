@@ -4,6 +4,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import src.global.Global;
 import src.global.Global.Direction;
@@ -11,7 +13,7 @@ import src.global.Global.Direction;
 public class KeyManager implements KeyListener {
 
     private boolean[] keys;
-    public Direction direction = Direction.DOWN;
+    public Direction playerDirection = Direction.DOWN;
     public boolean moving;
     public boolean interact;
 
@@ -35,12 +37,13 @@ public class KeyManager implements KeyListener {
         while (li.hasPrevious()) {
             for (int i = 0, j = li.previous(); i < keyVals.length; i++) {
                 if (keyVals[i] == j) {
-                    direction = Global.Direction.values()[i];
+                    playerDirection = Global.Direction.values()[i];
                     moving = true;
                     return;
                 }
             }
         }
+
     }
 
     @Override
@@ -82,6 +85,7 @@ public class KeyManager implements KeyListener {
         while (li.hasPrevious()) {
             for (int i = 0, j = li.previous(); i < keyVals.length; i++) {
                 if (keyVals[i] == j) {
+                    removeAll();
                     return Global.Direction.values()[i].ordinal();
                 }
             }
@@ -91,6 +95,13 @@ public class KeyManager implements KeyListener {
 
     public boolean emptyKeys() {
         return keyArr.size() == 0;
+    }
+
+    public void removeAll() {
+        for (int i = 0; i < keys.length; i++) {
+            keys[i] = false;
+        }
+        keyArr.removeAll(keyArr);
     }
 
 }

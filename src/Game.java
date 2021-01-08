@@ -24,6 +24,7 @@ public class Game implements Runnable {
     private int width, height;
 
     private boolean running = false;
+    private boolean released = false;
     private Thread thread;
 
     private BufferStrategy bs;
@@ -70,7 +71,13 @@ public class Game implements Runnable {
     }
 
     private void update() {
+        setReleased(false);
+
         keyManager.update();
+
+        /*
+         * if (isReleased()) { System.out.println("Pressed"); System.exit(0); }
+         */
 
         if (State.getState() != null) {
             State.getState().update();
@@ -195,6 +202,14 @@ public class Game implements Runnable {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public boolean isReleased() {
+        return released;
+    }
+
+    public void setReleased(boolean release) {
+        this.released = release;
     }
 
 }

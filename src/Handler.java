@@ -1,18 +1,36 @@
 package src;
 
+import java.util.TimerTask;
+
 import src.Game;
 import src.gfx.GameCamera;
 import src.maps.Map;
 import src.input.KeyManager;
 import src.input.MouseManager;
+import src.utils.TimedEvent;
 
 public class Handler {
 
     private Game game;
     private Map map;
+    private TimedEvent timedEvent;
 
     public Handler(Game game) {
         this.game = game;
+        timedEvent = new TimedEvent();
+
+        /*
+         * timedEvent.add(new TimerTask() {
+         * 
+         * @Override public void run() { game.getKeyManager().getArrowKey(); } }, 0,
+         * 170);
+         */
+        timedEvent.add(new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("Handler 500");
+            }
+        }, 0, 500);
     }
 
     public GameCamera getGameCamera() {
@@ -49,6 +67,14 @@ public class Handler {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public TimedEvent getTimedEvent() {
+        return timedEvent;
+    }
+
+    public void setTimedEvent(TimedEvent timedEvent) {
+        this.timedEvent = timedEvent;
     }
 
 }
