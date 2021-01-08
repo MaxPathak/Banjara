@@ -5,18 +5,18 @@ import java.awt.event.MouseEvent;
 import java.awt.Rectangle;
 
 public abstract class UIObject {
-    
+
     protected float x, y;
     protected int width, height;
     protected Rectangle bounds;
-    protected boolean hovering = false;
+    protected boolean focused = false;
 
     public UIObject(float x, float y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        bounds  = new Rectangle((int) x, (int) y, width, height);
+        bounds = new Rectangle((int) x, (int) y, width, height);
     }
 
     public abstract void update();
@@ -26,15 +26,23 @@ public abstract class UIObject {
     public abstract void onClick();
 
     public void onMouseMove(MouseEvent e) {
-        if(bounds.contains(e.getX(), e.getY()))
-            hovering = true;
-        else
-            hovering = false;
+
+        /*
+         * if (bounds.contains(e.getX(), e.getY())) setFocused(true); else hovering =
+         * false;
+         */
     }
 
     public void onMouseRelease(MouseEvent e) {
-        if(hovering)
-            onClick();
+        // if(hovering)
+        if (bounds.contains(e.getX(), e.getY())) {
+            if (isFocused()) {
+                setFocused(false);
+                onClick();
+            } else {
+                setFocused(true);
+            }
+        }
     }
 
     // Getters and Setters
@@ -71,14 +79,12 @@ public abstract class UIObject {
         this.height = height;
     }
 
-    public boolean isHovering() {
-        return hovering;
+    public boolean isFocused() {
+        return focused;
     }
 
-    public void setHovering(boolean hovering) {
-        this.hovering = hovering;
+    public void setFocused(boolean focused) {
+        this.focused = focused;
     }
-
-    
 
 }

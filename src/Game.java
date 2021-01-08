@@ -14,9 +14,9 @@ import java.awt.image.BufferedImage;
 
 //Temporary Imports
 import src.gfx.ImageLoader;
+import src.global.Global;
 import src.input.KeyManager;
 import src.input.MouseManager;
-
 
 public class Game implements Runnable {
     private Display display;
@@ -32,7 +32,7 @@ public class Game implements Runnable {
     // States
     public State gameState;
     public State menuState;
-    
+
     // Input
     private KeyManager keyManager;
     private MouseManager mouseManager;
@@ -52,7 +52,7 @@ public class Game implements Runnable {
     }
 
     private void init() {
-        //Initialize the Display object
+        // Initialize the Display object
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
         display.getFrame().addMouseListener(mouseManager);
@@ -68,50 +68,49 @@ public class Game implements Runnable {
         menuState = new MenuState(handler);
         State.setState(menuState);
     }
-    
+
     private void update() {
         keyManager.update();
 
-        if(State.getState() != null) {
+        if (State.getState() != null) {
             State.getState().update();
         }
     }
 
     private void render() {
-        //Initialize the BufferStrategy object
+        // Initialize the BufferStrategy object
         bs = display.getCanvas().getBufferStrategy();
-        if(bs == null) {
+        if (bs == null) {
             display.getCanvas().createBufferStrategy(3);
             return;
         }
-        //Initialize the Graphics object
+        // Initialize the Graphics object
         g = bs.getDrawGraphics();
-        //Clear Screen
+        // Clear Screen
         g.clearRect(0, 0, width, height);
-        //Start drawing
+        // Start drawing
         {
             g.setColor(Color.WHITE);
 
-            
             int marginx = 10, marginy = 10, thickness = 5;
-            //g.setColor(Color.RED);
-            //g.drawRect(marginx - 1, marginy - 1, width - 2*marginx, height - 2*marginy);
+            // g.setColor(Color.RED);
+            // g.drawRect(marginx - 1, marginy - 1, width - 2*marginx, height - 2*marginy);
             g.setColor(Color.WHITE);
-            g.fillRect(marginx, marginy, thickness, height - 2*marginy - 1);  //left
-            g.fillRect(marginx, marginy, width - 2*marginx - 1, thickness); //top
-            g.fillRect(width - marginx - thickness - 1, marginy, thickness, height - 2*marginy - 1);    //right
-            g.fillRect(marginx, height - marginy - thickness - 1, width - 2*marginx - 1, thickness);    //bot
+            g.fillRect(marginx, marginy, thickness, height - 2 * marginy - 1); // left
+            g.fillRect(marginx, marginy, width - 2 * marginx - 1, thickness); // top
+            g.fillRect(width - marginx - thickness - 1, marginy, thickness, height - 2 * marginy - 1); // right
+            g.fillRect(marginx, height - marginy - thickness - 1, width - 2 * marginx - 1, thickness); // bot
 
         }
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);
 
-        if(State.getState() != null) {
+        if (State.getState() != null) {
             State.getState().render(g);
         }
 
-        //Stop drawing
+        // Stop drawing
         bs.show();
         g.dispose();
     }
@@ -120,59 +119,59 @@ public class Game implements Runnable {
         init();
 
         int fps = 60;
-        double timePerTick = 1000000000 / fps;  //nano seconds / fps to slow down
+        double timePerTick = 1000000000 / fps; // nano seconds / fps to slow down
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();
         long timer = 0;
         int ticks = 0;
 
-        //Main gameloop
-        while(running) {
-            //Reduce how many times update and render are called
+        // Main gameloop
+        while (running) {
+            // Reduce how many times update and render are called
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
             lastTime = now;
-            
-            if(delta >= 1) {
+
+            if (delta >= 1) {
                 update();
                 render();
                 ticks++;
                 delta--;
             }
 
-            if(timer >= 1000000000) {
+            if (timer >= 1000000000) {
                 timer = ticks = 0;
             }
         }
 
         stop();
     }
-    
+
     public KeyManager getKeyManager() {
         return keyManager;
     }
-    
+
     public MouseManager getMouseManager() {
         return mouseManager;
     }
-    
+
     public GameCamera getGameCamera() {
         return gameCamera;
     }
 
     public synchronized void start() {
-        if(running)
+        if (running)
             return;
         running = true;
-        //Initialize the Thread objects
+        // Initialize the Thread objects
         thread = new Thread(this);
         thread.start();
     }
 
     public synchronized void stop() {
-        if(!running)
+        if (!running)
             return;
         running = false;
         try {

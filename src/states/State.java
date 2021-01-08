@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import src.Handler;
 
 public abstract class State {
-    
+
     private static State currentState = null;
 
     public static void setState(State state) {
@@ -16,7 +16,7 @@ public abstract class State {
         return currentState;
     }
 
-    //Common methods
+    // Common methods
 
     protected Handler handler;
 
@@ -27,5 +27,9 @@ public abstract class State {
     public abstract void update();
 
     public abstract void render(Graphics g);
+
+    public String getName() {
+        return this.getClass().getName();
+    }
 
 }

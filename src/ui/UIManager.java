@@ -17,23 +17,28 @@ public class UIManager {
     }
 
     public void update() {
-        for(UIObject o : objects)
+        for (UIObject o : objects)
             o.update();
     }
 
     public void render(Graphics g) {
-        for(UIObject o : objects)
+        for (UIObject o : objects)
             o.render(g);
     }
 
     public void onMouseMove(MouseEvent e) {
-        for(UIObject o : objects)
+        for (UIObject o : objects)
             o.onMouseMove(e);
     }
 
     public void onMouseRelease(MouseEvent e) {
-        for(UIObject o : objects)
+        for (UIObject o : objects) {
             o.onMouseRelease(e);
+            if (o.isFocused()) {
+                unfocusAll();
+                o.setFocused(true);
+            }
+        }
     }
 
     public void addObject(UIObject o) {
@@ -59,5 +64,19 @@ public class UIManager {
     public void setObjects(ArrayList<UIObject> objects) {
         this.objects = objects;
     }
-    
+
+    public void unfocusAll() {
+        for (UIObject o : objects) {
+            o.setFocused(false);
+        }
+    }
+
+    public UIObject getFocusedObject() {
+        for (UIObject o : objects) {
+            if (o.isFocused())
+                return o;
+        }
+        return null;
+    }
+
 }
