@@ -13,11 +13,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
-//Temporary Imports
-import src.gfx.ImageLoader;
-import src.global.Global;
-import java.awt.image.BufferedImage;
-
 public class Game implements Runnable {
     private Display display;
     public String title;
