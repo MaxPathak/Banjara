@@ -3,6 +3,8 @@ package src;
 import src.display.Display;
 import src.gfx.Assets;
 import src.gfx.GameCamera;
+import src.input.KeyManager;
+import src.input.MouseManager;
 import src.states.GameState;
 import src.states.MenuState;
 import src.states.State;
@@ -10,13 +12,11 @@ import src.states.State;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 //Temporary Imports
 import src.gfx.ImageLoader;
 import src.global.Global;
-import src.input.KeyManager;
-import src.input.MouseManager;
+import java.awt.image.BufferedImage;
 
 public class Game implements Runnable {
     private Display display;
