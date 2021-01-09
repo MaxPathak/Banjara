@@ -25,12 +25,12 @@ public class MenuState extends State {
         handler.getMouseManager().setUIManager(uiManager);
 
         timedEvent = new TimedEvent();
-        timedEvent.add(new TimerTask() {
-            @Override
-            public void run() {
-                handler.getGame().getKeyManager().getArrowKey();
-            }
-        }, 0, 170);
+        /*
+         * // Continuous Update timedEvent.add(new TimerTask() {
+         * 
+         * @Override public void run() {
+         * handler.getGame().getKeyManager().getArrowKey(); } }, 0, 170);
+         */
         timedEvent.add(new TimerTask() {
             @Override
             public void run() {

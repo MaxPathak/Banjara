@@ -9,10 +9,12 @@ import java.util.TimerTask;
 
 import src.global.Global;
 import src.global.Global.Direction;
+import src.states.GameState;
+import src.states.State;
 
 public class KeyManager implements KeyListener {
 
-    private boolean[] keys;
+    private boolean[] keys, justPressed, cantPress;
     public Direction playerDirection = Direction.DOWN;
     public boolean moving;
     public boolean interact;
@@ -22,6 +24,9 @@ public class KeyManager implements KeyListener {
 
     public KeyManager() {
         keys = new boolean[256];
+        justPressed = new boolean[keys.length];
+        cantPress = new boolean[keys.length];
+
         moving = false;
         interact = false;
         keyVals = new int[] { KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D };
@@ -31,6 +36,22 @@ public class KeyManager implements KeyListener {
         moving = false;
 
         interact = keys[KeyEvent.VK_Z] || keys[KeyEvent.VK_ENTER];
+
+        for (int i = 0; i < keys.length; i++) {
+            if (cantPress[i] && !keys[i]) {
+                cantPress[i] = false;
+            } else if (justPressed[i]) {
+                cantPress[i] = true;
+                justPressed[i] = false;
+            }
+            if (!cantPress[i] && keys[i]) {
+                justPressed[i] = true;
+            }
+        }
+
+        if (keyJustPressed(KeyEvent.VK_X)) {
+            System.out.println("Pressed X");
+        }
 
         ListIterator<Integer> li = keyArr.listIterator(keyArr.size());
 
@@ -46,13 +67,23 @@ public class KeyManager implements KeyListener {
 
     }
 
+    public boolean keyJustPressed(int keyCode) {
+        if (keyCode < 0 || keyCode >= keys.length)
+            return false;
+
+        return justPressed[keyCode];
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
+            return;
+
         if (!keyArr.contains(e.getKeyCode())) {
-            /*
-             * if (e.getKeyCode() == KeyEvent.VK_Z || e.getKeyCode() == KeyEvent.VK_ENTER)
-             * return;
-             */
+
+            // if (State.getState().getClass().getName() != GameState.class.getName())
+            if (keyJustPressed(e.getKeyCode()))
+                return;
             keys[e.getKeyCode()] = true;
             keyArr.add(e.getKeyCode());
         }
@@ -60,11 +91,10 @@ public class KeyManager implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() < 0 || e.getKeyCode() >= keys.length)
+            return;
+
         if (keyArr.contains(e.getKeyCode())) {
-            /*
-             * if (e.getKeyCode() == KeyEvent.VK_Z || e.getKeyCode() == KeyEvent.VK_ENTER)
-             * return;
-             */
             keys[e.getKeyCode()] = false;
             keyArr.remove(keyArr.indexOf(e.getKeyCode()));
         }
@@ -85,8 +115,12 @@ public class KeyManager implements KeyListener {
         while (li.hasPrevious()) {
             for (int i = 0, j = li.previous(); i < keyVals.length; i++) {
                 if (keyVals[i] == j) {
-                    removeAll();
-                    return Global.Direction.values()[i].ordinal();
+                    if (keyJustPressed(j))
+                        return i;
+                    /*
+                     * // Continuous Update removeAll(); return
+                     * Global.Direction.values()[i].ordinal();
+                     */
                 }
             }
         }
