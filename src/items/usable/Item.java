@@ -14,4 +14,28 @@ public class Item extends UsableItem {
         this.price = price;
     }
 
+    public boolean isConsumable() {
+        return consumable;
+    }
+
+    public void setConsumable(boolean consumable) {
+        this.consumable = consumable;
+    }
+
+    public int getItypeId() {
+        return itypeId;
+    }
+
+    public void setItypeId(int itypeId) {
+        this.itypeId = itypeId;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
 }
