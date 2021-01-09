@@ -34,7 +34,7 @@ public abstract class Entity {
 
     public abstract void render(Graphics g);
 
-    public abstract void event();
+    public abstract void effect();
 
     public Entity checkEntityInteractions() {
         for (Entity e : handler.getMap().getEntityManager().getEntities()) {

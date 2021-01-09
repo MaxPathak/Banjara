@@ -68,7 +68,7 @@ public class Player extends Creature {
         Entity e;
         if ((e = checkEntityInteractions()) != null) {
             if (handler.getGame().getKeyManager().isInteracting())
-                e.event();
+                e.effect();
         }
 
     }
@@ -130,7 +130,7 @@ public class Player extends Creature {
     }
 
     @Override
-    public void event() {
+    public void effect() {
         // TODO Auto-generated method stub
 
     }

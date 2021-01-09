@@ -51,7 +51,7 @@ public class Chest extends StaticEntity {
     }
 
     @Override
-    public void event() {
+    public void effect() {
         boolean skip = true;
         Direction oppDir = handler.getMap().getEntityManager().getPlayer().getOppDirection();
 
