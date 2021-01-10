@@ -6,7 +6,6 @@ import src.gfx.Assets;
 import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
-import src.items.usable.Item;
 import src.states.GameState;
 import src.states.MenuState;
 import src.states.State;
@@ -41,15 +40,13 @@ public class Game implements Runnable {
     // Handler
     private Handler handler;
 
-    public DatabaseManager databaseManager;
-
     public Game(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
-        databaseManager = new DatabaseManager();
+        new DatabaseManager();
     }
 
     private void init() {

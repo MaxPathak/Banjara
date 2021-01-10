@@ -1,6 +1,7 @@
 package src.inventory;
 
 import src.Handler;
+import src.items.equip.Weapon;
 import src.items.usable.Item;
 
 import java.awt.event.KeyEvent;
@@ -12,10 +13,12 @@ public class Inventory {
     private Handler handler;
     private boolean active = false;
     private ArrayList<Item> items;
+    private ArrayList<Weapon> weapons;
 
     public Inventory(Handler handler) {
         this.handler = handler;
         items = new ArrayList<Item>();
+        weapons = new ArrayList<Weapon>();
     }
 
     public void update() {
@@ -32,7 +35,7 @@ public class Inventory {
 
     // Inventory Methods
 
-    public boolean changeItem(Item item) {
+    public boolean changeItems(Item item) {
         for (Item i : items) {
             if (i.getId() == item.getId()) {
                 int q = i.getQuantity() + item.getQuantity();
@@ -48,31 +51,35 @@ public class Inventory {
         return true;
     }
 
-    public void addItem(Item item) {
-        for (Item i : items) {
-            if (i.getId() == item.getId()) {
-                i.setQuantity(i.getQuantity() + item.getQuantity());
-                return;
-            }
-        }
-        items.add(item);
-    }
-
-    public boolean removeItem(Item item) {
-        for (Item i : items) {
-            if (i.getId() == item.getId()) {
-                int q = i.getQuantity() - item.getQuantity();
+    public boolean changeWeapons(Weapon weapon) {
+        for (Weapon w : weapons) {
+            if (w.getId() == weapon.getId()) {
+                int q = w.getQuantity() + weapon.getQuantity();
                 if (q < 0)
                     return false;
                 else if (q == 0)
-                    items.remove(item);
-
-                i.setQuantity(q);
-                break;
+                    weapons.remove(w);
+                w.setQuantity(q);
+                return true;
             }
         }
+        weapons.add(weapon);
         return true;
     }
+
+    /*
+     * public void addItem(Item item) { for (Item i : items) { if (i.getId() ==
+     * item.getId()) { i.setQuantity(i.getQuantity() + item.getQuantity()); return;
+     * } } items.add(item); }
+     */
+
+    /*
+     * public boolean removeItem(Item item) { for (Item i : items) { if (i.getId()
+     * == item.getId()) { int q = i.getQuantity() - item.getQuantity(); if (q < 0)
+     * return false; else if (q == 0) items.remove(item);
+     * 
+     * i.setQuantity(q); break; } } return true; }
+     */
 
     public Handler getHandler() {
         return handler;
@@ -91,12 +98,30 @@ public class Inventory {
     }
 
     public void print() {
-        System.out.print("\nInventory: [ ");
+        System.out.println("\nInventory: ");
+        System.out.print("Items: [ ");
         if (items.size() == 0)
             System.out.print("<Empty>  ");
-        for (Item item : items) {
-            System.out.print(item.getName() + " x" + item.getQuantity() + ", ");
-        }
+        else
+            for (Item item : items) {
+                System.out.print(item.getName() + " x" + item.getQuantity() + ", ");
+            }
+        System.out.println("\b\b ]");
+        System.out.print("Weapons: [ ");
+        if (weapons.size() == 0)
+            System.out.print("<Empty>  ");
+        else
+            for (Weapon weapon : weapons) {
+                System.out.print(weapon.getName() + " x" + weapon.getQuantity() + ", ");
+            }
+        System.out.println("\b\b ]");
+        System.out.print("Armors: [ ");
+        if (items.size() + weapons.size() == 0)
+            System.out.print("<Empty>  ");
+        else
+            for (Weapon weapon : weapons) {
+                System.out.print(weapon.getName() + " x" + weapon.getQuantity() + ", ");
+            }
         System.out.println("\b\b ]");
     }
 

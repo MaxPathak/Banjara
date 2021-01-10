@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import src.items.usable.Item;
 
 public class CommandManager extends Command {
-    LinkedList<Command> commands;
+    private LinkedList<Command> commands;
 
     public CommandManager(Command... commands) {
         this.commands = new LinkedList<Command>();
@@ -19,10 +19,6 @@ public class CommandManager extends Command {
             command.execute();
         }
 
-    }
-
-    public void addItem(Item item) {
-        // map.getEntityManager().getPlayer().getInventory().addItem(item);
     }
 
 }
