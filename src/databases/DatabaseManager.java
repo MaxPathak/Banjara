@@ -6,6 +6,7 @@ import src.items.usable.Item;
 public class DatabaseManager {
     private static ItemsDatabase itemsDatabase;
     private static ItemsDatabase weaponsDatabase;
+    private static ItemsDatabase armorsDatabase;
 
     public DatabaseManager() {
         itemsDatabase = new ItemsDatabase(new Item(1, 0, "Dummy Item", "", "", 1, 0, 0, 0, 0, 0, 0, true, 0, 0),
@@ -19,6 +20,10 @@ public class DatabaseManager {
 
     public static ItemsDatabase getWeaponsDatabase() {
         return weaponsDatabase;
+    }
+
+    public static ItemsDatabase getArmorDatabase() {
+        return armorsDatabase;
     }
 
 }

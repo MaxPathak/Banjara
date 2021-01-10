@@ -1,6 +1,7 @@
 package src.inventory;
 
 import src.Handler;
+import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 
@@ -14,11 +15,13 @@ public class Inventory {
     private boolean active = false;
     private ArrayList<Item> items;
     private ArrayList<Weapon> weapons;
+    private ArrayList<Armor> armors;
 
     public Inventory(Handler handler) {
         this.handler = handler;
         items = new ArrayList<Item>();
         weapons = new ArrayList<Weapon>();
+        armors = new ArrayList<Armor>();
     }
 
     public void update() {
@@ -64,6 +67,22 @@ public class Inventory {
             }
         }
         weapons.add(weapon);
+        return true;
+    }
+
+    public boolean changeArmors(Armor armor) {
+        for (Armor a : armors) {
+            if (a.getId() == armor.getId()) {
+                int q = a.getQuantity() + armor.getQuantity();
+                if (q < 0)
+                    return false;
+                else if (q == 0)
+                    armors.remove(a);
+                a.setQuantity(q);
+                return true;
+            }
+        }
+        armors.add(armor);
         return true;
     }
 
@@ -116,11 +135,11 @@ public class Inventory {
             }
         System.out.println("\b\b ]");
         System.out.print("Armors: [ ");
-        if (true)
+        if (armors.size() == 0)
             System.out.print("<Empty>  ");
         else
-            for (Weapon weapon : weapons) {
-                System.out.print(weapon.getName() + " x" + weapon.getQuantity() + ", ");
+            for (Armor armor : armors) {
+                System.out.print(armor.getName() + " x" + armor.getQuantity() + ", ");
             }
         System.out.println("\b\b ]");
     }
