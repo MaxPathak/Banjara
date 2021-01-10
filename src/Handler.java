@@ -2,7 +2,6 @@ package src;
 
 import java.util.TimerTask;
 
-import src.Game;
 import src.gfx.GameCamera;
 import src.maps.Map;
 import src.input.KeyManager;
@@ -25,12 +24,12 @@ public class Handler {
          * @Override public void run() { game.getKeyManager().getArrowKey(); } }, 0,
          * 170);
          */
-        timedEvent.add(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("Handler 500");
-            }
-        }, 0, 500);
+        /*
+         * timedEvent.add(new TimerTask() {
+         * 
+         * @Override public void run() { System.out.println("Handler 500"); } }, 0,
+         * 500);
+         */
     }
 
     public GameCamera getGameCamera() {

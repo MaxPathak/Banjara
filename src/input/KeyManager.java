@@ -49,9 +49,9 @@ public class KeyManager implements KeyListener {
             }
         }
 
-        if (keyJustPressed(KeyEvent.VK_X)) {
-            System.out.println("Pressed X");
-        }
+        /*
+         * if (keyJustPressed(KeyEvent.VK_X)) { System.out.println("Pressed X"); }
+         */
 
         ListIterator<Integer> li = keyArr.listIterator(keyArr.size());
 

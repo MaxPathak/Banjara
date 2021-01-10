@@ -19,8 +19,8 @@ public class MenuState extends State {
     private UIManager uiManager;
     private TimedEvent timedEvent;
 
-    public MenuState(Handler handler) {
-        super(handler);
+    public MenuState() {
+        super();
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
 
@@ -31,12 +31,12 @@ public class MenuState extends State {
          * @Override public void run() {
          * handler.getGame().getKeyManager().getArrowKey(); } }, 0, 170);
          */
-        timedEvent.add(new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("MenuState 500");
-            }
-        }, 0, 500);
+        /*
+         * timedEvent.add(new TimerTask() {
+         * 
+         * @Override public void run() { System.out.println("MenuState 500"); } }, 0,
+         * 500);
+         */
 
         timedEvent.add(new TimerTask() {
             @Override
@@ -45,7 +45,7 @@ public class MenuState extends State {
                     uiManager.getFocusedObject().toggleBlinking();
                 }
             }
-        }, 0, 500);
+        }, 0, 200);
 
         handler.getTimedEvent().merge(timedEvent);
 
@@ -61,7 +61,7 @@ public class MenuState extends State {
                     public void onClick() {
                         handler.getMouseManager().setUIManager(null);
                         timedEvent.stopAll();
-                        System.out.println("Stopped Menu State Events");
+                        // System.out.println("Stopped Menu State Events");
                         handler.getTimedEvent().separate(timedEvent);
                         State.setState(handler.getGame().gameState);
                         handler.getKeyManager().playerDirection = Direction.DOWN;

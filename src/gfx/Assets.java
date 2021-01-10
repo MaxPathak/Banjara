@@ -16,7 +16,7 @@ public class Assets {
 
         title = ImageLoader.loadImage("/img/title/title.jpg");
 
-        iconSet = new SpriteSheet(ImageLoader.loadImage("/img/title/iconSet.jpg"));
+        iconSet = new SpriteSheet(ImageLoader.loadImage("/img/system/IconSet.png"));
 
         SpriteSheet Outside_A2 = new SpriteSheet(ImageLoader.loadImage("/img/tilesets/Outside_A2.png"));
         grass = Outside_A2.crop(width * 0, height * 0, width, height, 1);

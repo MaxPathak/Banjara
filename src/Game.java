@@ -12,6 +12,8 @@ import src.states.State;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class Game implements Runnable {
     private Display display;
@@ -59,20 +61,30 @@ public class Game implements Runnable {
 
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
-
-        gameState = new GameState(handler);
-        menuState = new MenuState(handler);
+        State.setHandler(handler);
+        gameState = new GameState();
+        menuState = new MenuState();
         State.setState(menuState);
+
+        // System.out.println("Fields: ");
+        // for (Field f : this.getClass().getDeclaredFields()) {
+        // if (!f.getType().isPrimitive()) {
+        // System.out.print(f.getType().getName());
+        // System.out.println(": " + f.getDeclaringClass().getName());
+        // }
+        // }
+
+        // System.out.println("Methods: ");
+        // for (Method method : this.getClass().getDeclaredMethods()) {
+        // System.out.print(method.getName());
+        // System.out.println(": " + method.getDeclaringClass().getName());
+        // }
     }
 
     private void update() {
         setReleased(false);
 
         keyManager.update();
-
-        /*
-         * if (isReleased()) { System.out.println("Pressed"); System.exit(0); }
-         */
 
         if (State.getState() != null) {
             State.getState().update();

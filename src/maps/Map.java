@@ -3,9 +3,12 @@ package src.maps;
 import java.awt.Graphics;
 
 import src.Handler;
+import src.commands.Command;
+import src.commands.CommandManager;
 import src.entities.EntityManager;
 import src.entities.creatures.Player;
 import src.entities.statics.Chest;
+import src.items.usable.Item;
 import src.tiles.Tile;
 import src.utils.Utils;
 
@@ -22,8 +25,9 @@ public class Map {
 
         loadMap(path);
 
-        entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY));
-        entityManager.addEntity(new Chest(handler, 5, 5));
+        entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
+        entityManager.addEntity(new Chest(handler, 5, 5, new CommandManager(
+                new Command("addItem", new Item(0, 0, "Dummy Item", "", "", 1, 0, 0, 0, 0, 0, 0, true, 0, 0)))));
     }
 
     public void update() {

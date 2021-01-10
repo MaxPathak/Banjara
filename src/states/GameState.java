@@ -12,8 +12,8 @@ public class GameState extends State {
 
     private Map map;
 
-    public GameState(Handler handler) {
-        super(handler);
+    public GameState() {
+        super();
         map = new Map(handler, "data/maps/map01.txt");
         handler.setMap(map);
         handler.getGameCamera().move(0, 0);

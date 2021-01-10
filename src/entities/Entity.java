@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 import src.Handler;
+import src.commands.CommandManager;
 import src.global.Global.Direction;
 import src.tiles.Tile;
 
@@ -18,14 +19,17 @@ public abstract class Entity {
 
     protected ArrayList<Direction> dFix;
 
-    public Entity(Handler handler, int x, int y, int width, int height) {
+    protected CommandManager commandManager;
+
+    public Entity(Handler handler, int x, int y, int width, int height, CommandManager commandManager) {
         this.handler = handler;
         this.x = x * Tile.TILEWIDTH;
         this.y = y * Tile.TILEHEIGHT;
         this.width = width;
         this.height = height;
-        this.trigger = 0;
+        this.commandManager = commandManager;
 
+        this.trigger = 0;
         dFix = new ArrayList<Direction>();
         bounds = new Rectangle(0, 0, width, height);
     }

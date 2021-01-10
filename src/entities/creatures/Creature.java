@@ -1,6 +1,7 @@
 package src.entities.creatures;
 
 import src.Handler;
+import src.commands.CommandManager;
 import src.entities.Entity;
 import src.tiles.Tile;
 
@@ -14,8 +15,8 @@ public abstract class Creature extends Entity {
     protected float speed;
     protected float xMove, yMove;
 
-    public Creature(Handler handler, int x, int y, int width, int height) {
-        super(handler, x, y, width, height);
+    public Creature(Handler handler, int x, int y, int width, int height, CommandManager commandManager) {
+        super(handler, x, y, width, height, commandManager);
         health = DEFAULT_HEALTH;
         speed = DEFAULT_SPEED;
         xMove = 0;

@@ -18,10 +18,10 @@ public abstract class State {
 
     // Common methods
 
-    protected Handler handler;
+    protected static Handler handler;
 
-    public State(Handler handler) {
-        this.handler = handler;
+    public State() {
+        // TODO
     }
 
     public abstract void update();
@@ -30,6 +30,14 @@ public abstract class State {
 
     public String getName() {
         return this.getClass().getName();
+    }
+
+    public static Handler getHandler() {
+        return State.handler;
+    }
+
+    public static void setHandler(Handler handler) {
+        State.handler = handler;
     }
 
 }

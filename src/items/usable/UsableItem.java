@@ -11,11 +11,11 @@ public class UsableItem extends BaseItem {
     protected int occasion;
     protected int scope;
     protected int speed;
-    protected float successRate;
+    protected int successRate;
 
-    public UsableItem(int id, int iconIndex, String name, String description, String note, int animationId, int hitType,
-            int occasion, int scope, int speed, float successRate) {
-        super(id, iconIndex, name, description, note);
+    public UsableItem(int id, int iconIndex, String name, String description, String note, int quantity,
+            int animationId, int hitType, int occasion, int scope, int speed, int successRate) {
+        super(id, iconIndex, name, description, note, quantity);
         this.animationId = animationId;
         this.hitType = hitType;
         this.occasion = occasion;

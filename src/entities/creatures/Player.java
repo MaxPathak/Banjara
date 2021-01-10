@@ -6,26 +6,28 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 import src.Handler;
+import src.commands.CommandManager;
 import src.entities.Entity;
 import src.gfx.Animation;
 import src.gfx.Assets;
 import src.global.Global;
 import src.global.Global.Direction;
+import src.inventory.Inventory;
 
 public class Player extends Creature {
 
     private static final int DEFAULT_AR_SIZE = 5;
 
+    private int arSize = DEFAULT_AR_SIZE;
     // Animations
     private Animation anim_down, anim_left, anim_right, anim_up;
-
     private Global.Direction direction = Global.Direction.DOWN;
 
-    private boolean isSnapped = true;
-    private int arSize = DEFAULT_AR_SIZE;
+    // Inventory
+    private Inventory inventory;
 
-    public Player(Handler handler, int x, int y) {
-        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT);
+    public Player(Handler handler, int x, int y, CommandManager commandManager) {
+        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, commandManager);
 
         ar = new Rectangle();
 
@@ -40,6 +42,8 @@ public class Player extends Creature {
         anim_left = new Animation(animSpeed, Assets.player_left);
         anim_right = new Animation(animSpeed, Assets.player_right);
         anim_up = new Animation(animSpeed, Assets.player_up);
+
+        inventory = new Inventory(handler);
     }
 
     private void action() {
@@ -108,8 +112,11 @@ public class Player extends Creature {
         // Movement
         getInput();
         move();
-        action();
         handler.getGameCamera().centerOnEntity(this);
+
+        action();
+        // Inventory
+        inventory.update();
     }
 
     @Override
@@ -126,6 +133,8 @@ public class Player extends Creature {
          * handler.getGameCamera().getxOffset()), (int) (ar.y -
          * handler.getGameCamera().getyOffset()), ar.width, ar.height);
          */
+
+        inventory.render(g);
 
     }
 
@@ -176,6 +185,14 @@ public class Player extends Creature {
                 return Direction.DOWN;
         }
         return Direction.UP;
+    }
+
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
 }

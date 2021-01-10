@@ -7,17 +7,19 @@ import javax.swing.Action;
 import java.awt.Color;
 
 import src.Handler;
+import src.commands.CommandManager;
 import src.gfx.Assets;
 import src.global.Global.Direction;
 import src.input.KeyManager;
+import src.items.usable.Item;
 import src.tiles.Tile;
 
 public class Chest extends StaticEntity {
 
     private boolean open;
 
-    public Chest(Handler handler, int x, int y) {
-        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT);
+    public Chest(Handler handler, int x, int y, CommandManager commandManager) {
+        super(handler, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT, commandManager);
 
         open = false;
         dFix.add(Direction.DOWN);
@@ -65,8 +67,15 @@ public class Chest extends StaticEntity {
             return;
 
         if (!open) {
+            handler.getMap().getEntityManager().getPlayer().getInventory().print();
+
             open = true;
-            System.out.println("Opened a chest");
+            System.out.println("\nOpened a chest!");
+            if (commandManager != null)
+                commandManager.execute();
+
+            handler.getMap().getEntityManager().getPlayer().getInventory().print();
+
         }
     }
 
