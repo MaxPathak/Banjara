@@ -1,10 +1,12 @@
 package src;
 
+import src.databases.DatabaseManager;
 import src.display.Display;
 import src.gfx.Assets;
 import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
+import src.items.usable.Item;
 import src.states.GameState;
 import src.states.MenuState;
 import src.states.State;
@@ -12,8 +14,6 @@ import src.states.State;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 
 public class Game implements Runnable {
     private Display display;
@@ -41,12 +41,15 @@ public class Game implements Runnable {
     // Handler
     private Handler handler;
 
+    public DatabaseManager databaseManager;
+
     public Game(String title, int width, int height) {
         this.title = title;
         this.width = width;
         this.height = height;
         keyManager = new KeyManager();
         mouseManager = new MouseManager();
+        databaseManager = new DatabaseManager();
     }
 
     private void init() {
@@ -79,6 +82,7 @@ public class Game implements Runnable {
         // System.out.print(method.getName());
         // System.out.println(": " + method.getDeclaringClass().getName());
         // }
+
     }
 
     private void update() {

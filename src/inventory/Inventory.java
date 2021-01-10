@@ -32,6 +32,22 @@ public class Inventory {
 
     // Inventory Methods
 
+    public boolean changeItem(Item item) {
+        for (Item i : items) {
+            if (i.getId() == item.getId()) {
+                int q = i.getQuantity() + item.getQuantity();
+                if (q < 0)
+                    return false;
+                else if (q == 0)
+                    items.remove(i);
+                i.setQuantity(q);
+                return true;
+            }
+        }
+        items.add(item);
+        return true;
+    }
+
     public void addItem(Item item) {
         for (Item i : items) {
             if (i.getId() == item.getId()) {

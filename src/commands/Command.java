@@ -2,6 +2,7 @@ package src.commands;
 
 import java.lang.reflect.Method;
 
+import src.databases.DatabaseManager;
 import src.items.usable.Item;
 import src.states.State;
 
@@ -21,15 +22,17 @@ public class Command {
                 this.parameters = parameters;
                 try {
                     this.method = this.getClass().getDeclaredMethod(name, method.getParameterTypes());
+                    return;
                 } catch (Exception e) {
                     throw new RuntimeException("Command Error");
                 }
             }
-
         }
     }
 
     public void execute() {
+        if (method == null)
+            return;
         try {
             method.invoke(this.getClass().getDeclaredConstructor().newInstance(), parameters);
         } catch (Exception e) {
@@ -37,8 +40,21 @@ public class Command {
         }
     }
 
-    public void addItem(Item item) {
-        State.getHandler().getMap().getEntityManager().getPlayer().getInventory().addItem(item);
+    public void changeItem(int id, int operand, int operandVal) {
+        int quantity = 0;
+        switch (operand) {
+            case 0:
+                quantity = operandVal;
+                break;
+            case 1:
+                quantity = operandVal;
+                break;
+        }
+        Item item = DatabaseManager.getItemDatabase().getItemById(id);
+        if (item == null)
+            return;
+        item.setQuantity(quantity);
+        State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeItem(item);
     }
 
 }
