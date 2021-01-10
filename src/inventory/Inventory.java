@@ -116,7 +116,7 @@ public class Inventory {
             }
         System.out.println("\b\b ]");
         System.out.print("Armors: [ ");
-        if (items.size() + weapons.size() == 0)
+        if (true)
             System.out.print("<Empty>  ");
         else
             for (Weapon weapon : weapons) {
