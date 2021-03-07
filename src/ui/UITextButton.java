@@ -10,6 +10,7 @@ import java.awt.geom.RoundRectangle2D;
 
 import src.gfx.Assets;
 import src.gfx.Text;
+import src.global.Global;
 
 public class UITextButton extends UIObject {
 
@@ -35,14 +36,16 @@ public class UITextButton extends UIObject {
         Graphics2D g2 = (Graphics2D) g;
         Color color = Color.white;
         int borderRadius = 5;
+        int padding = 5;
 
         // Set Stroke and Color
         g2.setStroke(new java.awt.BasicStroke(strokeValue));
-        g2.setColor(new Color(0, 0, 0, .4f));
-        color = color.darker();
+        g2.setColor(new Color(0, 0, 0, .7f));
+        // color = color.darker();
 
         if (isFocused() && isBlinking()) {
-            color = color.brighter();
+            // color = color.brighter();
+            g2.setColor(new Color(0, 0, 0, .5f));
         } else {
             // asd
         }
@@ -55,7 +58,10 @@ public class UITextButton extends UIObject {
         g2.drawRoundRect((int) x, (int) y, width, height, borderRadius, borderRadius);
 
         // Text
-        Text.drawString(g, text, (int) x + width / 2, (int) y + height / 2, true, color, Assets.regularFont.get(32));
+        // Text.drawString(g, text, (int) x + width / 2, (int) y + height / 2, true,
+        // color, Assets.regularFont.get(32));
+        Text.drawString(g, text, (int) (x + padding), (int) (y + height / 2), false, true, color,
+                Assets.regularFont.get(24));
 
         // GradientPaint blueToBlack = new GradientPaint(0, 0, Color.BLUE, 400, 400,
         // Color.BLACK);

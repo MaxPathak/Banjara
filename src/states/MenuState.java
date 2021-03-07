@@ -8,6 +8,7 @@ import java.util.TimerTask;
 import src.Handler;
 import src.gfx.Assets;
 import src.gfx.Text;
+import src.global.Global;
 import src.global.Global.Direction;
 import src.ui.ClickListener;
 import src.ui.UIImageButton;
@@ -47,13 +48,13 @@ public class MenuState extends State {
                     uiManager.getFocusedObject().toggleBlinking();
                 }
             }
-        }, 0, 300);
+        }, 0, 400);
 
         handler.getTimedEvent().merge(timedEvent);
 
         final int totalButtons = 3;
         int buttonIndex = 0;
-        int buttonWidth = 120, buttonHeight = 40;
+        int buttonWidth = 150, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
 
         int totalHeight = 50 * (int) (totalButtons + totalButtons / 2);
         // Start

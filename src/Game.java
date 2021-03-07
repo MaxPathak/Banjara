@@ -86,9 +86,9 @@ public class Game implements Runnable {
         // String str = "Options";
         // System.out.println("String: " + str);
         // System.out.println("Width: " +
-        // tempG.getFontMetrics(Assets.regularFont.get(32)).stringWidth(str));
+        // tempG.getFontMetrics(Assets.regularFont.get(24)).stringWidth(str));
         // System.out.println("Height: " +
-        // tempG.getFontMetrics(Assets.regularFont.get(32)).getHeight());
+        // tempG.getFontMetrics(Assets.regularFont.get(24)).getHeight());
         // System.exit(0);
 
     }

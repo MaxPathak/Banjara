@@ -19,7 +19,7 @@ public class Assets {
 
         title = ImageLoader.loadImage("/img/title/title.jpg");
 
-        regularFont = FontLoader.loadFont("/fonts/mplus-1m-regular.ttf");
+        regularFont = FontLoader.loadFont("/fonts/comic.ttf");
 
         iconSet = new SpriteSheet(ImageLoader.loadImage("/img/system/IconSet.png"));
 
