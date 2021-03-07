@@ -6,4 +6,6 @@ public class Global {
     };
 
     public static Direction direction = Direction.DOWN;
+
+    public static final float DEFAULT_FONTSIZE = 24;
 }

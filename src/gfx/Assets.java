@@ -1,5 +1,6 @@
 package src.gfx;
 
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 
 public class Assets {
@@ -9,12 +10,16 @@ public class Assets {
 
     private static SpriteSheet iconSet;
 
+    public static CustomFont regularFont;
+
     public static BufferedImage player, grass, dirt, tree, bush, cchest, ochest, title;
     public static BufferedImage[] player_down, player_left, player_right, player_up, start_btn;
 
     public static void init() {
 
         title = ImageLoader.loadImage("/img/title/title.jpg");
+
+        regularFont = FontLoader.loadFont("/fonts/mplus-1m-regular.ttf");
 
         iconSet = new SpriteSheet(ImageLoader.loadImage("/img/system/IconSet.png"));
 

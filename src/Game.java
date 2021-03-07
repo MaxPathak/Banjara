@@ -80,6 +80,17 @@ public class Game implements Runnable {
         // System.out.println(": " + method.getDeclaringClass().getName());
         // }
 
+        // display.getCanvas().createBufferStrategy(3);
+        // bs = display.getCanvas().getBufferStrategy();
+        // Graphics tempG = bs.getDrawGraphics();
+        // String str = "Options";
+        // System.out.println("String: " + str);
+        // System.out.println("Width: " +
+        // tempG.getFontMetrics(Assets.regularFont.get(32)).stringWidth(str));
+        // System.out.println("Height: " +
+        // tempG.getFontMetrics(Assets.regularFont.get(32)).getHeight());
+        // System.exit(0);
+
     }
 
     private void update() {
@@ -218,6 +229,14 @@ public class Game implements Runnable {
 
     public void setReleased(boolean release) {
         this.released = release;
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(Display display) {
+        this.display = display;
     }
 
 }

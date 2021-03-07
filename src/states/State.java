@@ -8,6 +8,8 @@ public abstract class State {
 
     private static State currentState = null;
 
+    protected static Handler handler;
+
     public static void setState(State state) {
         currentState = state;
     }
@@ -17,8 +19,6 @@ public abstract class State {
     }
 
     // Common methods
-
-    protected static Handler handler;
 
     public State() {
         // TODO

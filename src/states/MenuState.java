@@ -7,11 +7,13 @@ import java.util.TimerTask;
 
 import src.Handler;
 import src.gfx.Assets;
+import src.gfx.Text;
 import src.global.Global.Direction;
 import src.ui.ClickListener;
 import src.ui.UIImageButton;
 import src.ui.UIManager;
 import src.ui.UIObject;
+import src.ui.UITextButton;
 import src.utils.TimedEvent;
 
 public class MenuState extends State {
@@ -45,18 +47,18 @@ public class MenuState extends State {
                     uiManager.getFocusedObject().toggleBlinking();
                 }
             }
-        }, 0, 200);
+        }, 0, 300);
 
         handler.getTimedEvent().merge(timedEvent);
 
         final int totalButtons = 3;
         int buttonIndex = 0;
+        int buttonWidth = 120, buttonHeight = 40;
 
         int totalHeight = 50 * (int) (totalButtons + totalButtons / 2);
         // Start
-        uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 110 / 2,
-                handler.getHeight() / 2 - totalHeight / 2 + 50 * buttonIndex + 25 * buttonIndex++, 110, 50,
-                Assets.start_btn, new ClickListener() {
+        uiManager.addObject(new UITextButton("Start", handler.getWidth() / 2 - buttonWidth / 2, 400, buttonWidth,
+                buttonHeight, 3, new ClickListener() {
                     @Override
                     public void onClick() {
                         handler.getMouseManager().setUIManager(null);
@@ -68,19 +70,16 @@ public class MenuState extends State {
                     }
                 }));
         // Options
-        uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 110 / 2,
-                handler.getHeight() / 2 - totalHeight / 2 + 50 * buttonIndex + 25 * buttonIndex++, 110, 50,
-                Assets.start_btn, new ClickListener() {
+        uiManager.addObject(new UITextButton("Options", handler.getWidth() / 2 - buttonWidth / 2, 450, buttonWidth,
+                buttonHeight, 3, new ClickListener() {
                     @Override
                     public void onClick() {
                         // TODO
                     }
                 }));
-
         // Exit
-        uiManager.addObject(new UIImageButton(handler.getWidth() / 2 - 110 / 2,
-                handler.getHeight() / 2 - totalHeight / 2 + 50 * buttonIndex + 25 * buttonIndex++, 110, 50,
-                Assets.start_btn, new ClickListener() {
+        uiManager.addObject(new UITextButton("Exit", handler.getWidth() / 2 - buttonWidth / 2, 500, buttonWidth,
+                buttonHeight, 3, new ClickListener() {
                     @Override
                     public void onClick() {
                         System.exit(0);
@@ -88,6 +87,7 @@ public class MenuState extends State {
                 }));
 
         uiManager.getObjects().get(0).setFocused(true);
+
     }
 
     @Override
@@ -119,6 +119,8 @@ public class MenuState extends State {
         // Title Screen
         g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(), null);
 
+        // Text.drawString(g, "Start", 0, 0, false, Color.BLACK, Assets.font24);
+
         uiManager.render(g);
         // g.setColor(Color.white);
         // g.fillRect(handler.getMouseManager().getMouseX(),
@@ -149,24 +151,24 @@ public class MenuState extends State {
         }
 
         switch (direction) {
-            case UP:
-                if (i > 0) {
-                    // System.out.println("UP");
-                    uiManager.getObjects().get(i).setFocused(false);
-                    uiManager.getObjects().get(i - 1).setFocused(true);
-                }
-                break;
-            case DOWN:
-                if (i < size - 1) {
-                    // System.out.println("DOWN");
-                    uiManager.getObjects().get(i).setFocused(false);
-                    uiManager.getObjects().get(i + 1).setFocused(true);
-                }
-                break;
-            case LEFT:
-                break;
-            case RIGHT:
-                break;
+        case UP:
+            if (i > 0) {
+                // System.out.println("UP");
+                uiManager.getObjects().get(i).setFocused(false);
+                uiManager.getObjects().get(i - 1).setFocused(true);
+            }
+            break;
+        case DOWN:
+            if (i < size - 1) {
+                // System.out.println("DOWN");
+                uiManager.getObjects().get(i).setFocused(false);
+                uiManager.getObjects().get(i + 1).setFocused(true);
+            }
+            break;
+        case LEFT:
+            break;
+        case RIGHT:
+            break;
         }
     }
 
