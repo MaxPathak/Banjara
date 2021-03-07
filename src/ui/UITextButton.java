@@ -57,9 +57,6 @@ public class UITextButton extends UIObject {
         g2.setColor(color);
         g2.drawRoundRect((int) x, (int) y, width, height, borderRadius, borderRadius);
 
-        // Text
-        // Text.drawString(g, text, (int) x + width / 2, (int) y + height / 2, true,
-        // color, Assets.regularFont.get(32));
         Text.drawString(g, text, (int) (x + padding), (int) (y + height / 2), false, true, color,
                 Assets.regularFont.get(24));
 
