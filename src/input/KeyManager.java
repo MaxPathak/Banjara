@@ -17,7 +17,8 @@ public class KeyManager implements KeyListener {
     private boolean[] keys, justPressed, cantPress;
     public Direction playerDirection = Direction.DOWN;
     public boolean moving;
-    public boolean interact;
+    public boolean zKey;
+    public boolean xKey;
 
     private int keyVals[];
     private ArrayList<Integer> keyArr = new ArrayList<Integer>();
@@ -28,14 +29,16 @@ public class KeyManager implements KeyListener {
         cantPress = new boolean[keys.length];
 
         moving = false;
-        interact = false;
-        keyVals = new int[] { KeyEvent.VK_W, KeyEvent.VK_S, KeyEvent.VK_A, KeyEvent.VK_D };
+        zKey = false;
+        keyVals = new int[] { KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT };
     }
 
     public void update() {
         moving = false;
 
-        interact = keys[KeyEvent.VK_Z] || keys[KeyEvent.VK_ENTER];
+        zKey = keys[KeyEvent.VK_Z] || keys[KeyEvent.VK_ENTER];
+
+        xKey = keys[KeyEvent.VK_X] || keys[KeyEvent.VK_ESCAPE];
 
         for (int i = 0; i < keys.length; i++) {
             if (cantPress[i] && !keys[i]) {
@@ -49,9 +52,9 @@ public class KeyManager implements KeyListener {
             }
         }
 
-        /*
-         * if (keyJustPressed(KeyEvent.VK_X)) { System.out.println("Pressed X"); }
-         */
+        // if (keyJustPressed(KeyEvent.VK_X)) {
+        // System.out.println("Pressed X");
+        // }
 
         ListIterator<Integer> li = keyArr.listIterator(keyArr.size());
 
@@ -105,8 +108,12 @@ public class KeyManager implements KeyListener {
         // TODO
     }
 
-    public boolean isInteracting() {
-        return interact;
+    public boolean pressedZ() {
+        return zKey;
+    }
+
+    public boolean pressedX() {
+        return xKey;
     }
 
     public int getArrowKey() {
@@ -136,6 +143,12 @@ public class KeyManager implements KeyListener {
             keys[i] = false;
         }
         keyArr.removeAll(keyArr);
+    }
+
+    public void printKeyVals() {
+        for (int key : keyVals) {
+            System.out.println(key);
+        }
     }
 
 }

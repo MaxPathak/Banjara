@@ -51,27 +51,27 @@ public class Player extends Creature {
         ar.x = (int) x;
         ar.y = (int) y;
         switch (direction) {
-            case UP:
-                ar.width = bounds.width;
-                ar.y -= arSize;
-                break;
-            case DOWN:
-                ar.width = bounds.width;
-                ar.y += bounds.height;
-                break;
-            case LEFT:
-                ar.height = bounds.height;
-                ar.x -= arSize;
-                break;
-            case RIGHT:
-                ar.height = bounds.height;
-                ar.x += bounds.width;
-                break;
+        case UP:
+            ar.width = bounds.width;
+            ar.y -= arSize;
+            break;
+        case DOWN:
+            ar.width = bounds.width;
+            ar.y += bounds.height;
+            break;
+        case LEFT:
+            ar.height = bounds.height;
+            ar.x -= arSize;
+            break;
+        case RIGHT:
+            ar.height = bounds.height;
+            ar.x += bounds.width;
+            break;
         }
 
         Entity e;
         if ((e = checkEntityInteractions()) != null) {
-            if (handler.getGame().getKeyManager().isInteracting())
+            if (handler.getGame().getKeyManager().pressedZ())
                 e.effect();
         }
 
@@ -85,18 +85,18 @@ public class Player extends Creature {
 
         if (handler.getKeyManager().moving) {
             switch (direction) {
-                case UP:
-                    yMove -= speed;
-                    break;
-                case DOWN:
-                    yMove += speed;
-                    break;
-                case LEFT:
-                    xMove -= speed;
-                    break;
-                case RIGHT:
-                    xMove += speed;
-                    break;
+            case UP:
+                yMove -= speed;
+                break;
+            case DOWN:
+                yMove += speed;
+                break;
+            case LEFT:
+                xMove -= speed;
+                break;
+            case RIGHT:
+                xMove += speed;
+                break;
             }
         }
     }
@@ -155,34 +155,34 @@ public class Player extends Creature {
             return anim_down.getCurrentFrame();
         } else {
             switch (direction) {
-                case DOWN:
-                    anim_down.setIndex(0);
-                    return anim_down.getCurrentFrame();
-                case LEFT:
-                    anim_left.setIndex(0);
-                    return anim_left.getCurrentFrame();
-                case RIGHT:
-                    anim_right.setIndex(0);
-                    return anim_right.getCurrentFrame();
-                case UP:
-                    anim_up.setIndex(0);
-                    return anim_up.getCurrentFrame();
+            case DOWN:
+                anim_down.setIndex(0);
+                return anim_down.getCurrentFrame();
+            case LEFT:
+                anim_left.setIndex(0);
+                return anim_left.getCurrentFrame();
+            case RIGHT:
+                anim_right.setIndex(0);
+                return anim_right.getCurrentFrame();
+            case UP:
+                anim_up.setIndex(0);
+                return anim_up.getCurrentFrame();
             }
         }
         anim_down.setIndex(0);
         return anim_down.getCurrentFrame();
     }
 
-    public Direction getOppDirection() {
+    public Direction getOppositeDirection() {
         switch (direction) {
-            case DOWN:
-                return Direction.UP;
-            case LEFT:
-                return Direction.RIGHT;
-            case RIGHT:
-                return Direction.LEFT;
-            case UP:
-                return Direction.DOWN;
+        case DOWN:
+            return Direction.UP;
+        case LEFT:
+            return Direction.RIGHT;
+        case RIGHT:
+            return Direction.LEFT;
+        case UP:
+            return Direction.DOWN;
         }
         return Direction.UP;
     }

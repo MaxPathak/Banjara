@@ -62,7 +62,7 @@ public class MenuState extends State {
                 buttonHeight, 3, new ClickListener() {
                     @Override
                     public void onClick() {
-                        handler.getMouseManager().setUIManager(null);
+                        // handler.getMouseManager().setUIManager(null);
                         timedEvent.stopAll();
                         // System.out.println("Stopped Menu State Events");
                         handler.getTimedEvent().separate(timedEvent);
@@ -129,7 +129,7 @@ public class MenuState extends State {
     }
 
     public void getInput() {
-        if (handler.getKeyManager().isInteracting()) {
+        if (handler.getKeyManager().pressedZ()) {
             UIObject o = uiManager.getFocusedObject();
             if (o != null)
                 o.onClick();

@@ -91,6 +91,9 @@ public class Game implements Runnable {
         // tempG.getFontMetrics(Assets.regularFont.get(24)).getHeight());
         // System.exit(0);
 
+        // keyManager.printKeyVals();
+        // System.exit(0);
+
     }
 
     private void update() {

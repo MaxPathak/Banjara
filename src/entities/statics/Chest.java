@@ -55,7 +55,7 @@ public class Chest extends StaticEntity {
     @Override
     public void effect() {
         boolean skip = true;
-        Direction oppDir = handler.getMap().getEntityManager().getPlayer().getOppDirection();
+        Direction oppDir = handler.getMap().getEntityManager().getPlayer().getOppositeDirection();
 
         for (Direction d : dFix) {
             if (d == oppDir) {
