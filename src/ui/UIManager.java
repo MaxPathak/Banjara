@@ -68,7 +68,6 @@ public class UIManager {
     public void unfocusAll() {
         for (UIObject o : objects) {
             o.setFocused(false);
-            o.setBlinking(false);
         }
     }
 

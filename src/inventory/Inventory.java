@@ -1,6 +1,7 @@
 package src.inventory;
 
 import src.Handler;
+import src.global.Global;
 import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
@@ -25,8 +26,9 @@ public class Inventory {
     }
 
     public void update() {
-        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_X))
+        if (handler.getKeyManager().keyJustPressed(Global.KEY_X)) {
             active = !active;
+        }
         if (!active)
             return;
     }
@@ -142,6 +144,14 @@ public class Inventory {
                 System.out.print(armor.getName() + " x" + armor.getQuantity() + ", ");
             }
         System.out.println("\b\b ]");
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }

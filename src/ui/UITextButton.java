@@ -1,5 +1,6 @@
 package src.ui;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -17,10 +18,13 @@ public class UITextButton extends UIObject {
     private String text;
     private int strokeValue;
     private ClickListener clicker;
+    private boolean border;
 
-    public UITextButton(String text, float x, float y, int width, int height, int strokeValue, ClickListener clicker) {
+    public UITextButton(String text, float x, float y, int width, int height, boolean border, int strokeValue,
+            ClickListener clicker) {
         super(x, y, width, height);
         this.text = text;
+        this.border = border;
         this.strokeValue = strokeValue;
         this.clicker = clicker;
     }
@@ -39,26 +43,29 @@ public class UITextButton extends UIObject {
         int padding = 5;
 
         // Set Stroke and Color
-        g2.setStroke(new java.awt.BasicStroke(strokeValue));
-        g2.setColor(new Color(0, 0, 0, .7f));
+        g2.setStroke(new BasicStroke(strokeValue));
+        g2.setColor(Global.rgba(0, 0, 102, .8f));
         // color = color.darker();
 
         if (isFocused() && isBlinking()) {
             // color = color.brighter();
-            g2.setColor(new Color(0, 0, 0, .5f));
+            g2.setColor(Global.rgba(100, 100, 255, .8f));
         } else {
             // asd
         }
 
         // Background
-        g2.fillRoundRect((int) x, (int) y, width, height, borderRadius, borderRadius);
+        // g2.fillRoundRect((int) x, (int) y, width, height, borderRadius,
+        // borderRadius);
+        g2.fillRect((int) x, (int) y, width, height);
 
         // Border
         g2.setColor(color);
-        g2.drawRoundRect((int) x, (int) y, width, height, borderRadius, borderRadius);
+        if (border)
+            g2.drawRect((int) x, (int) y, width, height);
 
         Text.drawString(g, text, (int) (x + padding), (int) (y + height / 2), false, true, color,
-                Assets.regularFont.get(24));
+                Assets.regularFont.get(20));
 
         // GradientPaint blueToBlack = new GradientPaint(0, 0, Color.BLUE, 400, 400,
         // Color.BLACK);

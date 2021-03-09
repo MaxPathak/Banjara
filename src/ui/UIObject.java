@@ -38,7 +38,6 @@ public abstract class UIObject {
         // if(hovering)
         if (bounds.contains(e.getX(), e.getY())) {
             if (isFocused()) {
-                setFocused(false);
                 onClick();
             } else {
                 setFocused(true);
@@ -86,6 +85,7 @@ public abstract class UIObject {
 
     public void setFocused(boolean focused) {
         this.focused = focused;
+        setBlinking(focused);
     }
 
     public boolean isBlinking() {

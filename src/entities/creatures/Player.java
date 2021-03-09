@@ -13,6 +13,8 @@ import src.gfx.Assets;
 import src.global.Global;
 import src.global.Global.Direction;
 import src.inventory.Inventory;
+import src.states.GameState;
+import src.states.State;
 
 public class Player extends Creature {
 
@@ -71,7 +73,7 @@ public class Player extends Creature {
 
         Entity e;
         if ((e = checkEntityInteractions()) != null) {
-            if (handler.getGame().getKeyManager().pressedZ())
+            if (handler.getGame().getKeyManager().keyJustPressed(Global.KEY_Z))
                 e.effect();
         }
 

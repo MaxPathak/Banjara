@@ -1,35 +1,31 @@
 package src.states;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.TimerTask;
 
+import src.Handler;
 import src.gfx.Assets;
 import src.gfx.Text;
 import src.global.Global;
 import src.global.Global.Direction;
 import src.ui.ClickListener;
+import src.ui.UIImageButton;
+import src.ui.UIManager;
 import src.ui.UIObject;
 import src.ui.UITextButton;
+import src.utils.TimedEvent;
 
-public class MenuState extends State {
+public class TitleState extends State {
 
-    public static final int STATE_ID = 2;
+    public static final int STATE_ID = 0;
 
-    private ArrayList<Rectangle> containers;
-
-    public MenuState() {
+    public TitleState() {
         super();
         setId(TitleState.STATE_ID);
         // uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
-
-        containers = new ArrayList<Rectangle>();
 
         /*
          * // Continuous Update timedEvent.add(new TimerTask() {
@@ -44,63 +40,60 @@ public class MenuState extends State {
          * 500);
          */
 
-        // timedEvent.add(new TimerTask() {
-        // @Override
-        // public void run() {
-        // if (uiManager.getFocusedObject() != null) {
-        // uiManager.getFocusedObject().toggleBlinking();
-        // }
-        // }
-        // }, 0, 200);
+        timedEvent.add(new TimerTask() {
+            @Override
+            public void run() {
+                if (uiManager.getFocusedObject() != null) {
+                    uiManager.getFocusedObject().toggleBlinking();
+                }
+            }
+        }, 0, 400);
 
         handler.getTimedEvent().merge(timedEvent);
 
         final int totalButtons = 3;
         int buttonIndex = 0;
-        int buttonWidth = 200, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
+        int buttonWidth = 150, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
 
         int totalHeight = 50 * (int) (totalButtons + totalButtons / 2);
-        // Start
-        uiManager.addObject(new UITextButton("Inventory", 3, 3 + buttonHeight * buttonIndex++, buttonWidth,
-                buttonHeight, false, 3, new ClickListener() {
+        // New Game
+        uiManager.addObject(new UITextButton("New Game", handler.getWidth() / 2 - buttonWidth / 2, 350, buttonWidth,
+                buttonHeight, true, 3, new ClickListener() {
+                    @Override
+                    public void onClick() {
+                        // handler.getMouseManager().setUIManager(null);
+                        // System.out.println("Stopped Menu State Events");
+                        handler.getGame().gameState = new GameState();
+                        changeState(handler.getGame().gameState);
+                        handler.getKeyManager().playerDirection = Direction.DOWN;
+                    }
+                }));
+        // Continue
+        uiManager.addObject(new UITextButton("Continue", handler.getWidth() / 2 - buttonWidth / 2, 400, buttonWidth,
+                buttonHeight, true, 3, new ClickListener() {
                     @Override
                     public void onClick() {
                         // TODO
                     }
                 }));
         // Options
-        uiManager.addObject(new UITextButton("Options", 3, 3 + buttonHeight * buttonIndex++, buttonWidth, buttonHeight,
-                false, 3, new ClickListener() {
+        uiManager.addObject(new UITextButton("Options", handler.getWidth() / 2 - buttonWidth / 2, 450, buttonWidth,
+                buttonHeight, true, 3, new ClickListener() {
                     @Override
                     public void onClick() {
                         // TODO
                     }
                 }));
-        // Title Screen
-        uiManager.addObject(new UITextButton("To Title Screen", 3, 3 + buttonHeight * buttonIndex++, buttonWidth,
-                buttonHeight, false, 3, new ClickListener() {
-                    @Override
-                    public void onClick() {
-                        changeState(new TitleState());
-                    }
-                }));
         // Exit
-        uiManager.addObject(new UITextButton("Exit", 3, 3 + buttonHeight * buttonIndex++, buttonWidth, buttonHeight,
-                false, 3, new ClickListener() {
+        uiManager.addObject(new UITextButton("Exit", handler.getWidth() / 2 - buttonWidth / 2, 500, buttonWidth,
+                buttonHeight, true, 3, new ClickListener() {
                     @Override
                     public void onClick() {
-                        changeState(handler.getGame().gameState);
+                        System.exit(0);
                     }
                 }));
 
         uiManager.getObjects().get(0).setFocused(true);
-
-        containers.add(new Rectangle(1, 1, buttonWidth, buttonHeight * uiManager.getObjects().size()));
-        containers
-                .add(new Rectangle(1 + buttonWidth, 1, handler.getWidth() - 3 - buttonWidth, handler.getHeight() - 3));
-        containers.add(new Rectangle(1, handler.getHeight() - buttonHeight - 2, buttonWidth, buttonHeight));
-        // containers.add(new Rectangle(1, 1, handler.getWidth() - 3,
-        // handler.getHeight() - 3));
 
     }
 
@@ -131,43 +124,22 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
         // Title Screen
-        // g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(),
-        // null);
+        g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(), null);
 
-        handler.getGame().gameState.render(g);
-
-        Graphics2D g2 = (Graphics2D) g;
-        // GradientPaint blueToBlack = new GradientPaint(0, 0, Color.BLUE, 400, 400,
-        // Color.BLACK);
-        // g2.setPaint(blueToBlack);
-        g2.setColor(Global.rgba(0, 0, 0, .9f));
-        g2.fillRect(0, 0, handler.getWidth(), handler.getHeight());
-
-        g2.setStroke(new BasicStroke(3));
-
-        Text.drawString(g, "Gold: " + 10000, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
-                Assets.regularFont.get(20));
+        // Text.drawString(g, "Title", 0, 0, false, Color.white,
+        // Assets.regularFont.get(24));
 
         uiManager.render(g);
-
-        // Borders
-        g2.setColor(Color.white);
-        for (Rectangle c : containers) {
-            g2.drawRect(c.x, c.y, c.width, c.height);
-        }
-
+        // g.setColor(Color.white);
+        // g.fillRect(handler.getMouseManager().getMouseX(),
+        // handler.getMouseManager().getMouseY(), 8, 8);
     }
 
     public void getInput() {
         if (handler.getKeyManager().keyJustPressed(Global.KEY_Z)) {
             UIObject o = uiManager.getFocusedObject();
-            if (o != null) {
+            if (o != null)
                 o.onClick();
-                return;
-            }
-        } else if (handler.getKeyManager().keyJustPressed(Global.KEY_X)) {
-            changeState(handler.getGame().gameState);
-            return;
         }
         int i = handler.getKeyManager().getArrowKey();
         // System.out.println(i);

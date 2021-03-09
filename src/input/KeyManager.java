@@ -17,8 +17,6 @@ public class KeyManager implements KeyListener {
     private boolean[] keys, justPressed, cantPress;
     public Direction playerDirection = Direction.DOWN;
     public boolean moving;
-    public boolean zKey;
-    public boolean xKey;
 
     private int keyVals[];
     private ArrayList<Integer> keyArr = new ArrayList<Integer>();
@@ -29,16 +27,17 @@ public class KeyManager implements KeyListener {
         cantPress = new boolean[keys.length];
 
         moving = false;
-        zKey = false;
         keyVals = new int[] { KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT };
     }
 
     public void update() {
         moving = false;
 
-        zKey = keys[KeyEvent.VK_Z] || keys[KeyEvent.VK_ENTER];
-
-        xKey = keys[KeyEvent.VK_X] || keys[KeyEvent.VK_ESCAPE];
+        /*
+         * zKey = keys[KeyEvent.VK_Z] || keys[KeyEvent.VK_ENTER];
+         * 
+         * xKey = keys[KeyEvent.VK_X] || keys[KeyEvent.VK_ESCAPE];
+         */
 
         for (int i = 0; i < keys.length; i++) {
             if (cantPress[i] && !keys[i]) {
@@ -106,14 +105,6 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyTyped(KeyEvent e) {
         // TODO
-    }
-
-    public boolean pressedZ() {
-        return zKey;
-    }
-
-    public boolean pressedX() {
-        return xKey;
     }
 
     public int getArrowKey() {

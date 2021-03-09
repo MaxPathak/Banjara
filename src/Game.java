@@ -7,7 +7,7 @@ import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
 import src.states.GameState;
-import src.states.MenuState;
+import src.states.TitleState;
 import src.states.State;
 
 import java.awt.Color;
@@ -26,9 +26,8 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
 
-    // States
+    // State
     public State gameState;
-    public State menuState;
 
     // Input
     private KeyManager keyManager;
@@ -62,9 +61,7 @@ public class Game implements Runnable {
         handler = new Handler(this);
         gameCamera = new GameCamera(handler, 0, 0);
         State.setHandler(handler);
-        gameState = new GameState();
-        menuState = new MenuState();
-        State.setState(menuState);
+        State.setState(new TitleState());
 
         // System.out.println("Fields: ");
         // for (Field f : this.getClass().getDeclaredFields()) {

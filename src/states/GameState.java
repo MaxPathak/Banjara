@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import src.Handler;
 import src.entities.creatures.Player;
 import src.entities.statics.Chest;
+import src.global.Global;
 import src.maps.Map;
 import src.tiles.Tile;
 
@@ -12,8 +13,11 @@ public class GameState extends State {
 
     private Map map;
 
+    public static final int STATE_ID = 1;
+
     public GameState() {
         super();
+        setId(GameState.STATE_ID);
         map = new Map(handler, "data/maps/map01.txt");
         handler.setMap(map);
         handler.getGameCamera().move(0, 0);
@@ -22,6 +26,11 @@ public class GameState extends State {
     @Override
     public void update() {
         map.update();
+
+        if (handler.getGame().getKeyManager().keyJustPressed(Global.KEY_X)) {
+            changeState(new MenuState());
+        }
+
     }
 
     @Override
