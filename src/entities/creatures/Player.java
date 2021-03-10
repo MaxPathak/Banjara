@@ -197,4 +197,12 @@ public class Player extends Creature {
         this.inventory = inventory;
     }
 
+    public Global.Direction getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Global.Direction direction) {
+        this.direction = direction;
+    }
+
 }

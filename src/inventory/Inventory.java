@@ -2,6 +2,7 @@ package src.inventory;
 
 import src.Handler;
 import src.global.Global;
+import src.items.BaseItem;
 import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
@@ -152,6 +153,21 @@ public class Inventory {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public ArrayList<BaseItem> getAllItems() {
+        ArrayList<BaseItem> all = new ArrayList<BaseItem>();
+        for (BaseItem baseItem : items) {
+            all.add(baseItem);
+        }
+        for (BaseItem baseItem : weapons) {
+            all.add(baseItem);
+        }
+        for (BaseItem baseItem : armors) {
+            all.add(baseItem);
+        }
+
+        return all;
     }
 
 }

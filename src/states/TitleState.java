@@ -93,7 +93,7 @@ public class TitleState extends State {
                     }
                 }));
 
-        uiManager.getObjects().get(0).setFocused(true);
+        setFocused(FOCUSED_ID);
 
     }
 
@@ -124,7 +124,9 @@ public class TitleState extends State {
     @Override
     public void render(Graphics g) {
         // Title Screen
-        g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(), null);
+        // !Temporary disable bg for menu state testing
+        if (State.getState().getId() != MenuState.STATE_ID)
+            g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(), null);
 
         // Text.drawString(g, "Title", 0, 0, false, Color.white,
         // Assets.regularFont.get(24));

@@ -13,6 +13,7 @@ public abstract class State {
     protected UIManager uiManager;
     protected TimedEvent timedEvent;
     protected static Handler handler;
+    public int FOCUSED_ID;
 
     public static void setState(State state) {
         currentState = state;
@@ -27,6 +28,7 @@ public abstract class State {
     public State() {
         uiManager = new UIManager(handler);
         timedEvent = new TimedEvent();
+        FOCUSED_ID = 0;
     }
 
     public abstract void update();
@@ -59,7 +61,10 @@ public abstract class State {
         this.timedEvent.stopAll();
         handler.getTimedEvent().separate(this.timedEvent);
         State.setState(newState);
-        // System.out.println("\n------End------");
+    }
+
+    public void setFocused(int id) {
+        uiManager.getObjects().get(id).setFocused(true);
     }
 
 }

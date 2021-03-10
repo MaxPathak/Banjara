@@ -60,7 +60,8 @@ public class KeyManager implements KeyListener {
         while (li.hasPrevious()) {
             for (int i = 0, j = li.previous(); i < keyVals.length; i++) {
                 if (keyVals[i] == j) {
-                    playerDirection = Global.Direction.values()[i];
+                    if (State.getState().getId() == GameState.STATE_ID)
+                        playerDirection = Global.Direction.values()[i];
                     moving = true;
                     return;
                 }

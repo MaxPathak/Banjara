@@ -28,7 +28,10 @@ public class GameState extends State {
         map.update();
 
         if (handler.getGame().getKeyManager().keyJustPressed(Global.KEY_X)) {
-            changeState(new MenuState());
+            if (handler.getGame().menuState == null)
+                handler.getGame().menuState = new MenuState();
+            handler.getGame().menuState.FOCUSED_ID = 0;
+            changeState(handler.getGame().menuState);
         }
 
     }

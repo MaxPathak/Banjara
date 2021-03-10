@@ -13,6 +13,7 @@ import src.gfx.Assets;
 import src.gfx.Text;
 import src.global.Global;
 import src.global.Global.Direction;
+import src.items.BaseItem;
 import src.ui.ClickListener;
 import src.ui.UIObject;
 import src.ui.UITextButton;
@@ -25,9 +26,11 @@ public class MenuState extends State {
 
     public MenuState() {
         super();
-        setId(TitleState.STATE_ID);
+        setId(MenuState.STATE_ID);
         // uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
+
+        System.out.println("Direction: " + handler.getMap().getEntityManager().getPlayer().getDirection());
 
         containers = new ArrayList<Rectangle>();
 
@@ -90,10 +93,12 @@ public class MenuState extends State {
                     @Override
                     public void onClick() {
                         changeState(handler.getGame().gameState);
+                        // System.out.println("New Direction: " + handler.getGame().gameState);
                     }
                 }));
 
-        uiManager.getObjects().get(0).setFocused(true);
+        // uiManager.getObjects().get(0).setFocused(true);
+        setFocused(FOCUSED_ID);
 
         containers.add(new Rectangle(1, 1, buttonWidth, buttonHeight * uiManager.getObjects().size()));
         containers
@@ -145,6 +150,15 @@ public class MenuState extends State {
 
         g2.setStroke(new BasicStroke(3));
 
+        ArrayList<BaseItem> items = new ArrayList<BaseItem>();
+        items = handler.getMap().getEntityManager().getPlayer().getInventory().getAllItems();
+
+        int i = 0;
+        for (BaseItem baseItem : items) {
+            Text.drawString(g, baseItem.getName(), containers.get(1).x + 5, containers.get(1).y + 5 + 34 * i++, false,
+                    Color.white, Assets.regularFont.get(20));
+        }
+
         Text.drawString(g, "Gold: " + 10000, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
                 Assets.regularFont.get(20));
 
@@ -155,6 +169,9 @@ public class MenuState extends State {
         for (Rectangle c : containers) {
             g2.drawRect(c.x, c.y, c.width, c.height);
         }
+
+        State temp = new TitleState();
+        temp.render(g);
 
     }
 
@@ -167,7 +184,6 @@ public class MenuState extends State {
             }
         } else if (handler.getKeyManager().keyJustPressed(Global.KEY_X)) {
             changeState(handler.getGame().gameState);
-            return;
         }
         int i = handler.getKeyManager().getArrowKey();
         // System.out.println(i);
@@ -206,6 +222,9 @@ public class MenuState extends State {
         case RIGHT:
             break;
         }
+
+        FOCUSED_ID = i;
+
     }
 
 }
