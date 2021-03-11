@@ -2,12 +2,13 @@ package src.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Display {
-    
+
     private JFrame frame;
     private Canvas canvas;
 
@@ -23,7 +24,7 @@ public class Display {
     }
 
     private void createDisplay() {
-        //Initialize the JFrame object which displays the window
+        // Initialize the JFrame object which displays the window
         frame = new JFrame(title);
         frame.setSize(width, height);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,14 +35,14 @@ public class Display {
         ImageIcon icon = new ImageIcon("icon/icon.png");
         frame.setIconImage(icon.getImage());
 
-        //Initialize the Canvas where we can draw
+        // Initialize the Canvas where we can draw
         canvas = new Canvas();
         canvas.setPreferredSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setFocusable(false);
 
-        //Add the canvas to the frame
+        // Add the canvas to the frame
         frame.add(canvas);
         frame.pack();
     }

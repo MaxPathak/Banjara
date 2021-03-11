@@ -2,12 +2,9 @@ package src.ui;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
-import java.awt.geom.Rectangle2D;
-import java.awt.geom.RoundRectangle2D;
+import java.awt.RenderingHints;
 
 import src.gfx.Assets;
 import src.gfx.Text;
@@ -38,6 +35,7 @@ public class UITextButton extends UIObject {
     @Override
     public void render(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         Color color = Color.white;
         int borderRadius = 5;
         int padding = 5;

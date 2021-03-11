@@ -2,12 +2,11 @@ package src.states;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
-import java.util.TimerTask;
 
 import src.gfx.Assets;
 import src.gfx.Text;
@@ -142,6 +141,7 @@ public class MenuState extends State {
         handler.getGame().gameState.render(g);
 
         Graphics2D g2 = (Graphics2D) g;
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
         // GradientPaint blueToBlack = new GradientPaint(0, 0, Color.BLUE, 400, 400,
         // Color.BLACK);
         // g2.setPaint(blueToBlack);

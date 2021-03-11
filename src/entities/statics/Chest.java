@@ -12,6 +12,8 @@ import src.gfx.Assets;
 import src.global.Global.Direction;
 import src.input.KeyManager;
 import src.items.usable.Item;
+import src.states.State;
+import src.states.scenes.TextScene;
 import src.tiles.Tile;
 
 public class Chest extends StaticEntity {
@@ -75,7 +77,8 @@ public class Chest extends StaticEntity {
                 commandManager.execute();
 
             handler.getMap().getEntityManager().getPlayer().getInventory().print();
-
+            State.getState()
+                    .changeState(new TextScene("Received Items:\nDummy Item x1\nShort Sword x1/p Mehul Noob hai"));
         }
     }
 
