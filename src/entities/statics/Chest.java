@@ -77,8 +77,6 @@ public class Chest extends StaticEntity {
                 commandManager.execute();
 
             handler.getMap().getEntityManager().getPlayer().getInventory().print();
-            State.getState()
-                    .changeState(new TextScene("Received Items:\nDummy Item x1\nShort Sword x1/p Mehul Noob hai"));
         }
     }
 

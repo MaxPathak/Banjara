@@ -6,6 +6,7 @@ import src.databases.DatabaseManager;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 import src.states.State;
+import src.states.scenes.TextScene;
 
 public class Command {
 
@@ -50,12 +51,12 @@ public class Command {
     public void changeItems(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
-            case 0:
-                quantity = operandVal;
-                break;
-            case 1:
-                quantity = operandVal;
-                break;
+        case 0:
+            quantity = operandVal;
+            break;
+        case 1:
+            quantity = operandVal;
+            break;
         }
         Item item = (Item) DatabaseManager.getItemsDatabase().getItemById(id);
         if (item == null)
@@ -67,18 +68,22 @@ public class Command {
     public void changeWeapons(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
-            case 0:
-                quantity = operandVal;
-                break;
-            case 1:
-                quantity = operandVal;
-                break;
+        case 0:
+            quantity = operandVal;
+            break;
+        case 1:
+            quantity = operandVal;
+            break;
         }
         Weapon weapon = (Weapon) DatabaseManager.getWeaponsDatabase().getItemById(id);
         if (weapon == null)
             return;
         weapon.setQuantity(quantity);
         State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeWeapons(weapon);
+    }
+
+    public void showText(String text) {
+        State.getState().changeState(new TextScene(text));
     }
 
 }

@@ -154,12 +154,16 @@ public class MenuState extends State {
         items = handler.getMap().getEntityManager().getPlayer().getInventory().getAllItems();
 
         int i = 0;
-        for (BaseItem baseItem : items) {
-            Text.drawString(g, baseItem.getName(), containers.get(1).x + 5, containers.get(1).y + 5 + 34 * i++, false,
-                    Color.white, Assets.regularFont.get(20));
-        }
+        if (items.size() == 0)
+            Text.drawString(g, "Empty", containers.get(1).x + 5, containers.get(1).y + 5 + 34 * i++, false, Color.white,
+                    Assets.regularFont.get(20));
+        else
+            for (BaseItem baseItem : items) {
+                Text.drawString(g, baseItem.getName(), containers.get(1).x + 5, containers.get(1).y + 5 + 34 * i++,
+                        false, Color.white, Assets.regularFont.get(20));
+            }
 
-        Text.drawString(g, "Gold: " + 10000, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
+        Text.drawString(g, "Gold: " + 0, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
                 Assets.regularFont.get(20));
 
         uiManager.render(g);
@@ -169,9 +173,6 @@ public class MenuState extends State {
         for (Rectangle c : containers) {
             g2.drawRect(c.x, c.y, c.width, c.height);
         }
-
-        State temp = new TitleState();
-        temp.render(g);
 
     }
 
