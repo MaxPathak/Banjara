@@ -75,8 +75,6 @@ public class TextScene extends State {
 
     @Override
     public void render(Graphics g) {
-        // TODO Auto-generated method stub
-
         handler.getGame().gameState.render(g);
 
         Graphics2D g2 = (Graphics2D) g;
@@ -94,9 +92,6 @@ public class TextScene extends State {
                     Color.white, Assets.regularFont.get(20));
             line++;
         }
-
-        // Text.drawString(g, "test", 100, 100, false, Color.white,
-        // Assets.regularFont.get(30));
 
         int w = g.getFontMetrics(Assets.regularFont.get(30)).charWidth('<');
         int h = g.getFontMetrics(Assets.regularFont.get(30)).getHeight();
