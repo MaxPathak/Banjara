@@ -26,11 +26,7 @@ public class Chest extends StaticEntity {
         open = false;
         dFix.add(Direction.DOWN);
         // dFix.add(Direction.UP);
-
-        bounds.width = (int) (width * 0.6) - 1;
-        bounds.height = (int) (height * 0.4);
-        bounds.x = (width - bounds.width) / 2;
-        bounds.y = height - bounds.height;
+        System.out.println(this.x / Tile.TILEWIDTH + ", " + this.y / Tile.TILEHEIGHT);
     }
 
     @Override
@@ -73,8 +69,8 @@ public class Chest extends StaticEntity {
 
             open = true;
             System.out.println("\nOpened a chest!");
-            if (commandManager != null)
-                commandManager.execute();
+            if (pages != null)
+                pages.execute();
 
             handler.getMap().getEntityManager().getPlayer().getInventory().print();
         }

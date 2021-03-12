@@ -26,9 +26,11 @@ public class Map {
         loadMap(path);
 
         entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
-        entityManager.addEntity(new Chest(handler, 5, 5,
+        entityManager.addEntity(new Chest(handler, 5, 4,
                 new CommandManager(new Command("changeItems", 1, 0, 1), new Command("changeWeapons", 1, 0, 1),
                         new Command("showText", "Received Items:\nDummy Item x1\nShort Sword x1/p Mehul Noob hai"))));
+        // entityManager.getPlayer().setX(1);
+        // entityManager.getPlayer().setY(0);
     }
 
     public void update() {

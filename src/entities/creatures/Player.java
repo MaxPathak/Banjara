@@ -33,11 +33,6 @@ public class Player extends Creature {
 
         ar = new Rectangle();
 
-        bounds.width = (int) (width * 0.6) - 1;
-        bounds.height = (int) (height * 0.4);
-        bounds.x = (width - bounds.width) / 2;
-        bounds.y = height - bounds.height;
-
         // Animations
         int animSpeed = 375;
         anim_down = new Animation(animSpeed, Assets.player_down);

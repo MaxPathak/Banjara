@@ -19,19 +19,32 @@ public abstract class Entity {
 
     protected ArrayList<Direction> dFix;
 
-    protected CommandManager commandManager;
+    protected CommandManager pages;
 
-    public Entity(Handler handler, int x, int y, int width, int height, CommandManager commandManager) {
+    public Entity(Handler handler, int x, int y, int width, int height, CommandManager pages) {
         this.handler = handler;
         this.x = x * Tile.TILEWIDTH;
         this.y = y * Tile.TILEHEIGHT;
         this.width = width;
         this.height = height;
-        this.commandManager = commandManager;
+        this.pages = pages;
 
         this.trigger = 0;
         dFix = new ArrayList<Direction>();
-        bounds = new Rectangle(0, 0, width, height);
+
+        bounds = new Rectangle();
+        bounds.width = (int) (width * 0.6) - 1;
+        bounds.height = (int) (height * 0.4);
+        bounds.x = (width - bounds.width) / 2;
+        bounds.y = height - bounds.height;
+
+        this.x += (Tile.TILEWIDTH - bounds.width) / 2;
+        this.y += Tile.TILEHEIGHT - bounds.height;
+
+        System.out.println("Object:\nx: " + this.x + ", y: " + this.y + "\nw: " + this.width + ", h: " + this.height);
+        System.out.println(
+                "Bounds:\nx: " + bounds.x + ", y: " + bounds.y + "\nw: " + bounds.width + ", h: " + bounds.height);
+
     }
 
     public abstract void update();
@@ -71,6 +84,7 @@ public abstract class Entity {
     public void setX(int x) {
         this.x = x;
         this.x = x * Tile.TILEWIDTH;
+        this.x += (Tile.TILEWIDTH - bounds.width) / 2;
     }
 
     public float getY() {
@@ -80,6 +94,7 @@ public abstract class Entity {
     public void setY(int y) {
         this.y = y;
         this.y = y * Tile.TILEHEIGHT;
+        this.y += Tile.TILEHEIGHT - bounds.height;
     }
 
     public int getWidth() {
