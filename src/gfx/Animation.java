@@ -19,10 +19,10 @@ public class Animation {
         timer += System.currentTimeMillis() - lastTime;
         lastTime = System.currentTimeMillis();
 
-        if(timer > speed) {
+        if (timer > speed) {
             index++;
             timer = 0;
-            if(index >= frames.length)
+            if (index >= frames.length)
                 index = 1;
         }
     }
@@ -37,6 +37,14 @@ public class Animation {
 
     public void setIndex(int index) {
         this.index = index;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
 
 }

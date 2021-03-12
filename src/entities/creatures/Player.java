@@ -3,6 +3,7 @@ package src.entities.creatures;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import src.Handler;
@@ -19,10 +20,11 @@ import src.states.State;
 public class Player extends Creature {
 
     private static final int DEFAULT_AR_SIZE = 5;
+    private static final int DEFAULT_ANIMATION_SPEED = 375;
 
     private int arSize = DEFAULT_AR_SIZE;
     // Animations
-    private Animation anim_down, anim_left, anim_right, anim_up;
+    private Animation[] animations;
     private Global.Direction direction = Global.Direction.DOWN;
 
     // Inventory
@@ -34,11 +36,11 @@ public class Player extends Creature {
         ar = new Rectangle();
 
         // Animations
-        int animSpeed = 375;
-        anim_down = new Animation(animSpeed, Assets.player_down);
-        anim_left = new Animation(animSpeed, Assets.player_left);
-        anim_right = new Animation(animSpeed, Assets.player_right);
-        anim_up = new Animation(animSpeed, Assets.player_up);
+        animations = new Animation[4];
+        animations[0] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_up);
+        animations[1] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_down);
+        animations[2] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_left);
+        animations[3] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_right);
 
         inventory = new Inventory(handler);
     }
@@ -80,19 +82,33 @@ public class Player extends Creature {
 
         direction = handler.getKeyManager().playerDirection;
 
+        float newSpeed = speed;
+
+        if (handler.getKeyManager().keyHeld(KeyEvent.VK_SHIFT)) {
+            float constant = 1.5f;
+            newSpeed *= constant;
+            for (Animation animation : animations) {
+                animation.setSpeed((int) (DEFAULT_ANIMATION_SPEED / constant));
+            }
+        } else {
+            for (Animation animation : animations) {
+                animation.setSpeed(DEFAULT_ANIMATION_SPEED);
+            }
+        }
+
         if (handler.getKeyManager().moving) {
             switch (direction) {
             case UP:
-                yMove -= speed;
+                yMove -= newSpeed;
                 break;
             case DOWN:
-                yMove += speed;
+                yMove += newSpeed;
                 break;
             case LEFT:
-                xMove -= speed;
+                xMove -= newSpeed;
                 break;
             case RIGHT:
-                xMove += speed;
+                xMove += newSpeed;
                 break;
             }
         }
@@ -101,10 +117,9 @@ public class Player extends Creature {
     @Override
     public void update() {
         // Animations
-        anim_down.update();
-        anim_left.update();
-        anim_right.update();
-        anim_up.update();
+        for (Animation animation : animations) {
+            animation.update();
+        }
 
         // Movement
         getInput();
@@ -143,31 +158,16 @@ public class Player extends Creature {
 
     private BufferedImage getCurrentAnimationFrame() {
         if (xMove < 0) {
-            return anim_left.getCurrentFrame();
+            return animations[2].getCurrentFrame();
         } else if (xMove > 0) {
-            return anim_right.getCurrentFrame();
+            return animations[3].getCurrentFrame();
         } else if (yMove < 0) {
-            return anim_up.getCurrentFrame();
+            return animations[0].getCurrentFrame();
         } else if (yMove > 0) {
-            return anim_down.getCurrentFrame();
-        } else {
-            switch (direction) {
-            case DOWN:
-                anim_down.setIndex(0);
-                return anim_down.getCurrentFrame();
-            case LEFT:
-                anim_left.setIndex(0);
-                return anim_left.getCurrentFrame();
-            case RIGHT:
-                anim_right.setIndex(0);
-                return anim_right.getCurrentFrame();
-            case UP:
-                anim_up.setIndex(0);
-                return anim_up.getCurrentFrame();
-            }
+            return animations[1].getCurrentFrame();
         }
-        anim_down.setIndex(0);
-        return anim_down.getCurrentFrame();
+        animations[direction.ordinal()].setIndex(0);
+        return animations[direction.ordinal()].getCurrentFrame();
     }
 
     public Direction getOppositeDirection() {

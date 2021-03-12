@@ -51,8 +51,11 @@ public class KeyManager implements KeyListener {
             }
         }
 
-        // if (keyJustPressed(KeyEvent.VK_X)) {
-        // System.out.println("Pressed X");
+        // if (keyJustPressed(KeyEvent.VK_SHIFT)) {
+        // System.out.println("Pressed SHIFT");
+        // }
+        // if (keyHeld(KeyEvent.VK_SHIFT)) {
+        // System.out.println("SHIFT");
         // }
 
         ListIterator<Integer> li = keyArr.listIterator(keyArr.size());
@@ -75,6 +78,10 @@ public class KeyManager implements KeyListener {
             return false;
 
         return justPressed[keyCode];
+    }
+
+    public boolean keyHeld(int keyCode) {
+        return keys[keyCode];
     }
 
     @Override
