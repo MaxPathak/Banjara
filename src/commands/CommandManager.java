@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 import src.items.usable.Item;
 
-public class CommandManager extends Command {
+public class CommandManager {
     private LinkedList<Command> commands;
 
     public CommandManager(Command... commands) {

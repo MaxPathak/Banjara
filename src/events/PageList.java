@@ -3,7 +3,7 @@ package src.events;
 public class PageList {
     private long code;
     private long indent;
-    private Parameter[] parameters;
+    private Object[] parameters;
 
     public long getCode() {
         return code;
@@ -21,11 +21,11 @@ public class PageList {
         this.indent = value;
     }
 
-    public Parameter[] getParameters() {
+    public Object[] getParameters() {
         return parameters;
     }
 
-    public void setParameters(Parameter[] value) {
+    public void setParameters(Object... value) {
         this.parameters = value;
     }
 }

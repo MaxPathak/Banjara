@@ -3,6 +3,9 @@ package src.commands;
 import java.lang.reflect.Method;
 
 import src.databases.DatabaseManager;
+import src.entities.Entity;
+import src.entities.EntityManager;
+import src.entities.events.Event;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 import src.states.State;
@@ -84,6 +87,24 @@ public class Command {
 
     public void showText(String text) {
         State.getState().changeState(new TextScene(text));
+    }
+
+    public void setSelfSwitch(int id, String currentSelfSwitch) {
+        EntityManager entityManager = State.getHandler().getMap().getEntityManager();
+        int i = 0;
+        for (Entity entity : entityManager.getEntities()) {
+            if (entity.getId() == id) {
+                break;
+            }
+            i++;
+        }
+        if (i < entityManager.getEntities().size()) {
+            if (entityManager.getEntities().get(i) instanceof Event) {
+                Event e = (Event) entityManager.getEntities().get(i);
+                e.setCurrentSelfSwitch(currentSelfSwitch);
+            }
+        }
+
     }
 
 }

@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import src.Handler;
 import src.commands.CommandManager;
 import src.entities.Entity;
+import src.entities.PageList;
 import src.gfx.Animation;
 import src.gfx.Assets;
 import src.global.Global;
@@ -30,8 +31,8 @@ public class Player extends Creature {
     // Inventory
     private Inventory inventory;
 
-    public Player(Handler handler, int x, int y, CommandManager commandManager) {
-        super(handler, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, commandManager);
+    public Player(Handler handler, int x, int y, PageList pages) {
+        super(handler, 0, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, pages);
 
         ar = new Rectangle();
 

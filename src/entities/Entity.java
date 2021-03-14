@@ -12,25 +12,28 @@ import src.tiles.Tile;
 public abstract class Entity {
 
     protected Handler handler;
+    protected int id;
     protected float x, y;
     protected int width, height;
     protected Rectangle bounds, ar;
-    protected int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
 
-    protected ArrayList<Direction> dFix;
+    protected PageList pageList;
 
-    protected CommandManager pages;
+    // protected int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
+    // protected ArrayList<Direction> dFix;
+    // protected CommandManager pages;
 
-    public Entity(Handler handler, int x, int y, int width, int height, CommandManager pages) {
+    public Entity(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
         this.handler = handler;
+        this.id = id;
         this.x = x * Tile.TILEWIDTH;
         this.y = y * Tile.TILEHEIGHT;
         this.width = width;
         this.height = height;
-        this.pages = pages;
+        this.pageList = pages;
 
-        this.trigger = 0;
-        dFix = new ArrayList<Direction>();
+        // this.trigger = 0;
+        // dFix = new ArrayList<Direction>();
 
         bounds = new Rectangle();
         bounds.width = (int) (width * 0.6) - 1;
@@ -111,6 +114,14 @@ public abstract class Entity {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

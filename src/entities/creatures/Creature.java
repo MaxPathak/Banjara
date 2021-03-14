@@ -1,23 +1,20 @@
 package src.entities.creatures;
 
 import src.Handler;
-import src.commands.CommandManager;
 import src.entities.Entity;
+import src.entities.PageList;
 import src.tiles.Tile;
 
 public abstract class Creature extends Entity {
 
-    public static final int DEFAULT_HEALTH = 10;
     public static final float DEFAULT_SPEED = 4.0f;
     public static final int DEFAULT_CREATURE_WIDTH = 48, DEFAULT_CREATURE_HEIGHT = 48;
 
-    protected int health;
     protected float speed;
     protected float xMove, yMove;
 
-    public Creature(Handler handler, int x, int y, int width, int height, CommandManager commandManager) {
-        super(handler, x, y, width, height, commandManager);
-        health = DEFAULT_HEALTH;
+    public Creature(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
+        super(handler, id, x, y, width, height, pages);
         speed = DEFAULT_SPEED;
         xMove = 0;
         yMove = 0;
@@ -92,14 +89,6 @@ public abstract class Creature extends Entity {
     }
 
     // Getters and Setters
-
-    public int getHealth() {
-        return health;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
 
     public float getSpeed() {
         return speed;

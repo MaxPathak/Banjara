@@ -18,4 +18,7 @@ public class Global {
         return new Color(r, g, b, (int) (255 * a));
     }
 
+    public static int[] variables = new int[30];
+    public static boolean[] switches = new boolean[30];
+
 }

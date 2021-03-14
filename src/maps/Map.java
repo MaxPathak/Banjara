@@ -1,13 +1,19 @@
 package src.maps;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import src.Handler;
 import src.commands.Command;
 import src.commands.CommandManager;
+import src.entities.Conditions;
 import src.entities.EntityManager;
+import src.entities.Page;
+import src.entities.PageList;
 import src.entities.creatures.Player;
+import src.entities.events.Event;
 import src.entities.statics.Chest;
+import src.global.Global.Direction;
 import src.items.usable.Item;
 import src.tiles.Tile;
 import src.utils.Utils;
@@ -26,9 +32,16 @@ public class Map {
         loadMap(path);
 
         entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
-        entityManager.addEntity(new Chest(handler, 5, 4,
-                new CommandManager(new Command("changeItems", 1, 0, 1), new Command("changeWeapons", 1, 0, 1),
-                        new Command("showText", "Received Items:\nDummy Item x1\nShort Sword x1/p Mehul Noob hai"))));
+        entityManager.addEntity(new Event(handler, 1, 5, 4, new PageList(
+                new Page(0, "!Chest", 0,
+                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 0,
+                        new CommandManager(new Command("setSelfSwitch", 1, "A"), new Command("changeItems", 1, 0, 1),
+                                new Command("changeWeapons", 1, 0, 1),
+                                new Command("showText",
+                                        "Received Items:\nDummy Item x1\nShort Sword x1/pMehul Noob hai"))),
+                new Page(2, "!Chest", 0, new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
+                        true, 0, null))));
+
         // entityManager.getPlayer().setX(1);
         // entityManager.getPlayer().setY(0);
     }
