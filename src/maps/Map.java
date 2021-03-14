@@ -10,6 +10,7 @@ import src.entities.Conditions;
 import src.entities.EntityManager;
 import src.entities.Page;
 import src.entities.PageList;
+import src.entities.creatures.Creature;
 import src.entities.creatures.Player;
 import src.entities.events.Event;
 import src.global.Global.Direction;
@@ -31,7 +32,7 @@ public class Map {
         loadMap(path);
 
         entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
-        entityManager.addEntity(new Event(handler, 1, 5, 4, new PageList(
+        entityManager.addEntity(new Event(handler, 1, 5, 4, Tile.TILEWIDTH, Tile.TILEWIDTH, new PageList(
                 new Page(0, "!Chest", 0,
                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 0,
                         new CommandManager(new Command("setSelfSwitch", 1, "A"), new Command("changeItems", 1, 0, 1),
@@ -40,6 +41,27 @@ public class Map {
                                         "Received Items:\nDummy Item x1\nShort Sword x1/pMehul Noob hai"))),
                 new Page(2, "!Chest", 0, new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
                         true, 0, null))));
+
+        entityManager.addEntity(new Event(handler, 2, 10, 5, Creature.DEFAULT_CREATURE_WIDTH,
+                Creature.DEFAULT_CREATURE_HEIGHT,
+                new PageList(new Page(0, "People1", 6,
+                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
+                        new CommandManager(new Command("setSwitch", 0, true),
+                                new Command("showText", "Talk to the Boy"), new Command("changeItems", 1, 1, 1))))));
+
+        entityManager
+                .addEntity(
+                        new Event(handler, 3, 12, 5, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT,
+                                new PageList(
+                                        new Page(0, "People1", 0,
+                                                new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0,
+                                                        false),
+                                                false, 0, new CommandManager(new Command("showText", "Who Are You?"))),
+                                        new Page(0, "People1", 0,
+                                                new Conditions(0, true, 0, false, 0, 0, false, "A", false, 0, false, 0,
+                                                        false),
+                                                false, 0,
+                                                new CommandManager(new Command("showText", "You Know my Grandpa"))))));
 
     }
 

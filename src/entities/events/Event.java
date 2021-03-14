@@ -16,8 +16,8 @@ public class Event extends Entity {
     private Page currentPage;
     private String currentSelfSwitch;
 
-    public Event(Handler handler, int id, int x, int y, PageList pages) {
-        super(handler, id, x, y, Tile.TILEWIDTH, Tile.TILEHEIGHT, pages);
+    public Event(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
+        super(handler, id, x, y, width, height, pages);
         currentPage = pages.getPages().get(0);
         currentSelfSwitch = null;
         this.id = id;

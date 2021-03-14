@@ -6,6 +6,7 @@ import src.databases.DatabaseManager;
 import src.entities.Entity;
 import src.entities.EntityManager;
 import src.entities.events.Event;
+import src.global.Global;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 import src.states.State;
@@ -58,13 +59,15 @@ public class Command {
             quantity = operandVal;
             break;
         case 1:
-            quantity = operandVal;
+            quantity = -operandVal;
             break;
         }
         Item item = (Item) DatabaseManager.getItemsDatabase().getItemById(id);
         if (item == null)
             return;
         item.setQuantity(quantity);
+        // System.out.println
+        // asd
         State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeItems(item);
     }
 
@@ -75,7 +78,7 @@ public class Command {
             quantity = operandVal;
             break;
         case 1:
-            quantity = operandVal;
+            quantity = -operandVal;
             break;
         }
         Weapon weapon = (Weapon) DatabaseManager.getWeaponsDatabase().getItemById(id);
@@ -105,6 +108,10 @@ public class Command {
             }
         }
 
+    }
+
+    public void setSwitch(int id, boolean value) {
+        Global.switches[id] = value;
     }
 
 }
