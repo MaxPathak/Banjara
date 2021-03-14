@@ -12,7 +12,6 @@ import src.entities.Page;
 import src.entities.PageList;
 import src.entities.creatures.Player;
 import src.entities.events.Event;
-import src.entities.statics.Chest;
 import src.global.Global.Direction;
 import src.items.usable.Item;
 import src.tiles.Tile;
