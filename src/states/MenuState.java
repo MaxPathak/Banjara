@@ -55,11 +55,9 @@ public class MenuState extends State {
 
         handler.getTimedEvent().merge(timedEvent);
 
-        final int totalButtons = 3;
         int buttonIndex = 0;
         int buttonWidth = 200, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
 
-        int totalHeight = 50 * (int) (totalButtons + totalButtons / 2);
         // Start
         uiManager.addObject(new UITextButton("Inventory", 3, 3 + buttonHeight * buttonIndex++, buttonWidth,
                 buttonHeight, false, 3, new ClickListener() {

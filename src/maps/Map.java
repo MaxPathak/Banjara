@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import src.Handler;
 import src.commands.Command;
 import src.commands.CommandManager;
+import src.commands.CommandManagerList;
 import src.entities.Conditions;
 import src.entities.EntityManager;
 import src.entities.Page;
@@ -64,11 +65,20 @@ public class Map {
                                                 false, 0,
                                                 new CommandManager(new Command("showText", "You Know my Grandpa"))))));
 
+        // Portal Event
         entityManager.addEntity(new Event(handler, 4, 27, 2, Tile.TILEWIDTH, Tile.TILEHEIGHT,
                 new PageList(new Page(0, "!Door2", 4,
                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
                         new CommandManager(new Command("transferPlayer", 0, 1, 1))))));
         ((Event) entityManager.getEntities().get(4)).getCurrentPage().setPassable(true);
+
+        entityManager.addEntity(new Event(handler, 5, 20, 6, Creature.DEFAULT_CREATURE_WIDTH,
+                Creature.DEFAULT_CREATURE_HEIGHT,
+                new PageList(new Page(0, "People1", 3,
+                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
+                        new CommandManager(new Command("showChoices", "Yes/cNo",
+                                new CommandManagerList(new CommandManager(new Command("showText", "Yes")),
+                                        new CommandManager(new Command("showText", "No")))))))));
 
     }
 

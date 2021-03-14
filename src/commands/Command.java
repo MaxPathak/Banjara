@@ -13,6 +13,7 @@ import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 import src.states.State;
+import src.states.scenes.ChoiceScene;
 import src.states.scenes.TextScene;
 
 public class Command {
@@ -178,6 +179,11 @@ public class Command {
         State.getHandler().getMap().getEntityManager().getPlayer().setX(x);
         State.getHandler().getMap().getEntityManager().getPlayer().setY(y);
         State.getHandler().getMap().getEntityManager().getPlayer().setDirection(Direction.values()[direction]);
+        return true;
+    }
+
+    public boolean showChoices(String text, CommandManagerList list) {
+        State.getState().changeState(new ChoiceScene(text, list));
         return true;
     }
 
