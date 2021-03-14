@@ -72,4 +72,14 @@ public class EntityManager {
         this.entities = entities;
     }
 
+    public Entity getEntityById(int id) {
+        int i = 0;
+        for (Entity entity : entities) {
+            if (entity.getId() == id)
+                return entity;
+            i++;
+        }
+        return null;
+    }
+
 }

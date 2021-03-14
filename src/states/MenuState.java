@@ -29,8 +29,6 @@ public class MenuState extends State {
         // uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
 
-        System.out.println("Direction: " + handler.getMap().getEntityManager().getPlayer().getDirection());
-
         containers = new ArrayList<Rectangle>();
 
         /*

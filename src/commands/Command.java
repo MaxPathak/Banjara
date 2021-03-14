@@ -9,6 +9,7 @@ import src.entities.events.Event;
 import src.global.Global;
 import src.global.Global.Direction;
 import src.items.BaseItem;
+import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 import src.states.State;
@@ -86,6 +87,23 @@ public class Command {
             return false;
         weapon.setQuantity(quantity);
         return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeWeapons(weapon);
+    }
+
+    public boolean changeArmors(int id, int operand, int operandVal) {
+        int quantity = 0;
+        switch (operand) {
+        case 0:
+            quantity = operandVal;
+            break;
+        case 1:
+            quantity = -operandVal;
+            break;
+        }
+        Armor armor = (Armor) BaseItem.copy(DatabaseManager.getArmorDatabase().getItemById(id));
+        if (armor == null)
+            return false;
+        armor.setQuantity(quantity);
+        return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeArmors(armor);
     }
 
     public boolean showText(String text) {

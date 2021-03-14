@@ -12,7 +12,6 @@ import src.tiles.Tile;
 
 public class Event extends Entity {
 
-    private int id;
     private Page currentPage;
     private String currentSelfSwitch;
 
@@ -20,7 +19,6 @@ public class Event extends Entity {
         super(handler, id, x, y, width, height, pages);
         currentPage = pages.getPages().get(0);
         currentSelfSwitch = null;
-        this.id = id;
     }
 
     @Override
