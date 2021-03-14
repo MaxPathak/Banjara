@@ -32,6 +32,10 @@ public class KeyManager implements KeyListener {
 
     public void update() {
         moving = false;
+        if (State.getHandler().getMap() == null)
+            playerDirection = Direction.DOWN;
+        else
+            playerDirection = State.getHandler().getMap().getEntityManager().getPlayer().getDirection();
 
         /*
          * zKey = keys[KeyEvent.VK_Z] || keys[KeyEvent.VK_ENTER];
@@ -142,12 +146,6 @@ public class KeyManager implements KeyListener {
             keys[i] = false;
         }
         keyArr.removeAll(keyArr);
-    }
-
-    public void printKeyVals() {
-        for (int key : keyVals) {
-            System.out.println(key);
-        }
     }
 
 }

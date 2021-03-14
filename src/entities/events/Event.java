@@ -58,8 +58,10 @@ public class Event extends Entity {
     public void effect() {
 
         Direction oppDir = handler.getMap().getEntityManager().getPlayer().getOppositeDirection();
-
-        if (currentPage.isdFix()) {
+        // Passable temporary
+        if (currentPage.isPassable()) {
+            // nothings
+        } else if (currentPage.isdFix()) {
             if (currentPage.getDirection() != oppDir)
                 return;
         } else {
@@ -67,7 +69,8 @@ public class Event extends Entity {
         }
 
         if (pageList != null) {
-            currentPage.getList().execute();
+            if (currentPage.getList() != null)
+                currentPage.getList().execute();
         }
 
     }
@@ -78,6 +81,14 @@ public class Event extends Entity {
 
     public void setCurrentSelfSwitch(String currentSelfSwitch) {
         this.currentSelfSwitch = currentSelfSwitch;
+    }
+
+    public Page getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(Page currentPage) {
+        this.currentPage = currentPage;
     }
 
 }

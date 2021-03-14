@@ -159,11 +159,13 @@ public class MenuState extends State {
                     Assets.regularFont.get(20));
         else
             for (BaseItem baseItem : items) {
-                Text.drawString(g, baseItem.getName(), containers.get(1).x + 5, containers.get(1).y + 5 + 34 * i++,
-                        false, Color.white, Assets.regularFont.get(20));
+                Text.drawString(g, baseItem.getName() + " x" + baseItem.getQuantity(), containers.get(1).x + 5,
+                        containers.get(1).y + 5 + 34 * i++, false, Color.white, Assets.regularFont.get(20));
             }
 
-        Text.drawString(g, "Gold: " + 0, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
+        int gold = handler.getMap().getEntityManager().getPlayer().getGold();
+
+        Text.drawString(g, "Gold: " + gold, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
                 Assets.regularFont.get(20));
 
         uiManager.render(g);

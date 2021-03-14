@@ -14,11 +14,12 @@ public class CommandManager {
         }
     }
 
-    public void execute() {
+    public boolean execute() {
         for (Command command : commands) {
-            command.execute();
+            if (command.execute() == false)
+                return false;
         }
-
+        return true;
     }
 
 }

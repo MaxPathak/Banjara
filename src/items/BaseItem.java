@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import src.gfx.Assets;
 
-public abstract class BaseItem {
+public abstract class BaseItem implements Cloneable {
 
     protected BufferedImage icon;
     protected int id;
@@ -13,6 +13,16 @@ public abstract class BaseItem {
     protected String description;
     protected String note;
     protected int quantity;
+
+    public static BaseItem copy(BaseItem src) {
+        BaseItem t = null;
+        try {
+            t = (BaseItem) src.clone();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return t;
+    }
 
     public BaseItem(int id, int iconIndex, String name, String description, String note, int quantity) {
         this.id = id;
@@ -71,6 +81,11 @@ public abstract class BaseItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
 }

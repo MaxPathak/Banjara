@@ -35,7 +35,7 @@ public class Map {
         entityManager.addEntity(new Event(handler, 1, 5, 4, Tile.TILEWIDTH, Tile.TILEWIDTH, new PageList(
                 new Page(0, "!Chest", 0,
                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 0,
-                        new CommandManager(new Command("setSelfSwitch", 1, "A"), new Command("changeItems", 1, 0, 1),
+                        new CommandManager(new Command("setSelfSwitch", 1, "A"), new Command("changeItems", 1, 0, 2),
                                 new Command("changeWeapons", 1, 0, 1),
                                 new Command("showText",
                                         "Received Items:\nDummy Item x1\nShort Sword x1/pMehul Noob hai"))),
@@ -47,7 +47,8 @@ public class Map {
                 new PageList(new Page(0, "People1", 6,
                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
                         new CommandManager(new Command("setSwitch", 0, true),
-                                new Command("showText", "Talk to the Boy"), new Command("changeItems", 1, 1, 1))))));
+                                new Command("showText", "Talk to the Boy"), new Command("changeItems", 1, 1, 1),
+                                new Command("changeGold", 0, 100), new Command("removeEvent", 2))))));
 
         entityManager
                 .addEntity(
@@ -62,6 +63,12 @@ public class Map {
                                                         false),
                                                 false, 0,
                                                 new CommandManager(new Command("showText", "You Know my Grandpa"))))));
+
+        entityManager.addEntity(new Event(handler, 4, 27, 2, Tile.TILEWIDTH, Tile.TILEHEIGHT,
+                new PageList(new Page(0, "!Door2", 4,
+                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
+                        new CommandManager(new Command("transferPlayer", 0, 1, 1))))));
+        ((Event) entityManager.getEntities().get(4)).getCurrentPage().setPassable(true);
 
     }
 

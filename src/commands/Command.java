@@ -7,6 +7,8 @@ import src.entities.Entity;
 import src.entities.EntityManager;
 import src.entities.events.Event;
 import src.global.Global;
+import src.global.Global.Direction;
+import src.items.BaseItem;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 import src.states.State;
@@ -36,9 +38,9 @@ public class Command {
         }
     }
 
-    public void execute() {
+    public boolean execute() {
         if (method == null)
-            return;
+            return false;
         try {
             // System.out.println(method.getName());
             // System.out.print("Parameters: ");
@@ -46,13 +48,13 @@ public class Command {
             // System.out.print(object + " ");
             // }
             // System.exit(0);
-            method.invoke(this.getClass().getDeclaredConstructor().newInstance(), parameters);
+            return (Boolean) method.invoke(this.getClass().getDeclaredConstructor().newInstance(), parameters);
         } catch (Exception e) {
             throw new RuntimeException("Command Error");
         }
     }
 
-    public void changeItems(int id, int operand, int operandVal) {
+    public boolean changeItems(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
         case 0:
@@ -62,16 +64,14 @@ public class Command {
             quantity = -operandVal;
             break;
         }
-        Item item = (Item) DatabaseManager.getItemsDatabase().getItemById(id);
+        Item item = (Item) BaseItem.copy(DatabaseManager.getItemsDatabase().getItemById(id));
         if (item == null)
-            return;
+            return false;
         item.setQuantity(quantity);
-        // System.out.println
-        // asd
-        State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeItems(item);
+        return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeItems(item);
     }
 
-    public void changeWeapons(int id, int operand, int operandVal) {
+    public boolean changeWeapons(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
         case 0:
@@ -81,18 +81,19 @@ public class Command {
             quantity = -operandVal;
             break;
         }
-        Weapon weapon = (Weapon) DatabaseManager.getWeaponsDatabase().getItemById(id);
+        Weapon weapon = (Weapon) BaseItem.copy(DatabaseManager.getWeaponsDatabase().getItemById(id));
         if (weapon == null)
-            return;
+            return false;
         weapon.setQuantity(quantity);
-        State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeWeapons(weapon);
+        return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeWeapons(weapon);
     }
 
-    public void showText(String text) {
+    public boolean showText(String text) {
         State.getState().changeState(new TextScene(text));
+        return true;
     }
 
-    public void setSelfSwitch(int id, String currentSelfSwitch) {
+    public boolean setSelfSwitch(int id, String currentSelfSwitch) {
         EntityManager entityManager = State.getHandler().getMap().getEntityManager();
         int i = 0;
         for (Entity entity : entityManager.getEntities()) {
@@ -107,11 +108,59 @@ public class Command {
                 e.setCurrentSelfSwitch(currentSelfSwitch);
             }
         }
+        return true;
+    }
+
+    public boolean setSwitch(int id, boolean value) {
+        Global.switches[id] = value;
+        return true;
+    }
+
+    public boolean changeGold(int operand, int operandVal) {
+        int amount = 0;
+        switch (operand) {
+        case 0:
+            amount = operandVal;
+            break;
+        case 1:
+            amount = -operandVal;
+            break;
+        }
+        int gold = State.getHandler().getMap().getEntityManager().getPlayer().getGold();
+        if (gold + amount >= 0) {
+            State.getHandler().getMap().getEntityManager().getPlayer().setGold(gold + amount);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean removeEvent(int id) {
+        EntityManager entityManager = State.getHandler().getMap().getEntityManager();
+        int i = 0;
+        for (Entity entity : entityManager.getEntities()) {
+            if (entity.getId() == id) {
+                break;
+            }
+            i++;
+        }
+        if (i < entityManager.getEntities().size()) {
+            if (entityManager.getEntities().get(i) instanceof Event) {
+                entityManager.getEntities().remove(i);
+                return true;
+            }
+        }
+
+        return false;
 
     }
 
-    public void setSwitch(int id, boolean value) {
-        Global.switches[id] = value;
+    public boolean transferPlayer(int direction, int x, int y) {
+        if (State.getHandler().getMap().getTile(x, y).isSolid())
+            return false;
+        State.getHandler().getMap().getEntityManager().getPlayer().setX(x);
+        State.getHandler().getMap().getEntityManager().getPlayer().setY(y);
+        State.getHandler().getMap().getEntityManager().getPlayer().setDirection(Direction.values()[direction]);
+        return true;
     }
 
 }

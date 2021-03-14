@@ -95,7 +95,7 @@ public class Game implements Runnable {
 
     }
 
-    private void update() {
+    public void update() {
         setReleased(false);
 
         keyManager.update();
@@ -105,7 +105,7 @@ public class Game implements Runnable {
         }
     }
 
-    private void render() {
+    public void render() {
         // Initialize the BufferStrategy object
         bs = display.getCanvas().getBufferStrategy();
         if (bs == null) {

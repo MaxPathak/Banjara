@@ -10,6 +10,7 @@ import src.Handler;
 import src.commands.CommandManager;
 import src.entities.Entity;
 import src.entities.PageList;
+import src.entities.events.Event;
 import src.gfx.Animation;
 import src.gfx.Assets;
 import src.global.Global;
@@ -30,6 +31,7 @@ public class Player extends Creature {
 
     // Inventory
     private Inventory inventory;
+    private int gold;
 
     public Player(Handler handler, int x, int y, PageList pages) {
         super(handler, 0, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, pages);
@@ -43,6 +45,8 @@ public class Player extends Creature {
             animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
 
         inventory = new Inventory(handler);
+
+        gold = 100;
 
     }
 
@@ -71,8 +75,19 @@ public class Player extends Creature {
 
         Entity e;
         if ((e = checkEntityInteractions()) != null) {
-            if (handler.getGame().getKeyManager().keyJustPressed(Global.KEY_Z))
-                e.effect();
+            if (handler.getGame().getKeyManager().keyJustPressed(Global.KEY_Z)) {
+                if (e instanceof Event) {
+                    if (((Event) e).getCurrentPage().getTrigger() == 0)
+                        e.effect();
+                }
+            }
+        }
+
+        if ((e = checkEntityInteractions()) != null) {
+            if (e instanceof Event) {
+                if (((Event) e).getCurrentPage().getTrigger() == 1)
+                    e.effect();
+            }
         }
 
     }
@@ -128,8 +143,6 @@ public class Player extends Creature {
         handler.getGameCamera().centerOnEntity(this);
 
         action();
-        // Inventory
-        inventory.update();
     }
 
     @Override
@@ -146,8 +159,6 @@ public class Player extends Creature {
          * handler.getGameCamera().getxOffset()), (int) (ar.y -
          * handler.getGameCamera().getyOffset()), ar.width, ar.height);
          */
-
-        inventory.render(g);
 
     }
 
@@ -199,6 +210,14 @@ public class Player extends Creature {
 
     public void setDirection(Global.Direction direction) {
         this.direction = direction;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
     }
 
 }

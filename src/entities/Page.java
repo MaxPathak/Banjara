@@ -15,8 +15,27 @@ public class Page {
     private Animation[] animations;
     private Conditions conditions;
     private boolean dFix;
-    private int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
+    private int trigger;
+    // ! 0: Action Button, 1: Player Touch, 2: Parallel, 3: Autorun
     private CommandManager list;
+    private boolean passable;
+
+    public Page(int direction, String characterName, int characterIndex, Conditions conditions, boolean dFix,
+            int trigger, CommandManager list) {
+        this.direction = Direction.values()[direction];
+        this.conditions = conditions;
+        this.dFix = dFix;
+        this.trigger = trigger;
+        this.list = list;
+
+        this.animations = new Animation[4];
+        BufferedImage[][] images = Assets.getSprites(characterName, characterIndex);
+        for (int i = 0; i < animations.length; i++)
+            animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
+
+        passable = false;
+
+    }
 
     public Direction getDirection() {
         return direction;
@@ -66,18 +85,11 @@ public class Page {
         this.list = list;
     }
 
-    public Page(int direction, String characterName, int characterIndex, Conditions conditions, boolean dFix,
-            int trigger, CommandManager list) {
-        this.direction = Direction.values()[direction];
-        this.conditions = conditions;
-        this.dFix = dFix;
-        this.trigger = trigger;
-        this.list = list;
+    public boolean isPassable() {
+        return passable;
+    }
 
-        this.animations = new Animation[4];
-        BufferedImage[][] images = Assets.getSprites(characterName, characterIndex);
-        for (int i = 0; i < animations.length; i++)
-            animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
-
+    public void setPassable(boolean passable) {
+        this.passable = passable;
     }
 }

@@ -18,8 +18,8 @@ public abstract class Entity {
     protected Rectangle bounds, ar;
 
     protected PageList pageList;
-
-    // protected int trigger; // ! 0: Action Button, 1: Parallel, 2: Autorun
+    // protected int trigger;
+    // ! 0: Action Button, 1: Player Touch, 2: Parallel, 3: Autorun
     // protected ArrayList<Direction> dFix;
     // protected CommandManager pages;
 
@@ -44,9 +44,11 @@ public abstract class Entity {
         this.x += (Tile.TILEWIDTH - bounds.width) / 2;
         this.y += Tile.TILEHEIGHT - bounds.height;
 
-        System.out.println("Object:\nx: " + this.x + ", y: " + this.y + "\nw: " + this.width + ", h: " + this.height);
-        System.out.println(
-                "Bounds:\nx: " + bounds.x + ", y: " + bounds.y + "\nw: " + bounds.width + ", h: " + bounds.height);
+        // System.out.println("Object:\nx: " + this.x + ", y: " + this.y + "\nw: " +
+        // this.width + ", h: " + this.height);
+        // System.out.println(
+        // "Bounds:\nx: " + bounds.x + ", y: " + bounds.y + "\nw: " + bounds.width + ",
+        // h: " + bounds.height);
 
     }
 
@@ -85,9 +87,7 @@ public abstract class Entity {
     }
 
     public void setX(int x) {
-        this.x = x;
-        this.x = x * Tile.TILEWIDTH;
-        this.x += (Tile.TILEWIDTH - bounds.width) / 2;
+        this.x = x * Tile.TILEWIDTH + (Tile.TILEWIDTH - bounds.width) / 2;
     }
 
     public float getY() {
@@ -95,9 +95,12 @@ public abstract class Entity {
     }
 
     public void setY(int y) {
-        this.y = y;
-        this.y = y * Tile.TILEHEIGHT;
-        this.y += Tile.TILEHEIGHT - bounds.height;
+        this.y = y * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.height;
+    }
+
+    public void setPosition(int x, int y) {
+        this.x = x * Tile.TILEWIDTH + (Tile.TILEWIDTH - bounds.width) / 2;
+        this.y = y * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.height;
     }
 
     public int getWidth() {
@@ -122,6 +125,14 @@ public abstract class Entity {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public PageList getPageList() {
+        return pageList;
+    }
+
+    public void setPageList(PageList pageList) {
+        this.pageList = pageList;
     }
 
 }

@@ -1,6 +1,7 @@
 package src.inventory;
 
 import src.Handler;
+import src.databases.DatabaseManager;
 import src.global.Global;
 import src.items.BaseItem;
 import src.items.equip.Armor;
@@ -26,82 +27,82 @@ public class Inventory {
         armors = new ArrayList<Armor>();
     }
 
-    public void update() {
-        if (handler.getKeyManager().keyJustPressed(Global.KEY_X)) {
-            active = !active;
-        }
-        if (!active)
-            return;
-    }
-
-    public void render(Graphics g) {
-        if (!active)
-            return;
-    }
-
     // Inventory Methods
 
     public boolean changeItems(Item item) {
+        int q = 0;
+        int index = 0;
+
         for (Item i : items) {
             if (i.getId() == item.getId()) {
-                int q = i.getQuantity() + item.getQuantity();
+                q = i.getQuantity() + item.getQuantity();
                 if (q < 0)
                     return false;
-                else if (q == 0)
+                else if (q == 0) {
                     items.remove(i);
-                i.setQuantity(q);
+                    return true;
+                }
+                items.get(index).setQuantity(q);
                 return true;
             }
+            index++;
         }
-        items.add(item);
-        return true;
+        if (item.getQuantity() + q > 0) {
+            items.add(item);
+            return true;
+        }
+        return false;
     }
 
     public boolean changeWeapons(Weapon weapon) {
+        int q = 0;
+        int index = 0;
+
         for (Weapon w : weapons) {
             if (w.getId() == weapon.getId()) {
-                int q = w.getQuantity() + weapon.getQuantity();
+                q = w.getQuantity() + weapon.getQuantity();
                 if (q < 0)
                     return false;
-                else if (q == 0)
+                else if (q == 0) {
                     weapons.remove(w);
-                w.setQuantity(q);
+                    return true;
+                }
+                weapons.get(index).setQuantity(q);
                 return true;
             }
+            index++;
         }
-        weapons.add(weapon);
-        return true;
+        if (weapon.getQuantity() + q > 0) {
+            weapons.add(weapon);
+            return true;
+        }
+        return false;
     }
 
     public boolean changeArmors(Armor armor) {
+        int q = 0;
+        int index = 0;
+
         for (Armor a : armors) {
             if (a.getId() == armor.getId()) {
-                int q = a.getQuantity() + armor.getQuantity();
+                q = a.getQuantity() + armor.getQuantity();
                 if (q < 0)
                     return false;
-                else if (q == 0)
+                else if (q == 0) {
                     armors.remove(a);
-                a.setQuantity(q);
+                    return true;
+                }
+                armors.get(index).setQuantity(q);
                 return true;
             }
+            index++;
         }
-        armors.add(armor);
-        return true;
+        if (armor.getQuantity() + q > 0) {
+            armors.add(armor);
+            return true;
+        }
+        return false;
     }
-
-    /*
-     * public void addItem(Item item) { for (Item i : items) { if (i.getId() ==
-     * item.getId()) { i.setQuantity(i.getQuantity() + item.getQuantity()); return;
-     * } } items.add(item); }
-     */
-
-    /*
-     * public boolean removeItem(Item item) { for (Item i : items) { if (i.getId()
-     * == item.getId()) { int q = i.getQuantity() - item.getQuantity(); if (q < 0)
-     * return false; else if (q == 0) items.remove(item);
-     * 
-     * i.setQuantity(q); break; } } return true; }
-     */
 
     public Handler getHandler() {
         return handler;
@@ -168,6 +169,22 @@ public class Inventory {
         }
 
         return all;
+    }
+
+    public ArrayList<Weapon> getWeapons() {
+        return weapons;
+    }
+
+    public void setWeapons(ArrayList<Weapon> weapons) {
+        this.weapons = weapons;
+    }
+
+    public ArrayList<Armor> getArmors() {
+        return armors;
+    }
+
+    public void setArmors(ArrayList<Armor> armors) {
+        this.armors = armors;
     }
 
 }
