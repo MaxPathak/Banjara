@@ -41,8 +41,6 @@ public class Map {
                 new Page(2, "!Chest", 0, new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
                         true, 0, null))));
 
-        // entityManager.getPlayer().setX(1);
-        // entityManager.getPlayer().setY(0);
     }
 
     public void update() {
