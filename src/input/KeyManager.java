@@ -27,7 +27,7 @@ public class KeyManager implements KeyListener {
         cantPress = new boolean[keys.length];
 
         moving = false;
-        keyVals = new int[] { KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT };
+        keyVals = new int[] { KeyEvent.VK_DOWN, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP };
     }
 
     public void update() {

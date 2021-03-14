@@ -13,7 +13,7 @@ public class Assets {
     public static CustomFont regularFont;
 
     public static BufferedImage player, grass, dirt, tree, bush, cchest, ochest, title;
-    public static BufferedImage[] player_down, player_left, player_right, player_up, start_btn;
+    public static BufferedImage[] player_down, player_left, player_right, player_up;
 
     public static void init() {
 
@@ -57,14 +57,24 @@ public class Assets {
         cchest = Chest.crop(characterWidth * 0, characterHeight * 0, width, height, 2);
         ochest = Chest.crop(characterWidth * 0, characterHeight * 2, width, height, 2);
 
-        start_btn = new BufferedImage[2];
-        start_btn[0] = ImageLoader.loadImage("/img/system/start_btn_blue[0].png");
-        start_btn[1] = ImageLoader.loadImage("/img/system/start_btn_blue[1].png");
-
     }
 
     public static BufferedImage getIcon(int iconIndex) {
         return iconSet.crop(iconIndex, icon_width, icon_height, 1);
+    }
+
+    public static BufferedImage[][] getSprites(String characterName, int characterIndex) {
+        String path = "/img/characters/" + characterName + ".png";
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage(path));
+        sheet.setSheet(sheet.crop(characterIndex, characterWidth * 3, characterHeight * 4, 1));
+        BufferedImage[][] images = new BufferedImage[4][3];
+        int index = 0;
+        for (BufferedImage[] pattern : images) {
+            pattern[0] = sheet.crop(index++, characterWidth, characterHeight, 1);
+            pattern[1] = sheet.crop(index++, characterWidth, characterHeight, 1);
+            pattern[2] = sheet.crop(index++, characterWidth, characterHeight, 1);
+        }
+        return images;
     }
 
 }

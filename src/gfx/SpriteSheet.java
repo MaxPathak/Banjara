@@ -19,4 +19,13 @@ public class SpriteSheet {
         int x = (id % cols) * width, y = (id / cols) * height;
         return sheet.getSubimage(x, y, width * scale, height * scale);
     }
+
+    public BufferedImage getSheet() {
+        return sheet;
+    }
+
+    public void setSheet(BufferedImage sheet) {
+        this.sheet = sheet;
+    }
+
 }

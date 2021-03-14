@@ -37,12 +37,12 @@ public class Player extends Creature {
 
         // Animations
         animations = new Animation[4];
-        animations[0] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_up);
-        animations[1] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_down);
-        animations[2] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_left);
-        animations[3] = new Animation(DEFAULT_ANIMATION_SPEED, Assets.player_right);
+        BufferedImage[][] images = Assets.getSprites("Actor1", 0);
+        for (int i = 0; i < animations.length; i++)
+            animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
 
         inventory = new Inventory(handler);
+
     }
 
     private void action() {
@@ -158,15 +158,15 @@ public class Player extends Creature {
 
     private BufferedImage getCurrentAnimationFrame() {
         if (xMove < 0) {
-            return animations[2].getCurrentFrame();
+            return animations[Direction.LEFT.ordinal()].getCurrentFrame();
         } else if (xMove > 0) {
-            return animations[3].getCurrentFrame();
+            return animations[Direction.RIGHT.ordinal()].getCurrentFrame();
         } else if (yMove < 0) {
-            return animations[0].getCurrentFrame();
+            return animations[Direction.UP.ordinal()].getCurrentFrame();
         } else if (yMove > 0) {
-            return animations[1].getCurrentFrame();
+            return animations[Direction.DOWN.ordinal()].getCurrentFrame();
         }
-        animations[direction.ordinal()].setIndex(0);
+        animations[direction.ordinal()].setIndex(1);
         return animations[direction.ordinal()].getCurrentFrame();
     }
 
@@ -181,7 +181,7 @@ public class Player extends Creature {
         case UP:
             return Direction.DOWN;
         }
-        return Direction.UP;
+        return null;
     }
 
     public Inventory getInventory() {

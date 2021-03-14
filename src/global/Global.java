@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 
 public class Global {
     public static enum Direction {
-        UP, DOWN, LEFT, RIGHT
+        DOWN, LEFT, RIGHT, UP
     };
 
     public static Direction direction = Direction.DOWN;

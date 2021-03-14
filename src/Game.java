@@ -13,6 +13,7 @@ import src.states.State;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 public class Game implements Runnable {
     private Display display;
@@ -136,6 +137,16 @@ public class Game implements Runnable {
         if (State.getState() != null) {
             State.getState().render(g);
         }
+
+        // BufferedImage[][] images = Assets.getSprites("People1", 6);
+        // int i = 0, j = 0;
+        // for (BufferedImage[] pattern : images) {
+        // j = 0;
+        // for (BufferedImage frame : pattern) {
+        // g.drawImage(frame, j++ * 48, i * 48, 48, 48, null);
+        // }
+        // i++;
+        // }
 
         // Stop drawing
         bs.show();
