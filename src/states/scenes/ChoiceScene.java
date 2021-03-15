@@ -117,9 +117,7 @@ public class ChoiceScene extends State {
                 return;
             }
         }
-        // if (handler.getKeyManager().keyJustPressed(Global.KEY_X)) {
-        // changeState(handler.getGame().gameState);
-        // }
+        
         int i = handler.getKeyManager().getArrowKey();
         if (i == -1)
             return;

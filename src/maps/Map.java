@@ -33,6 +33,8 @@ public class Map {
         loadMap(path);
 
         entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
+
+        // Chest Event
         entityManager.addEntity(new Event(handler, 1, 5, 4, Tile.TILEWIDTH, Tile.TILEWIDTH, new PageList(
                 new Page(0, "!Chest", 0,
                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 0,
@@ -43,27 +45,28 @@ public class Map {
                 new Page(2, "!Chest", 0, new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
                         true, 0, null))));
 
-        entityManager.addEntity(new Event(handler, 2, 10, 5, Creature.DEFAULT_CREATURE_WIDTH,
-                Creature.DEFAULT_CREATURE_HEIGHT,
-                new PageList(new Page(0, "People1", 6,
-                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                        new CommandManager(new Command("setSwitch", 0, true),
-                                new Command("showText", "Talk to the Boy"), new Command("changeItems", 1, 1, 1),
-                                new Command("changeGold", 0, 100), new Command("removeEvent", 2))))));
+        // Link Event
+        entityManager.addEntity(
+                new Event(handler, 2, 10, 5, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT,
+                        new PageList(new Page(0, "People1", 6,
+                                new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false,
+                                0, new CommandManager(new Command("setSwitch", 0, true),
+                                        new Command("showText", "Talk to the Boy"))))));
 
-        entityManager
-                .addEntity(
-                        new Event(handler, 3, 12, 5, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT,
-                                new PageList(
-                                        new Page(0, "People1", 0,
-                                                new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0,
-                                                        false),
-                                                false, 0, new CommandManager(new Command("showText", "Who Are You?"))),
-                                        new Page(0, "People1", 0,
-                                                new Conditions(0, true, 0, false, 0, 0, false, "A", false, 0, false, 0,
-                                                        false),
-                                                false, 0,
-                                                new CommandManager(new Command("showText", "You Know my Grandpa"))))));
+        // Link Event
+        entityManager.addEntity(
+                new Event(handler, 3, 12, 5, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT,
+                        new PageList(
+                                new Page(0, "People1", 0,
+                                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0,
+                                                false),
+                                        false, 0, new CommandManager(new Command("showText", "Who Are You?"))),
+                                new Page(0, "People1", 0,
+                                        new Conditions(0, true, 0, false, 0, 0, false, "A", false, 0, false, 0, false),
+                                        false, 0,
+                                        new CommandManager(new Command("showText",
+                                                "You Know my Grandpa\nHere, Have Some Gold/pReceived:\n100 Gold"),
+                                                new Command("changeGold", 0, 100))))));
 
         // Portal Event
         entityManager.addEntity(new Event(handler, 4, 27, 2, Tile.TILEWIDTH, Tile.TILEHEIGHT,
@@ -72,6 +75,7 @@ public class Map {
                         new CommandManager(new Command("transferPlayer", 0, 1, 1))))));
         ((Event) entityManager.getEntities().get(4)).getCurrentPage().setPassable(true);
 
+        // Choice Event
         entityManager.addEntity(new Event(handler, 5, 20, 6, Creature.DEFAULT_CREATURE_WIDTH,
                 Creature.DEFAULT_CREATURE_HEIGHT,
                 new PageList(new Page(0, "People1", 3,
@@ -79,6 +83,32 @@ public class Map {
                         new CommandManager(new Command("showChoices", "Yes/cNo",
                                 new CommandManagerList(new CommandManager(new Command("showText", "Yes")),
                                         new CommandManager(new Command("showText", "No")))))))));
+
+        // Remove Event
+        entityManager.addEntity(new Event(handler, 6, 15, 0, Creature.DEFAULT_CREATURE_WIDTH,
+                Creature.DEFAULT_CREATURE_HEIGHT,
+                new PageList(new Page(0, "People1", 1,
+                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
+                        new CommandManager(new Command("showText", "Im Going"), new Command("removeEvent", 6))))));
+
+        // Trade Event
+        entityManager.addEntity(new Event(handler, 7, 15, 5, Creature.DEFAULT_CREATURE_WIDTH,
+                Creature.DEFAULT_CREATURE_HEIGHT,
+                new PageList(new Page(0, "People1", 2,
+                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
+                        new CommandManager(new Command("showText", "Give me a Dummy Item and I will give you 3"),
+                                new Command("changeItems", 1, 1, 1), new Command("changeItems", 1, 0, 3),
+                                new Command("showText", "Removed:\nDummy Item x1/pAdded:\nDummy Item x3"))))));
+
+        // entityManager.addEntity(new Event(handler, 5, 16, 2,
+        // Creature.DEFAULT_CREATURE_WIDTH,
+        // Creature.DEFAULT_CREATURE_HEIGHT,
+        // new PageList(new Page(0, "People1", 4,
+        // new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0,
+        // false), false, 0,
+        // new CommandManager(new Command("showChoices", "Yes/cNo",
+        // new CommandManagerList(new CommandManager(new Command("showText", "Yes")),
+        // new CommandManager(new Command("showText", "No")))))))));
 
     }
 
