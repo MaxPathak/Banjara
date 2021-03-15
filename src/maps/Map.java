@@ -1,7 +1,6 @@
 package src.maps;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
 
 import src.Handler;
 import src.commands.Command;
@@ -14,8 +13,6 @@ import src.entities.PageList;
 import src.entities.creatures.Creature;
 import src.entities.creatures.Player;
 import src.entities.events.Event;
-import src.global.Global.Direction;
-import src.items.usable.Item;
 import src.tiles.Tile;
 import src.utils.Utils;
 
@@ -35,17 +32,20 @@ public class Map {
         entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
 
         // Chest Event
-        entityManager.addEntity(new Event(handler, 1, 5, 4, Tile.TILEWIDTH, Tile.TILEWIDTH, new PageList(
-                new Page(0, "!Chest", 0,
-                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 0,
-                        new CommandManager(new Command("setSelfSwitch", 1, "A"), new Command("changeItems", 1, 0, 2),
-                                new Command("changeWeapons", 1, 0, 1),
-                                new Command("showText",
-                                        "Received Items:\nDummy Item x1\nShort Sword x1/pMehul Noob hai"))),
-                new Page(2, "!Chest", 0, new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
-                        true, 0, null))));
+        entityManager.addEntity(new Event(handler, 1, 5, 4, Tile.TILEWIDTH, Tile.TILEWIDTH,
+                new PageList(
+                        new Page(0, "!Chest", 0,
+                                new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true,
+                                0,
+                                new CommandManager(new Command("setSelfSwitch", 1, "A"),
+                                        new Command("changeItems", 1, 0, 2), new Command("changeWeapons", 1, 0, 1),
+                                        new Command("showText",
+                                                "Received Items:\nDummy Item x1\nShort Sword x1/pTata"))),
+                        new Page(2, "!Chest", 0,
+                                new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false), true, 0,
+                                null))));
 
-        // Link Event
+        // Link Event A
         entityManager.addEntity(
                 new Event(handler, 2, 10, 5, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT,
                         new PageList(new Page(0, "People1", 6,
@@ -53,7 +53,7 @@ public class Map {
                                 0, new CommandManager(new Command("setSwitch", 0, true),
                                         new Command("showText", "Talk to the Boy"))))));
 
-        // Link Event
+        // Link Event B
         entityManager.addEntity(
                 new Event(handler, 3, 12, 5, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT,
                         new PageList(
@@ -96,7 +96,7 @@ public class Map {
                 Creature.DEFAULT_CREATURE_HEIGHT,
                 new PageList(new Page(0, "People1", 2,
                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                        new CommandManager(new Command("showText", "Give me a Dummy Item and I will give you 3"),
+                        new CommandManager(new Command("showText", "Give me 1 Dummy Item and I will give you 3"),
                                 new Command("changeItems", 1, 1, 1), new Command("changeItems", 1, 0, 3),
                                 new Command("showText", "Removed:\nDummy Item x1/pAdded:\nDummy Item x3"))))));
 

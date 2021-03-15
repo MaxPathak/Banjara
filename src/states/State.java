@@ -14,6 +14,7 @@ public abstract class State {
     protected TimedEvent timedEvent;
     protected static Handler handler;
     public int FOCUSED_ID;
+    public int id;
 
     public static void setState(State state) {
         currentState = state;
@@ -34,8 +35,6 @@ public abstract class State {
     public abstract void update();
 
     public abstract void render(Graphics g);
-
-    public int id;
 
     public String getName() {
         return this.getClass().getName();

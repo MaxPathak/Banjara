@@ -1,11 +1,9 @@
 package src;
 
-import java.util.TimerTask;
-
 import src.gfx.GameCamera;
-import src.maps.Map;
 import src.input.KeyManager;
 import src.input.MouseManager;
+import src.maps.Map;
 import src.utils.TimedEvent;
 
 public class Handler {

@@ -2,11 +2,8 @@ package src.states;
 
 import java.awt.Graphics;
 
-import src.Handler;
-import src.entities.creatures.Player;
 import src.global.Global;
 import src.maps.Map;
-import src.tiles.Tile;
 
 public class GameState extends State {
 

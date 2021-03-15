@@ -1,21 +1,14 @@
 package src.states;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.util.ListIterator;
 import java.util.TimerTask;
 
-import src.Handler;
 import src.gfx.Assets;
-import src.gfx.Text;
 import src.global.Global;
 import src.global.Global.Direction;
 import src.ui.ClickListener;
-import src.ui.UIImageButton;
-import src.ui.UIManager;
 import src.ui.UIObject;
 import src.ui.UITextButton;
-import src.utils.TimedEvent;
 
 public class TitleState extends State {
 
@@ -124,9 +117,7 @@ public class TitleState extends State {
     @Override
     public void render(Graphics g) {
         // Title Screen
-        // !Temporary disable bg for menu state testing
-        if (State.getState().getId() != MenuState.STATE_ID)
-            g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(), null);
+        g.drawImage(Assets.title, 0, 0, handler.getWidth(), handler.getHeight(), null);
 
         // Text.drawString(g, "Title", 0, 0, false, Color.white,
         // Assets.regularFont.get(24));

@@ -1,19 +1,17 @@
 package src;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+
 import src.databases.DatabaseManager;
 import src.display.Display;
 import src.gfx.Assets;
 import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
-import src.states.GameState;
-import src.states.TitleState;
 import src.states.State;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
+import src.states.TitleState;
 
 public class Game implements Runnable {
     private Display display;
@@ -117,19 +115,22 @@ public class Game implements Runnable {
         // Clear Screen
         g.clearRect(0, 0, width, height);
         // Start drawing
-        {
-            g.setColor(Color.WHITE);
+        // {
+        // g.setColor(Color.WHITE);
 
-            int marginx = 10, marginy = 10, thickness = 5;
-            // g.setColor(Color.RED);
-            // g.drawRect(marginx - 1, marginy - 1, width - 2*marginx, height - 2*marginy);
-            g.setColor(Color.WHITE);
-            g.fillRect(marginx, marginy, thickness, height - 2 * marginy - 1); // left
-            g.fillRect(marginx, marginy, width - 2 * marginx - 1, thickness); // top
-            g.fillRect(width - marginx - thickness - 1, marginy, thickness, height - 2 * marginy - 1); // right
-            g.fillRect(marginx, height - marginy - thickness - 1, width - 2 * marginx - 1, thickness); // bot
+        // int marginx = 10, marginy = 10, thickness = 5;
+        // // g.setColor(Color.RED);
+        // // g.drawRect(marginx - 1, marginy - 1, width - 2*marginx, height -
+        // 2*marginy);
+        // g.setColor(Color.WHITE);
+        // g.fillRect(marginx, marginy, thickness, height - 2 * marginy - 1); // left
+        // g.fillRect(marginx, marginy, width - 2 * marginx - 1, thickness); // top
+        // g.fillRect(width - marginx - thickness - 1, marginy, thickness, height - 2 *
+        // marginy - 1); // right
+        // g.fillRect(marginx, height - marginy - thickness - 1, width - 2 * marginx -
+        // 1, thickness); // bot
 
-        }
+        // }
 
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, width, height);

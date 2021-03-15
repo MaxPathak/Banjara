@@ -18,6 +18,7 @@ public class KeyManager implements KeyListener {
     public Direction playerDirection = Direction.DOWN;
     public boolean moving;
 
+    // Direction Values
     private int keyVals[];
     private ArrayList<Integer> keyArr = new ArrayList<Integer>();
 

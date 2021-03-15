@@ -58,7 +58,7 @@ public class MenuState extends State {
         int buttonIndex = 0;
         int buttonWidth = 200, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
 
-        // Start
+        // Inventory
         uiManager.addObject(new UITextButton("Inventory", 3, 3 + buttonHeight * buttonIndex++, buttonWidth,
                 buttonHeight, false, 3, new ClickListener() {
                     @Override
@@ -88,11 +88,9 @@ public class MenuState extends State {
                     @Override
                     public void onClick() {
                         changeState(handler.getGame().gameState);
-                        // System.out.println("New Direction: " + handler.getGame().gameState);
                     }
                 }));
 
-        // uiManager.getObjects().get(0).setFocused(true);
         setFocused(FOCUSED_ID);
 
         containers.add(new Rectangle(1, 1, buttonWidth, buttonHeight * uiManager.getObjects().size()));
@@ -160,7 +158,6 @@ public class MenuState extends State {
             }
 
         int gold = handler.getMap().getEntityManager().getPlayer().getGold();
-
         Text.drawString(g, "Gold: " + gold, containers.get(2).x + 5, containers.get(2).y + 5, false, Color.white,
                 Assets.regularFont.get(20));
 
