@@ -20,7 +20,6 @@ import src.entities.creatures.Player;
 import src.entities.events.Event;
 import src.gfx.Assets;
 import src.gfx.Text;
-import src.tiles.CompoundTile;
 import src.tiles.Layer;
 import src.tiles.Tile;
 import src.tiles.TileSet;
