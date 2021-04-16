@@ -174,7 +174,9 @@ public class Command {
     }
 
     public boolean transferPlayer(int direction, int x, int y) {
-        if (State.getHandler().getMap().getTile(x, y).isSolid())
+        // if (State.getHandler().getMap().getTile(x, y).isSolid())
+        // return false;
+        if (State.getHandler().getMap().layers.get(0).data[x][y] - State.getHandler().getMap().regionIndex == 1)
             return false;
         State.getHandler().getMap().getEntityManager().getPlayer().setX(x);
         State.getHandler().getMap().getEntityManager().getPlayer().setY(y);

@@ -4,6 +4,7 @@ import java.awt.Graphics;
 
 import src.global.Global;
 import src.maps.Map;
+import src.utils.JSONMapReader;
 
 public class GameState extends State {
 
@@ -14,7 +15,8 @@ public class GameState extends State {
     public GameState() {
         super();
         setId(GameState.STATE_ID);
-        map = new Map(handler, "data/maps/map01.txt");
+        // map = new Map(handler, "data/maps/map01.txt");
+        map = JSONMapReader.loadMap(handler, "data/tiles/map01.json");
         handler.setMap(map);
         handler.getGameCamera().move(0, 0);
     }

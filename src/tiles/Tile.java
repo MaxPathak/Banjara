@@ -10,7 +10,7 @@ public class Tile {
     public static Tile dirtTile = new DirtTile(1);
     public static Tile bushTile = new BushTile(2);
 
-    public static final int TILEWIDTH = 36, TILEHEIGHT = 36;
+    public static final int TILEWIDTH = 36 / 2, TILEHEIGHT = 36 / 2;
 
     protected BufferedImage img;
     protected final int id;
@@ -18,7 +18,7 @@ public class Tile {
     public Tile(BufferedImage img, int id) {
         this.img = img;
         this.id = id;
-        
+
         tiles[id] = this;
     }
 
@@ -37,5 +37,5 @@ public class Tile {
     public int getId() {
         return id;
     }
-    
+
 }

@@ -91,6 +91,8 @@ public class Game implements Runnable {
         // keyManager.printKeyVals();
         // System.exit(0);
 
+        // Assets.newMap.setHandler(handler);
+
     }
 
     public void update() {
@@ -139,15 +141,7 @@ public class Game implements Runnable {
             State.getState().render(g);
         }
 
-        // BufferedImage[][] images = Assets.getSprites("People1", 6);
-        // int i = 0, j = 0;
-        // for (BufferedImage[] pattern : images) {
-        // j = 0;
-        // for (BufferedImage frame : pattern) {
-        // g.drawImage(frame, j++ * 48, i * 48, 48, 48, null);
-        // }
-        // i++;
-        // }
+        // Assets.newMap.renderLayers(g);
 
         // Stop drawing
         bs.show();

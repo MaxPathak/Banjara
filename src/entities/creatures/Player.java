@@ -151,14 +151,13 @@ public class Player extends Creature {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
                 (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
 
-        /*
-         * g.setColor(Color.red); g.fillRect((int) (pX -
-         * handler.getGameCamera().getxOffset()), (int) (pY -
-         * handler.getGameCamera().getyOffset()), bounds.width, bounds.height);
-         * g.setColor(Color.black); g.fillRect((int) (ar.x -
-         * handler.getGameCamera().getxOffset()), (int) (ar.y -
-         * handler.getGameCamera().getyOffset()), ar.width, ar.height);
-         */
+        // g.setColor(Color.red);
+        // g.fillRect((int) (pX - handler.getGameCamera().getxOffset()), (int) (pY -
+        // handler.getGameCamera().getyOffset()),
+        // bounds.width, bounds.height);
+        // g.setColor(Color.black);
+        // g.fillRect((int) (ar.x - handler.getGameCamera().getxOffset()),
+        // (int) (ar.y - handler.getGameCamera().getyOffset()), ar.width, ar.height);
 
     }
 

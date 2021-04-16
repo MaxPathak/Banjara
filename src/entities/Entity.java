@@ -41,8 +41,8 @@ public abstract class Entity {
         bounds.x = (width - bounds.width) / 2;
         bounds.y = height - bounds.height;
 
-        this.x += (Tile.TILEWIDTH - bounds.width) / 2;
-        this.y += Tile.TILEHEIGHT - bounds.height;
+        this.x += (Tile.TILEWIDTH * 2 - bounds.width) / 2;
+        this.y += Tile.TILEHEIGHT * 2 - bounds.height;
 
         // System.out.println("Object:\nx: " + this.x + ", y: " + this.y + "\nw: " +
         // this.width + ", h: " + this.height);
@@ -87,7 +87,7 @@ public abstract class Entity {
     }
 
     public void setX(int x) {
-        this.x = x * Tile.TILEWIDTH + (Tile.TILEWIDTH - bounds.width) / 2;
+        this.x = x * Tile.TILEWIDTH + (Tile.TILEWIDTH * 2 - bounds.width) / 2;
     }
 
     public float getY() {
@@ -95,12 +95,20 @@ public abstract class Entity {
     }
 
     public void setY(int y) {
-        this.y = y * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.height;
+        this.y = y * Tile.TILEHEIGHT + (Tile.TILEHEIGHT * 2 - bounds.height);
+    }
+
+    public int getGridY() {
+        return (int) ((y - (Tile.TILEHEIGHT * 2 - bounds.height)) / Tile.TILEHEIGHT);
+    }
+
+    public int getGridX() {
+        return (int) ((x - (Tile.TILEWIDTH * 2 - bounds.width) / 2) / Tile.TILEWIDTH);
     }
 
     public void setPosition(int x, int y) {
-        this.x = x * Tile.TILEWIDTH + (Tile.TILEWIDTH - bounds.width) / 2;
-        this.y = y * Tile.TILEHEIGHT + Tile.TILEHEIGHT - bounds.height;
+        this.x = x * Tile.TILEWIDTH * 2 + (Tile.TILEWIDTH * 2 - bounds.width) / 2;
+        this.y = y * Tile.TILEHEIGHT * 2 + Tile.TILEHEIGHT * 2 - bounds.height;
     }
 
     public int getWidth() {
