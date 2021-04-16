@@ -2,11 +2,8 @@ package src.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
 import src.Handler;
-import src.commands.CommandManager;
-import src.global.Global.Direction;
 import src.tiles.Tile;
 
 public abstract class Entity {

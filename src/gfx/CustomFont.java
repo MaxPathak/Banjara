@@ -2,8 +2,6 @@ package src.gfx;
 
 import java.awt.Font;
 
-import src.global.Global;
-
 public class CustomFont extends Font {
 
     /**

@@ -2,8 +2,6 @@ package src.commands;
 
 import java.util.LinkedList;
 
-import src.items.usable.Item;
-
 public class CommandManager {
     private LinkedList<Command> commands;
 

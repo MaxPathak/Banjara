@@ -3,7 +3,6 @@ package src.gfx;
 import java.awt.image.BufferedImage;
 
 import src.maps.Map;
-import src.utils.JSONMapReader;
 
 public class Assets {
     private static final int width = 24, height = 24, icon_width = 32, icon_height = 32;

@@ -1,13 +1,11 @@
 package src.entities.creatures;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
 import src.Handler;
-import src.commands.CommandManager;
 import src.entities.Entity;
 import src.entities.PageList;
 import src.entities.events.Event;
@@ -16,8 +14,6 @@ import src.gfx.Assets;
 import src.global.Global;
 import src.global.Global.Direction;
 import src.inventory.Inventory;
-import src.states.GameState;
-import src.states.State;
 
 public class Player extends Creature {
 

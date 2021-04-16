@@ -1,12 +1,9 @@
 package src.maps;
 
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import src.Game;
 import src.Handler;
 import src.commands.Command;
 import src.commands.CommandManager;
@@ -23,14 +20,12 @@ import src.gfx.Text;
 import src.tiles.Layer;
 import src.tiles.Tile;
 import src.tiles.TileSet;
-import src.utils.Utils;
 
 public class Map {
 
     private Handler handler;
     private int width, height;
     private int spawnX, spawnY;
-    private int[][] tiles;
     private EntityManager entityManager;
 
     public int regionIndex;
@@ -294,33 +289,33 @@ public class Map {
                 Assets.regularFont.get(20));
     }
 
-    public Tile getTile(int x, int y) {
-        if (x < 0 || y < 0 || x >= width || y >= height)
-            return Tile.grassTile;
+    // public Tile getTile(int x, int y) {
+    // if (x < 0 || y < 0 || x >= width || y >= height)
+    // return Tile.grassTile;
 
-        Tile t = Tile.tiles[tiles[x][y]];
-        if (t == null) {
-            return Tile.dirtTile;
-        }
-        return t;
-    }
+    // Tile t = Tile.tiles[tiles[x][y]];
+    // if (t == null) {
+    // return Tile.dirtTile;
+    // }
+    // return t;
+    // }
 
-    private void loadMap(String path) {
-        String file = Utils.loadFileAsString(path);
-        String[] tokens = file.split("\\s+");
+    // private void loadMap(String path) {
+    // String file = Utils.loadFileAsString(path);
+    // String[] tokens = file.split("\\s+");
 
-        width = Utils.parseInt(tokens[0]);
-        height = Utils.parseInt(tokens[1]);
-        spawnX = Utils.parseInt(tokens[2]);
-        spawnY = Utils.parseInt(tokens[3]);
+    // width = Utils.parseInt(tokens[0]);
+    // height = Utils.parseInt(tokens[1]);
+    // spawnX = Utils.parseInt(tokens[2]);
+    // spawnY = Utils.parseInt(tokens[3]);
 
-        tiles = new int[width][height];
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
-            }
-        }
-    }
+    // tiles = new int[width][height];
+    // for (int y = 0; y < height; y++) {
+    // for (int x = 0; x < width; x++) {
+    // tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
+    // }
+    // }
+    // }
 
     public int getSpawnX() {
         return spawnX;

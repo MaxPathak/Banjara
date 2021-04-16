@@ -1,7 +1,5 @@
 package src.tiles;
 
-import java.awt.Graphics;
-
 public class Layer {
 
     private int width, height;

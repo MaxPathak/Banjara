@@ -1,6 +1,5 @@
 package src.gfx;
 
-import src.Game;
 import src.Handler;
 import src.entities.Entity;
 import src.tiles.Tile;
@@ -17,19 +16,19 @@ public class GameCamera {
     }
 
     public void checkBlankSpace() {
-        if(handler.getWidth() > handler.getMap().getWidth() * Tile.TILEWIDTH) {
+        if (handler.getWidth() > handler.getMap().getWidth() * Tile.TILEWIDTH) {
             xOffset = (handler.getMap().getWidth() * Tile.TILEWIDTH - handler.getWidth()) / 2;
-        } else if(xOffset < 0) {
+        } else if (xOffset < 0) {
             xOffset = 0;
-        } else if(xOffset > handler.getMap().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
+        } else if (xOffset > handler.getMap().getWidth() * Tile.TILEWIDTH - handler.getWidth()) {
             xOffset = handler.getMap().getWidth() * Tile.TILEWIDTH - handler.getWidth();
         }
 
-        if(handler.getHeight() > handler.getMap().getHeight() * Tile.TILEHEIGHT) {
+        if (handler.getHeight() > handler.getMap().getHeight() * Tile.TILEHEIGHT) {
             yOffset = (handler.getMap().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) / 2;
-        } else if(yOffset < 0) {
+        } else if (yOffset < 0) {
             yOffset = 0;
-        } else if(yOffset > handler.getMap().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
+        } else if (yOffset > handler.getMap().getHeight() * Tile.TILEHEIGHT - handler.getHeight()) {
             yOffset = handler.getMap().getHeight() * Tile.TILEHEIGHT - handler.getHeight();
         }
 

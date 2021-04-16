@@ -4,8 +4,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.ListIterator;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import src.global.Global;
 import src.global.Global.Direction;

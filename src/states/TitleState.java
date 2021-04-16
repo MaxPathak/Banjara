@@ -44,11 +44,8 @@ public class TitleState extends State {
 
         handler.getTimedEvent().merge(timedEvent);
 
-        final int totalButtons = 3;
-        int buttonIndex = 0;
         int buttonWidth = 150, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
 
-        int totalHeight = 50 * (int) (totalButtons + totalButtons / 2);
         // New Game
         uiManager.addObject(new UITextButton("New Game", handler.getWidth() / 2 - buttonWidth / 2, 350, buttonWidth,
                 buttonHeight, true, 3, new ClickListener() {

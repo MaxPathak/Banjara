@@ -2,7 +2,6 @@ package src.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
-import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;

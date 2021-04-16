@@ -1,16 +1,12 @@
 package src.inventory;
 
+import java.util.ArrayList;
+
 import src.Handler;
-import src.databases.DatabaseManager;
-import src.global.Global;
 import src.items.BaseItem;
 import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
-
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.awt.Graphics;
 
 public class Inventory {
 

@@ -8,7 +8,6 @@ import src.entities.Page;
 import src.entities.PageList;
 import src.global.Global;
 import src.global.Global.Direction;
-import src.tiles.Tile;
 
 public class Event extends Entity {
 

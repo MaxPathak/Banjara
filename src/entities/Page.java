@@ -1,7 +1,6 @@
 package src.entities;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import src.commands.CommandManager;
 import src.gfx.Animation;
