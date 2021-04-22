@@ -10,14 +10,14 @@ public class Conditions {
     private boolean variableValid;
     private String selfSwitchCh;
     private boolean selfswitchValid;
-    private int itemID;
+    private int itemId;
     private boolean itemValid;
-    private int actorID;
+    private int actorId;
     private boolean actorValid;
 
     public Conditions(int switch1Id, boolean switch1Valid, int switch2Id, boolean switch2Valid, int variableId,
-            int variableValue, boolean variableValid, String selfSwitchCh, boolean selfswitchValid, int itemID,
-            boolean itemValid, int actorID, boolean actorValid) {
+            int variableValue, boolean variableValid, String selfSwitchCh, boolean selfswitchValid, int itemId,
+            boolean itemValid, int actorId, boolean actorValid) {
         this.switch1Id = switch1Id;
         this.switch1Valid = switch1Valid;
         this.switch2Id = switch2Id;
@@ -27,9 +27,9 @@ public class Conditions {
         this.variableValid = variableValid;
         this.selfSwitchCh = selfSwitchCh;
         this.selfswitchValid = selfswitchValid;
-        this.itemID = itemID;
+        this.itemId = itemId;
         this.itemValid = itemValid;
-        this.actorID = actorID;
+        this.actorId = actorId;
         this.actorValid = actorValid;
     }
 
@@ -106,11 +106,11 @@ public class Conditions {
     }
 
     public int getItemID() {
-        return itemID;
+        return itemId;
     }
 
     public void setItemID(int itemID) {
-        this.itemID = itemID;
+        this.itemId = itemID;
     }
 
     public boolean isItemValid() {
@@ -122,11 +122,11 @@ public class Conditions {
     }
 
     public int getActorID() {
-        return actorID;
+        return actorId;
     }
 
     public void setActorID(int actorID) {
-        this.actorID = actorID;
+        this.actorId = actorID;
     }
 
     public boolean isActorValid() {

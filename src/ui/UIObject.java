@@ -1,8 +1,8 @@
 package src.ui;
 
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 public abstract class UIObject {
 

@@ -19,16 +19,16 @@ public class Page {
     private CommandManager list;
     private boolean passable;
 
-    public Page(int direction, String characterName, int characterIndex, Conditions conditions, boolean dFix,
-            int trigger, CommandManager list) {
+    public Page(int direction, String name, int index, Conditions conditions, boolean directionFix, int trigger,
+            CommandManager list) {
         this.direction = Direction.values()[direction];
         this.conditions = conditions;
-        this.dFix = dFix;
+        this.dFix = directionFix;
         this.trigger = trigger;
         this.list = list;
 
         this.animations = new Animation[4];
-        BufferedImage[][] images = Assets.getSprites(characterName, characterIndex);
+        BufferedImage[][] images = Assets.getSprites(name, index);
         for (int i = 0; i < animations.length; i++)
             animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
 

@@ -35,9 +35,6 @@ public abstract class Entity {
         bounds = new Rectangle();
         createBounds();
 
-        this.x += (Tile.TILEWIDTH * 2 - bounds.width) / 2;
-        this.y += Tile.TILEHEIGHT * 2 - bounds.height;
-
         // System.out.println("Object:\nx: " + this.x + ", y: " + this.y + "\nw: " +
         // this.width + ", h: " + this.height);
         // System.out.println(
@@ -57,6 +54,11 @@ public abstract class Entity {
         bounds.height = (int) (height * 0.4);
         bounds.x = (width - bounds.width) / 2;
         bounds.y = height - bounds.height;
+    }
+
+    public void adjustPosition() {
+        this.x += (Tile.TILEWIDTH * 2 - bounds.width) / 2;
+        this.y += Tile.TILEHEIGHT * 2 - bounds.height;
     }
 
     public Entity checkEntityInteractions() {

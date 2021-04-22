@@ -12,7 +12,6 @@ import src.entities.Conditions;
 import src.entities.EntityManager;
 import src.entities.Page;
 import src.entities.PageList;
-import src.entities.creatures.Creature;
 import src.entities.creatures.Player;
 import src.entities.events.Event;
 import src.gfx.Assets;

@@ -89,6 +89,17 @@
                  "height":48,
                  "id":9,
                  "name":"Chest",
+                 "properties":[
+                        {
+                         "name":"id",
+                         "type":"int",
+                         "value":1
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"T"
+                        }],
                  "rotation":0,
                  "type":"Event",
                  "visible":true,

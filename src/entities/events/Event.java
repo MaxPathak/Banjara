@@ -27,7 +27,9 @@ public class Event extends Entity {
             width = Creature.DEFAULT_CREATURE_WIDTH * 3 / 4;
             height = Creature.DEFAULT_CREATURE_HEIGHT * 3 / 4;
         }
+
         this.createBounds();
+        this.adjustPosition();
     }
 
     @Override
