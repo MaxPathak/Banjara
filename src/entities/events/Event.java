@@ -6,6 +6,7 @@ import src.Handler;
 import src.entities.Entity;
 import src.entities.Page;
 import src.entities.PageList;
+import src.entities.creatures.Creature;
 import src.global.Global;
 import src.global.Global.Direction;
 
@@ -18,6 +19,15 @@ public class Event extends Entity {
         super(handler, id, x, y, width, height, pages);
         currentPage = pages.getPages().get(0);
         currentSelfSwitch = null;
+    }
+
+    public Event(Handler handler, int id, int x, int y, char type, PageList pages) {
+        this(handler, id, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, pages);
+        if (type == 't' || type == 'T') {
+            width = Creature.DEFAULT_CREATURE_WIDTH * 3 / 4;
+            height = Creature.DEFAULT_CREATURE_HEIGHT * 3 / 4;
+        }
+        this.createBounds();
     }
 
     @Override

@@ -33,10 +33,7 @@ public abstract class Entity {
         // dFix = new ArrayList<Direction>();
 
         bounds = new Rectangle();
-        bounds.width = (int) (width * 0.6) - 1;
-        bounds.height = (int) (height * 0.4);
-        bounds.x = (width - bounds.width) / 2;
-        bounds.y = height - bounds.height;
+        createBounds();
 
         this.x += (Tile.TILEWIDTH * 2 - bounds.width) / 2;
         this.y += Tile.TILEHEIGHT * 2 - bounds.height;
@@ -54,6 +51,13 @@ public abstract class Entity {
     public abstract void render(Graphics g);
 
     public abstract void effect();
+
+    public void createBounds() {
+        bounds.width = (int) (width * 0.6) - 1;
+        bounds.height = (int) (height * 0.4);
+        bounds.x = (width - bounds.width) / 2;
+        bounds.y = height - bounds.height;
+    }
 
     public Entity checkEntityInteractions() {
         for (Entity e : handler.getMap().getEntityManager().getEntities()) {
