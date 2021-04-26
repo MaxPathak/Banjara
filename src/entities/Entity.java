@@ -51,7 +51,7 @@ public abstract class Entity {
 
     public void createBounds() {
         bounds.width = (int) (width * 0.6) - 1;
-        bounds.height = (int) (height * 0.4);
+        bounds.height = (int) (height * 0.39);
         bounds.x = (width - bounds.width) / 2;
         bounds.y = height - bounds.height;
     }
@@ -101,12 +101,12 @@ public abstract class Entity {
         this.y = y * Tile.TILEHEIGHT + (Tile.TILEHEIGHT * 2 - bounds.height);
     }
 
-    public int getGridY() {
-        return (int) ((y - (Tile.TILEHEIGHT * 2 - bounds.height)) / Tile.TILEHEIGHT);
+    public int getGridX() {
+        return (int) ((x + 6 - (Tile.TILEWIDTH * 2 - bounds.width) / 2) / Tile.TILEWIDTH);
     }
 
-    public int getGridX() {
-        return (int) ((x - (Tile.TILEWIDTH * 2 - bounds.width) / 2) / Tile.TILEWIDTH);
+    public int getGridY() {
+        return (int) ((y + 6 - (Tile.TILEHEIGHT * 2 - bounds.height)) / Tile.TILEHEIGHT);
     }
 
     public void setPosition(int x, int y) {

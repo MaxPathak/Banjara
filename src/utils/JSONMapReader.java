@@ -41,7 +41,7 @@ public class JSONMapReader {
             int width = ((Long) obj.get("width")).intValue();
             int height = ((Long) obj.get("height")).intValue();
 
-            map = new Map(handler, width, height, 2, 7);
+            map = new Map(handler, width, height, 0, 0);
 
             // System.out.println("\nMap Size: " + map.getWidth() + ", " + map.getHeight());
 
@@ -75,6 +75,7 @@ public class JSONMapReader {
             for (Object o : (JSONArray) obj.get("layers")) {
                 layers.add((JSONObject) o);
             }
+            int index = 0;
             for (JSONObject o : layers) {
                 JSONArray a = (JSONArray) o.get("data");
                 if (a == null)
@@ -83,8 +84,12 @@ public class JSONMapReader {
                 for (int i = 0; i < a.size(); i++) {
                     data[i] = ((Long) a.get(i)).intValue();
                 }
-                map.layers
-                        .add(new Layer(((Long) o.get("width")).intValue(), ((Long) o.get("height")).intValue(), data));
+                if (((String) o.get("name")).equals("regions"))
+                    map.regionLayer = index;
+                map.layers.add(new Layer((String) o.get("name"), ((Long) o.get("width")).intValue(),
+                        ((Long) o.get("height")).intValue(), data));
+
+                index++;
             }
 
             return map;

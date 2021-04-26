@@ -28,6 +28,7 @@ public class Map {
     private EntityManager entityManager;
 
     public int regionIndex;
+    public int regionLayer;
     public ArrayList<TileSet> tileSets;
     public ArrayList<Layer> layers;
 
@@ -70,7 +71,7 @@ public class Map {
                                         new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0,
                                                 false),
                                         false, 0, new CommandManager(new Command("showText", "Who Are You?"))),
-                                new Page(0, "People1", 0,
+                                new Page(3, "People1", 0,
                                         new Conditions(0, true, 0, false, 0, 0, false, "A", false, 0, false, 0, false),
                                         false, 0,
                                         new CommandManager(new Command("showText",
@@ -121,8 +122,12 @@ public class Map {
                 (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
 
         for (int i = 0; i < layers.size(); i++) {
-            if (i == layers.size() - 1)
+            if (i == layers.size() - 1) {
                 entityManager.render(g);
+                // break; // Hide
+            }
+            if (layers.get(i).isRegionLayer())
+                continue;
             for (int y = yStart; y < yEnd; y++) {
                 for (int x = xStart; x < xEnd; x++) {
                     if (layers.get(i).data[x][y] != 0)

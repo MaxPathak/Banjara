@@ -86,7 +86,8 @@ public abstract class Creature extends Entity {
 
     protected boolean collisionWithTile(int x, int y) {
         // return handler.getMap().getTile(x, y).isSolid();
-        return handler.getMap().layers.get(0).data[x][y] - handler.getMap().regionIndex == 1;
+        int regionLayer = handler.getMap().regionLayer;
+        return handler.getMap().layers.get(regionLayer).data[x][y] - handler.getMap().regionIndex == 1;
     }
 
     // Getters and Setters

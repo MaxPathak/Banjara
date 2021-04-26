@@ -2,8 +2,6 @@ package src.gfx;
 
 import java.awt.image.BufferedImage;
 
-import src.maps.Map;
-
 public class Assets {
     private static final int width = 24, height = 24, icon_width = 32, icon_height = 32;
 
@@ -17,15 +15,13 @@ public class Assets {
     public static BufferedImage[] player_down, player_left, player_right, player_up;
 
     // Temporary
-    public static BufferedImage map;
-    public static Map newMap;
+    // public static Map newMap;
 
     public static void init() {
 
         // newMap = JSONMapReader.readFile();
 
         title = ImageLoader.loadImage("/img/title/title.jpg");
-        map = ImageLoader.loadImage("/img/system/map01.png");
 
         regularFont = FontLoader.loadFont("/fonts/comic.ttf");
 

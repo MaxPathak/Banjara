@@ -2,12 +2,14 @@ package src.tiles;
 
 public class Layer {
 
+    private String name;
     private int width, height;
     public int[][] data;
 
-    public Layer(int width, int height, int[] data) {
+    public Layer(String name, int width, int height, int[] data) {
         int c = 0;
 
+        this.name = name;
         this.width = width;
         this.height = height;
         this.data = new int[this.width][this.height];
@@ -17,6 +19,10 @@ public class Layer {
             }
         }
 
+    }
+
+    public boolean isRegionLayer() {
+        return this.name.equals("regions");
     }
 
 }

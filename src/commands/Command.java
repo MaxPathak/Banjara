@@ -56,7 +56,7 @@ public class Command {
         }
     }
 
-    public boolean changeItems(int id, int operand, int operandVal) {
+    public static boolean changeItems(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
         case 0:
@@ -73,7 +73,7 @@ public class Command {
         return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeItems(item);
     }
 
-    public boolean changeWeapons(int id, int operand, int operandVal) {
+    public static boolean changeWeapons(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
         case 0:
@@ -90,7 +90,7 @@ public class Command {
         return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeWeapons(weapon);
     }
 
-    public boolean changeArmors(int id, int operand, int operandVal) {
+    public static boolean changeArmors(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
         case 0:
@@ -107,12 +107,12 @@ public class Command {
         return State.getHandler().getMap().getEntityManager().getPlayer().getInventory().changeArmors(armor);
     }
 
-    public boolean showText(String text) {
+    public static boolean showText(String text) {
         State.getState().changeState(new TextScene(text));
         return true;
     }
 
-    public boolean setSelfSwitch(int id, String currentSelfSwitch) {
+    public static boolean setSelfSwitch(int id, String currentSelfSwitch) {
         EntityManager entityManager = State.getHandler().getMap().getEntityManager();
         int i = 0;
         for (Entity entity : entityManager.getEntities()) {
@@ -130,12 +130,12 @@ public class Command {
         return true;
     }
 
-    public boolean setSwitch(int id, boolean value) {
+    public static boolean setSwitch(int id, boolean value) {
         Global.switches[id] = value;
         return true;
     }
 
-    public boolean changeGold(int operand, int operandVal) {
+    public static boolean changeGold(int operand, int operandVal) {
         int amount = 0;
         switch (operand) {
         case 0:
@@ -153,7 +153,7 @@ public class Command {
         return false;
     }
 
-    public boolean removeEvent(int id) {
+    public static boolean removeEvent(int id) {
         EntityManager entityManager = State.getHandler().getMap().getEntityManager();
         int i = 0;
         for (Entity entity : entityManager.getEntities()) {
@@ -173,10 +173,14 @@ public class Command {
 
     }
 
-    public boolean transferPlayer(int direction, int x, int y) {
+    public static boolean transferPlayer(int direction, int x, int y) {
         // if (State.getHandler().getMap().getTile(x, y).isSolid())
         // return false;
-        if (State.getHandler().getMap().layers.get(0).data[x][y] - State.getHandler().getMap().regionIndex == 1)
+
+        int regionLayer = State.getHandler().getMap().regionLayer;
+
+        if (State.getHandler().getMap().layers.get(regionLayer).data[x][y]
+                - State.getHandler().getMap().regionIndex == 1)
             return false;
         State.getHandler().getMap().getEntityManager().getPlayer().setX(x);
         State.getHandler().getMap().getEntityManager().getPlayer().setY(y);
@@ -184,7 +188,7 @@ public class Command {
         return true;
     }
 
-    public boolean showChoices(String text, CommandManagerList list) {
+    public static boolean showChoices(String text, CommandManagerList list) {
         State.getState().changeState(new ChoiceScene(text, list));
         return true;
     }

@@ -2,6 +2,7 @@ package src.states;
 
 import java.awt.Graphics;
 
+import src.commands.Command;
 import src.global.Global;
 import src.maps.Map;
 import src.utils.JSONMapReader;
@@ -15,10 +16,16 @@ public class GameState extends State {
     public GameState() {
         super();
         setId(GameState.STATE_ID);
-        // map = new Map(handler, "data/maps/map01.txt");
+        // Load Maps
         map = JSONMapReader.loadMap(handler, "data/tiles/map01.json");
+
+        // Set Starting Map
         handler.setMap(map);
         handler.getGameCamera().move(0, 0);
+
+        Command.transferPlayer(0, 2, 7); // Map01 Starting Pos
+        // Command.transferPlayer(3, 13, 18); // House01 Starting Pos
+
     }
 
     @Override

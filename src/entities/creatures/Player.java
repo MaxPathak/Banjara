@@ -1,5 +1,6 @@
 package src.entities.creatures;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -147,10 +148,13 @@ public class Player extends Creature {
         g.drawImage(getCurrentAnimationFrame(), (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
                 (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
 
+        // Bounds Rectangle
         // g.setColor(Color.red);
-        // g.fillRect((int) (pX - handler.getGameCamera().getxOffset()), (int) (pY -
+        // g.fillRect((int) (x - handler.getGameCamera().getxOffset()), (int) (y -
         // handler.getGameCamera().getyOffset()),
         // bounds.width, bounds.height);
+
+        // Interaction Rectangle
         // g.setColor(Color.black);
         // g.fillRect((int) (ar.x - handler.getGameCamera().getxOffset()),
         // (int) (ar.y - handler.getGameCamera().getyOffset()), ar.width, ar.height);

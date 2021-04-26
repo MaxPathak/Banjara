@@ -14,11 +14,13 @@ public class Event extends Entity {
 
     private Page currentPage;
     private String currentSelfSwitch;
+    private Direction currentDirection;
 
     public Event(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
         super(handler, id, x, y, width, height, pages);
         currentPage = pages.getPages().get(0);
         currentSelfSwitch = null;
+        currentDirection = currentPage.getDirection();
     }
 
     public Event(Handler handler, int id, int x, int y, char type, PageList pages) {
@@ -56,7 +58,7 @@ public class Event extends Entity {
 
     @Override
     public void render(Graphics g) {
-        int cDirection = currentPage.getDirection().ordinal();
+        int cDirection = currentDirection.ordinal();
         g.drawImage(currentPage.getAnimations()[cDirection].getCurrentFrame(),
                 (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
                 (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
@@ -74,7 +76,7 @@ public class Event extends Entity {
             if (currentPage.getDirection() != oppDir)
                 return;
         } else {
-            currentPage.setDirection(oppDir);
+            currentDirection = oppDir;
         }
 
         if (pageList != null) {
