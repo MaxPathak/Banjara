@@ -8,17 +8,23 @@ public class Global {
         DOWN, LEFT, RIGHT, UP
     };
 
-    public static Direction direction = Direction.DOWN;
-
     public static final float DEFAULT_FONTSIZE = 24;
 
-    public static int KEY_Z = KeyEvent.VK_Z, KEY_X = KeyEvent.VK_X;
+    public static final int KEY_Z = KeyEvent.VK_Z, KEY_X = KeyEvent.VK_X;
+
+    public static Direction direction;
+
+    public static int[] variables;
+    public static boolean[] switches;
+
+    public static void resetData() {
+        Global.variables = new int[30];
+        Global.switches = new boolean[30];
+        Global.direction = Direction.DOWN;
+    }
 
     public static Color rgba(int r, int g, int b, float a) {
         return new Color(r, g, b, (int) (255 * a));
     }
-
-    public static int[] variables = new int[30];
-    public static boolean[] switches = new boolean[30];
 
 }

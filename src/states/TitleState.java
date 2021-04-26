@@ -85,6 +85,8 @@ public class TitleState extends State {
 
         setFocused(FOCUSED_ID);
 
+        Global.resetData();
+
     }
 
     @Override
