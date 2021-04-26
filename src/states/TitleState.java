@@ -47,7 +47,7 @@ public class TitleState extends State {
         int buttonWidth = 150, buttonHeight = (int) (Global.DEFAULT_FONTSIZE + 10);
 
         // New Game
-        uiManager.addObject(new UITextButton("New Game", handler.getWidth() / 2 - buttonWidth / 2, 350, buttonWidth,
+        uiManager.addObject(new UITextButton("New Game", handler.getWidth() / 2 - buttonWidth / 2, 400, buttonWidth,
                 buttonHeight, true, 3, new ClickListener() {
                     @Override
                     public void onClick() {
@@ -59,21 +59,22 @@ public class TitleState extends State {
                     }
                 }));
         // Continue
-        uiManager.addObject(new UITextButton("Continue", handler.getWidth() / 2 - buttonWidth / 2, 400, buttonWidth,
+        uiManager.addObject(new UITextButton("Continue", handler.getWidth() / 2 - buttonWidth / 2, 450, buttonWidth,
                 buttonHeight, true, 3, new ClickListener() {
                     @Override
                     public void onClick() {
                         // TODO
                     }
                 }));
-        // Options
-        uiManager.addObject(new UITextButton("Options", handler.getWidth() / 2 - buttonWidth / 2, 450, buttonWidth,
-                buttonHeight, true, 3, new ClickListener() {
-                    @Override
-                    public void onClick() {
-                        // TODO
-                    }
-                }));
+        // // Options
+        // uiManager.addObject(new UITextButton("Options", handler.getWidth() / 2 -
+        // buttonWidth / 2, 450, buttonWidth,
+        // buttonHeight, true, 3, new ClickListener() {
+        // @Override
+        // public void onClick() {
+        // // TODO
+        // }
+        // }));
         // Exit
         uiManager.addObject(new UITextButton("Exit", handler.getWidth() / 2 - buttonWidth / 2, 500, buttonWidth,
                 buttonHeight, true, 3, new ClickListener() {

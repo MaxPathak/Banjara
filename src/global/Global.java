@@ -21,6 +21,7 @@ public class Global {
         Global.variables = new int[30];
         Global.switches = new boolean[30];
         Global.direction = Direction.DOWN;
+        switches[0] = true;
     }
 
     public static Color rgba(int r, int g, int b, float a) {

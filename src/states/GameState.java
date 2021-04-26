@@ -1,6 +1,7 @@
 package src.states;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import src.commands.Command;
 import src.global.Global;
@@ -9,7 +10,9 @@ import src.utils.JSONMapReader;
 
 public class GameState extends State {
 
-    private Map map;
+    private Map currentMap;
+
+    private ArrayList<Map> maps;
 
     public static final int STATE_ID = 1;
 
@@ -17,20 +20,26 @@ public class GameState extends State {
         super();
         setId(GameState.STATE_ID);
         // Load Maps
-        map = JSONMapReader.loadMap(handler, "data/tiles/map01.json");
+        maps = new ArrayList<Map>();
+        maps.add(JSONMapReader.loadMap(handler, "map01"));
+        maps.add(JSONMapReader.loadMap(handler, "house01"));
+
+        currentMap = maps.get(0);
 
         // Set Starting Map
-        handler.setMap(map);
+        handler.setMap(currentMap);
         handler.getGameCamera().move(0, 0);
 
-        Command.transferPlayer(0, 2, 7); // Map01 Starting Pos
-        // Command.transferPlayer(3, 13, 18); // House01 Starting Pos
+        if (handler.getMap().getName().equals("map01"))
+            Command.transferPlayer(0, 2, 7, null); // Map01 Starting Pos
+        else if (handler.getMap().getName().equals("house01"))
+            Command.transferPlayer(3, 13, 18, null); // House01 Starting Pos
 
     }
 
     @Override
     public void update() {
-        map.update();
+        currentMap.update();
 
         if (handler.getGame().getKeyManager().keyJustPressed(Global.KEY_X)) {
             if (handler.getGame().menuState == null)
@@ -43,12 +52,20 @@ public class GameState extends State {
 
     @Override
     public void render(Graphics g) {
-        map.render(g);
+        currentMap.render(g);
         /*
          * Tile.tiles[0].render(g, 0, 0); Tile.tiles[1].render(g, 48, 0);
          * Tile.tiles[2].render(g, 48*2, 0);
          */
         // g.drawImage(Assets.bush, 0, 48, null);
+    }
+
+    public ArrayList<Map> getMaps() {
+        return maps;
+    }
+
+    public void setCurrentMap(Map currentMap) {
+        this.currentMap = currentMap;
     }
 
 }

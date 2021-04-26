@@ -1,0 +1,280 @@
+{
+    "map": "map01",
+    "events": [
+        {
+            "id": 1,
+            "x": 1,
+            "y": 4,
+            "type": "T",
+            "pages": [
+                {
+                    "direction": 0,
+                    "name": "!Chest",
+                    "index": 0,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": false,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": false,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": true,
+                    "trigger": 0,
+                    "passable": false,
+                    "list": [
+                        {
+                            "code": "setSelfSwitch",
+                            "parameters": [
+                                1,
+                                "A"
+                            ]
+                        },
+                        {
+                            "code": "changeItems",
+                            "parameters": [
+                                1,
+                                0,
+                                2
+                            ]
+                        },
+                        {
+                            "code": "showText",
+                            "parameters": [
+                                "Received Items:\nDummy Item x1\nShort Sword x1/pTata"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "direction": 2,
+                    "name": "!Chest",
+                    "index": 0,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": false,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": true,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": true,
+                    "trigger": 0,
+                    "passable": false,
+                    "list": [
+                        null
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "x": 9,
+            "y": 2,
+            "type": "C",
+            "pages": [
+                {
+                    "direction": 0,
+                    "name": "!People1",
+                    "index": 6,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": false,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": false,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": false,
+                    "trigger": 0,
+                    "passable": false,
+                    "list": [
+                        {
+                            "code": "setSwitch",
+                            "parameters": [
+                                0,
+                                true
+                            ]
+                        },
+                        {
+                            "code": "showText",
+                            "parameters": [
+                                "Talk to the Boy"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "x": 18,
+            "y": 11,
+            "type": "C",
+            "pages": [
+                {
+                    "direction": 3,
+                    "name": "!People1",
+                    "index": 0,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": false,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": false,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": false,
+                    "trigger": 0,
+                    "passable": false,
+                    "list": [
+                        {
+                            "code": "showText",
+                            "parameters": [
+                                "Who are You?"
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "direction": 3,
+                    "name": "!People1",
+                    "index": 0,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": true,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": false,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": false,
+                    "trigger": 0,
+                    "passable": false,
+                    "list": [
+                        {
+                            "code": "showText",
+                            "parameters": [
+                                "You Know my Grandpa\nHere, Have Some Gold/pReceived:\n100 Gold"
+                            ]
+                        },
+                        {
+                            "code": "changeGold",
+                            "parameters": [
+                                0,
+                                100
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "x": 28,
+            "y": 8,
+            "type": "T",
+            "pages": [
+                {
+                    "direction": 0,
+                    "name": "!Door2",
+                    "index": 4,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": false,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": false,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": true,
+                    "trigger": 1,
+                    "passable": false,
+                    "list": [
+                        {
+                            "code": "transferPlayer",
+                            "parameters": [
+                                0,
+                                2,
+                                7
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "direction": 3,
+                    "name": "!People1",
+                    "index": 0,
+                    "conditions": {
+                        "switch1Id": 0,
+                        "switch1Valid": true,
+                        "switch2Id": 0,
+                        "switch2Valid": false,
+                        "variableId": 0,
+                        "variableValue": false,
+                        "selfSwitchCh": "A",
+                        "selfSwitchValid": false,
+                        "itemId": 0,
+                        "itemValid": false,
+                        "actorId": 0,
+                        "actorValid": false
+                    },
+                    "directionFix": false,
+                    "trigger": 0,
+                    "passable": false,
+                    "list": [
+                        {
+                            "code": "showText",
+                            "parameters": [
+                                "You Know my Grandpa\nHere, Have Some Gold/pReceived:\n100 Gold"
+                            ]
+                        },
+                        {
+                            "code": "changeGold",
+                            "parameters": [
+                                0,
+                                100
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

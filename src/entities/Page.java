@@ -20,19 +20,22 @@ public class Page {
     private boolean passable;
 
     public Page(int direction, String name, int index, Conditions conditions, boolean directionFix, int trigger,
-            CommandManager list) {
+            boolean passable, CommandManager list) {
         this.direction = Direction.values()[direction];
         this.conditions = conditions;
         this.dFix = directionFix;
         this.trigger = trigger;
+        this.passable = passable;
         this.list = list;
 
-        this.animations = new Animation[4];
-        BufferedImage[][] images = Assets.getSprites(name, index);
-        for (int i = 0; i < animations.length; i++)
-            animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
-
-        passable = false;
+        if (name == null)
+            this.animations = null;
+        else {
+            this.animations = new Animation[4];
+            BufferedImage[][] images = Assets.getSprites(name, index);
+            for (int i = 0; i < animations.length; i++)
+                animations[i] = new Animation(DEFAULT_ANIMATION_SPEED, images[i]);
+        }
 
     }
 

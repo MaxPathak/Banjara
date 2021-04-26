@@ -22,6 +22,7 @@ import src.tiles.TileSet;
 
 public class Map {
 
+    private String name;
     private Handler handler;
     private int width, height;
     private int spawnX, spawnY;
@@ -32,8 +33,9 @@ public class Map {
     public ArrayList<TileSet> tileSets;
     public ArrayList<Layer> layers;
 
-    public Map(Handler handler, int width, int height, int spawnX, int spawnY) {
+    public Map(Handler handler, String name, int width, int height, int spawnX, int spawnY) {
         this.handler = handler;
+        this.name = name;
         this.width = width;
         this.height = height;
         this.spawnX = spawnX;
@@ -44,69 +46,95 @@ public class Map {
 
         entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
 
-        // Chest Event
-        entityManager.addEntity(new Event(handler, 1, 1, 4, 'T',
-                new PageList(
-                        new Page(0, "!Chest", 0,
-                                new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true,
-                                0,
-                                new CommandManager(new Command("setSelfSwitch", 1, "A"),
-                                        new Command("changeItems", 1, 0, 2), new Command("changeWeapons", 1, 0, 1),
-                                        new Command("showText",
-                                                "Received Items:\nDummy Item x1\nShort Sword x1/pTata"))),
-                        new Page(2, "!Chest", 0,
-                                new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false), true, 0,
-                                null))));
+        // Temporary
+        addEvents();
 
-        // Link Event A
-        entityManager.addEntity(new Event(handler, 2, 9, 2, 'C', new PageList(new Page(0, "People1", 6,
-                new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                new CommandManager(new Command("setSwitch", 0, true), new Command("showText", "Talk to the Boy"))))));
+    }
 
-        // Link Event B
-        entityManager
-                .addEntity(
-                        new Event(handler, 3, 18, 11, 'C', new PageList(
-                                new Page(3, "People1", 0,
-                                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0,
-                                                false),
-                                        false, 0, new CommandManager(new Command("showText", "Who Are You?"))),
-                                new Page(3, "People1", 0,
-                                        new Conditions(0, true, 0, false, 0, 0, false, "A", false, 0, false, 0, false),
-                                        false, 0,
-                                        new CommandManager(new Command("showText",
-                                                "You Know my Grandpa\nHere, Have Some Gold/pReceived:\n100 Gold"),
-                                                new Command("changeGold", 0, 100))))));
+    public void addEvents() {
+        if (this.name.equals("map01")) {
+            // Chest Event
+            entityManager.addEntity(new Event(handler, 1, 1, 4, 'T',
+                    new PageList(
+                            new Page(0, "!Chest", 0,
+                                    new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false),
+                                    true, 0, false,
+                                    new CommandManager(new Command("setSelfSwitch", 1, "A"),
+                                            new Command("changeItems", 1, 0, 2), new Command("changeWeapons", 1, 0, 1),
+                                            new Command("showText",
+                                                    "Received Items:\nDummy Item x1\nShort Sword x1/pTata"))),
+                            new Page(2, "!Chest", 0,
+                                    new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
+                                    true, 0, false, null))));
 
-        // Portal Event
-        entityManager.addEntity(new Event(handler, 4, 28, 8, 'T',
-                new PageList(new Page(0, "!Door2", 4,
-                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
-                        new CommandManager(new Command("transferPlayer", 0, 2, 7))))));
-        ((Event) entityManager.getEntities().get(4)).getCurrentPage().setPassable(true);
+            // Link Event B
+            entityManager.addEntity(new Event(handler, 2, 18, 11, 'C',
+                    new PageList(
+                            new Page(3, "People1", 0,
+                                    new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false),
+                                    false, 0, false, new CommandManager(new Command("showText", "Who Are You?"))),
+                            new Page(3, "People1", 0,
+                                    new Conditions(0, true, 0, false, 0, 0, false, "A", false, 0, false, 0, false),
+                                    false, 0, false,
+                                    new CommandManager(
+                                            new Command("showText",
+                                                    "You Know my Grandpa\nHere, Have Some Gold/pReceived:\n100 Gold"),
+                                            new Command("changeGold", 0, 100), new Command("setSelfSwitch", 2, "A"))),
+                            new Page(3, "People1", 0,
+                                    new Conditions(0, false, 0, false, 0, 0, false, "A", true, 0, false, 0, false),
+                                    false, 0, false, new CommandManager(new Command("showText", "Hi"))))));
 
-        // Choice Event
-        entityManager.addEntity(new Event(handler, 5, 26, 5, 'C',
-                new PageList(new Page(0, "People1", 3,
-                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                        new CommandManager(new Command("showChoices", "Yes/cNo",
-                                new CommandManagerList(new CommandManager(new Command("showText", "Yes")),
-                                        new CommandManager(new Command("showText", "No")))))))));
+            // Portal Event
+            entityManager.addEntity(new Event(handler, 3, 28, 8, 'T',
+                    new PageList(new Page(0, "!Door2", 4,
+                            new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
+                            true, new CommandManager(new Command("transferPlayer", 0, 2, 7, null))))));
 
-        // Remove Event
-        entityManager.addEntity(new Event(handler, 6, 19, 1, 'C',
-                new PageList(new Page(0, "People1", 1,
-                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                        new CommandManager(new Command("showText", "Im Going"), new Command("removeEvent", 6))))));
+            entityManager.addEntity(new Event(handler, 4, 28, 10, 'T',
+                    new PageList(new Page(0, "!Door2", 4,
+                            new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
+                            true, new CommandManager(new Command("transferPlayer", 0, 2, 7, null))))));
 
-        // Trade Event
-        entityManager.addEntity(new Event(handler, 7, 13, 12, 'C',
-                new PageList(new Page(3, "People1", 2,
-                        new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                        new CommandManager(new Command("showText", "Give me Dummy Item x1 and I will give you 3"),
-                                new Command("changeItems", 1, 1, 1), new Command("changeItems", 1, 0, 3),
-                                new Command("showText", "Removed:\nDummy Item x1/pAdded:\nDummy Item x3"))))));
+            // Choice Event
+            entityManager.addEntity(new Event(handler, 5, 26, 5, 'C', new PageList(new Page(0, "People1", 3,
+                    new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0, false,
+                    new CommandManager(new Command("showChoices", "Yes/cNo",
+                            new CommandManagerList(new CommandManager(new Command("showText", "Yes")),
+                                    new CommandManager(new Command("showText", "No")))))))));
 
+            // Remove Event
+            entityManager.addEntity(new Event(handler, 6, 19, 1, 'C', new PageList(new Page(0, "People1", 1,
+                    new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0, false,
+                    new CommandManager(new Command("showText", "Im Going"), new Command("removeEvent", 6))))));
+
+            // Enter House
+            entityManager.addEntity(new Event(handler, 7, 5, 2, 'T',
+                    new PageList(new Page(0, null, 0,
+                            new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
+                            true, new CommandManager(new Command("transferPlayer", 0, 13, 18, "house01"))))));
+        } else if (this.name.equals("house01")) {
+
+            // Exit House
+            entityManager.addEntity(new Event(handler, 1, 13, 19, 'T',
+                    new PageList(new Page(0, null, 0,
+                            new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
+                            true, new CommandManager(new Command("transferPlayer", 0, 5, 4, "map01"))))));
+
+            // Link Event A
+            entityManager.addEntity(new Event(handler, 2, 23, 6, 'C',
+                    new PageList(new Page(3, "People1", 6,
+                            new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
+                            false, new CommandManager(new Command("setSwitch", 2, true),
+                                    new Command("showText", "Talk to the Boy"))))));
+
+            // Trade Event
+            entityManager.addEntity(new Event(handler, 3, 4, 6, 'C', new PageList(new Page(0, "People1", 2,
+                    new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0, false,
+                    new CommandManager(new Command("showText", "Give me Dummy Item x1 and I will give you 3"),
+                            new Command("changeItems", 1, 1, 1), new Command("changeItems", 1, 0, 3),
+                            new Command("showText", "Removed:\nDummy Item x1/pAdded:\nDummy Item x3"))))));
+
+        }
     }
 
     public void update() {
@@ -226,6 +254,10 @@ public class Map {
 
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

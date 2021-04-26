@@ -58,6 +58,8 @@ public class Event extends Entity {
 
     @Override
     public void render(Graphics g) {
+        if (currentPage.getAnimations() == null)
+            return;
         int cDirection = currentDirection.ordinal();
         g.drawImage(currentPage.getAnimations()[cDirection].getCurrentFrame(),
                 (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
@@ -100,6 +102,10 @@ public class Event extends Entity {
 
     public void setCurrentPage(Page currentPage) {
         this.currentPage = currentPage;
+    }
+
+    public void setCurrentDirection(Direction currentDirection) {
+        this.currentDirection = currentDirection;
     }
 
 }

@@ -19,17 +19,13 @@ import src.tiles.TileSet;
 
 public class JSONMapReader {
 
-    // public static void main(String[] args) throws Exception {
-    // readFile();
-    // }
-
     public static Map loadMap(Handler handler, String path) {
 
         // String path = new String("data\\tiles\\map01.json");
 
         Map map;
 
-        try (FileReader reader = new FileReader(path)) {
+        try (FileReader reader = new FileReader(String.format("data/tiles/%s.json", path))) {
 
             // parsing file "JSONExample.json"
             Object fileObject = new JSONParser().parse(reader);
@@ -41,7 +37,7 @@ public class JSONMapReader {
             int width = ((Long) obj.get("width")).intValue();
             int height = ((Long) obj.get("height")).intValue();
 
-            map = new Map(handler, width, height, 0, 0);
+            map = new Map(handler, path, width, height, 0, 0);
 
             // System.out.println("\nMap Size: " + map.getWidth() + ", " + map.getHeight());
 
@@ -93,12 +89,6 @@ public class JSONMapReader {
             }
 
             return map;
-            // Iterator itr = tilesets.iterator();
-
-            /*
-             * while (itr.hasNext()) { mapItr = ((Map) itr.next()).entrySet().iterator();
-             * while () }
-             */
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -108,23 +98,11 @@ public class JSONMapReader {
             e.printStackTrace();
         }
 
-        /*
-         * // getting age long age = (long) jo.get("age"); System.out.println(age);
-         * 
-         * // getting address Map address = ((Map)jo.get("address"));
-         * 
-         * // iterating address Map Iterator<Map.Entry> itr1 =
-         * address.entrySet().iterator(); while (itr1.hasNext()) { Map.Entry pair =
-         * itr1.next(); System.out.println(pair.getKey() + " : " + pair.getValue()); }
-         * 
-         * // getting phoneNumbers JSONArray ja = (JSONArray) jo.get("phoneNumbers");
-         * 
-         * // iterating phoneNumbers Iterator itr2 = ja.iterator();
-         * 
-         * while (itr2.hasNext()) { itr1 = ((Map) itr2.next()).entrySet().iterator();
-         * while (itr1.hasNext()) { Map.Entry pair = itr1.next();
-         * System.out.println(pair.getKey() + " : " + pair.getValue()); } }
-         */
         return null;
     }
+
+    public void loadEvents() {
+        // TODO
+    }
+
 }

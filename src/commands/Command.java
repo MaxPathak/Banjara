@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import src.databases.DatabaseManager;
 import src.entities.Entity;
 import src.entities.EntityManager;
+import src.entities.creatures.Player;
 import src.entities.events.Event;
 import src.global.Global;
 import src.global.Global.Direction;
@@ -12,8 +13,9 @@ import src.items.BaseItem;
 import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
+import src.maps.Map;
+import src.states.GameState;
 import src.states.State;
-import src.states.scenes.ChoiceScene;
 import src.states.scenes.TextScene;
 
 public class Command {
@@ -173,24 +175,39 @@ public class Command {
 
     }
 
-    public static boolean transferPlayer(int direction, int x, int y) {
-        // if (State.getHandler().getMap().getTile(x, y).isSolid())
-        // return false;
+    public static boolean transferPlayer(int direction, int x, int y, String mapName) {
+
+        Map prevMap = State.getHandler().getMap();
+
+        if (mapName != null) {
+            for (Map m : ((GameState) State.getState()).getMaps()) {
+                if (m.getName() == mapName) {
+                    State.getHandler().setMap(m);
+                }
+            }
+        }
 
         int regionLayer = State.getHandler().getMap().regionLayer;
 
         if (State.getHandler().getMap().layers.get(regionLayer).data[x][y]
-                - State.getHandler().getMap().regionIndex == 1)
+                - State.getHandler().getMap().regionIndex == 1) {
+            if (mapName == null)
+                State.getHandler().setMap(prevMap);
             return false;
+        }
         State.getHandler().getMap().getEntityManager().getPlayer().setX(x);
         State.getHandler().getMap().getEntityManager().getPlayer().setY(y);
         State.getHandler().getMap().getEntityManager().getPlayer().setDirection(Direction.values()[direction]);
+        if (mapName != null)
+            State.getHandler().getGame().gameState.setCurrentMap(State.getHandler().getMap());
+
+        for (Entity e : prevMap.getEntityManager().getEntities()) {
+            if (e.getClass() != Player.class) {
+                Event event = (Event) e;
+                event.setCurrentDirection(event.getCurrentPage().getDirection());
+            }
+        }
+
         return true;
     }
-
-    public static boolean showChoices(String text, CommandManagerList list) {
-        State.getState().changeState(new ChoiceScene(text, list));
-        return true;
-    }
-
 }

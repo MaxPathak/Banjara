@@ -10,6 +10,7 @@ import src.gfx.Assets;
 import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
+import src.states.GameState;
 import src.states.State;
 import src.states.TitleState;
 
@@ -26,7 +27,7 @@ public class Game implements Runnable {
     private Graphics g;
 
     // State
-    public State gameState;
+    public GameState gameState;
     public State menuState;
 
     // Input
