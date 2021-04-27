@@ -5,7 +5,7 @@ public class Launcher {
         // Initialize the Game object
         // Resolutions
         /*
-         * 1138 x 640 = 3 : 2
+         * 1138 x 640 = 3 : 2, 900 x 600 = 3 : 2
          */
         Game game = new Game("Banjara", 900, 600);
         // Start the game
