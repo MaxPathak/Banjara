@@ -32,10 +32,10 @@ public class GameState extends State {
         handler.setMap(currentMap);
         handler.getGameCamera().move(0, 0);
 
-        if (handler.getMap().getName().equals("map01"))
-            Command.transferPlayer(0, 2, 7, null); // Map01 Starting Pos
-        else if (handler.getMap().getName().equals("house01"))
-            Command.transferPlayer(3, 13, 18, null); // House01 Starting Pos
+        // if (handler.getMap().getName().equals("map01"))
+        Command.transferPlayer(0, 2, 7, null); // Map01 Starting Pos
+        // else if (handler.getMap().getName().equals("house01"))
+        // Command.transferPlayer(3, 13, 18, null); // House01 Starting Pos
 
     }
 
