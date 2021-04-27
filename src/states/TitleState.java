@@ -55,7 +55,7 @@ public class TitleState extends State {
                         // System.out.println("Stopped Menu State Events");
                         handler.getGame().gameState = new GameState();
                         changeState(handler.getGame().gameState);
-                        handler.getKeyManager().playerDirection = Direction.DOWN;
+                        // handler.getKeyManager().playerDirection = Direction.DOWN;
                     }
                 }));
         // Continue
