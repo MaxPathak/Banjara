@@ -6,6 +6,7 @@ import java.util.Comparator;
 
 import src.Handler;
 import src.entities.creatures.Player;
+import src.entities.events.Event;
 
 public class EntityManager {
 
@@ -32,6 +33,10 @@ public class EntityManager {
         for (int i = 0; i < entities.size(); i++) {
             Entity e = entities.get(i);
             e.update();
+            if (e instanceof Event) {
+                if (((Event) e).getType() == 't' || ((Event) e).getType() == 'T')
+                    ((Event) e).setCurrentDirection(((Event) e).getCurrentPage().getDirection());
+            }
         }
         entities.sort(renderSorter);
     }

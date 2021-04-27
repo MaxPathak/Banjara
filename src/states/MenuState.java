@@ -67,7 +67,7 @@ public class MenuState extends State {
                     }
                 }));
         // Options
-        uiManager.addObject(new UITextButton("Options", 3, 3 + buttonHeight * buttonIndex++, buttonWidth, buttonHeight,
+        uiManager.addObject(new UITextButton("Save", 3, 3 + buttonHeight * buttonIndex++, buttonWidth, buttonHeight,
                 false, 3, new ClickListener() {
                     @Override
                     public void onClick() {

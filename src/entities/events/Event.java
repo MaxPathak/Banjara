@@ -15,6 +15,7 @@ public class Event extends Entity {
     private Page currentPage;
     private String currentSelfSwitch;
     private Direction currentDirection;
+    private char type;
 
     public Event(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
         super(handler, id, x, y, width, height, pages);
@@ -25,6 +26,7 @@ public class Event extends Entity {
 
     public Event(Handler handler, int id, int x, int y, char type, PageList pages) {
         this(handler, id, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, pages);
+        this.type = type;
         if (type == 't' || type == 'T') {
             width = Creature.DEFAULT_CREATURE_WIDTH * 3 / 4;
             height = Creature.DEFAULT_CREATURE_HEIGHT * 3 / 4;
@@ -82,6 +84,7 @@ public class Event extends Entity {
         }
 
         if (pageList != null) {
+            // System.out.println(this.id);
             if (currentPage.getList() != null)
                 currentPage.getList().execute();
         }
@@ -106,6 +109,10 @@ public class Event extends Entity {
 
     public void setCurrentDirection(Direction currentDirection) {
         this.currentDirection = currentDirection;
+    }
+
+    public char getType() {
+        return type;
     }
 
 }

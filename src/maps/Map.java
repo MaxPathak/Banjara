@@ -51,6 +51,51 @@ public class Map {
 
     }
 
+    public void update() {
+        entityManager.update();
+    }
+
+    public void render(Graphics g) {
+        int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
+        int xEnd = (int) Math.min(width,
+                (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
+        int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
+        int yEnd = (int) Math.min(height,
+                (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
+
+        for (int i = 0; i < layers.size(); i++) {
+            if (i == layers.size() - 1) {
+                entityManager.render(g);
+                // break; // Hide
+            }
+            if (layers.get(i).isRegionLayer())
+                continue;
+            for (int y = yStart; y < yEnd; y++) {
+                for (int x = xStart; x < xEnd; x++) {
+                    if (layers.get(i).data[x][y] != 0)
+                        for (TileSet tileSet : tileSets) {
+                            if (layers.get(i).data[x][y] < tileSet.getFirstIndex() + tileSet.getTileCount()) {
+                                int xPos = (int) (x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset());
+                                int yPos = (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset());
+                                g.drawImage(tileSet.crop(layers.get(i).data[x][y]), xPos, yPos, Tile.TILEWIDTH,
+                                        Tile.TILEHEIGHT, null);
+                                break;
+                            }
+                        }
+                }
+            }
+        }
+
+        // int x = handler.getMap().getEntityManager().getPlayer().getGridX(),
+        // y = handler.getMap().getEntityManager().getPlayer().getGridY();
+        // String str = String.format("%d, %d", x, y);
+        // Text.drawString(g, str, handler.getWidth() -
+        // g.getFontMetrics(Assets.regularFont.get(20)).stringWidth(str),
+        // handler.getHeight() -
+        // g.getFontMetrics(Assets.regularFont.get(20)).getAscent(), true, Color.white,
+        // Assets.regularFont.get(20));
+    }
+
     public void addEvents() {
         if (this.name.equals("map01")) {
             // Chest Event
@@ -135,49 +180,6 @@ public class Map {
                             new Command("showText", "Removed:\nDummy Item x1/pAdded:\nDummy Item x3"))))));
 
         }
-    }
-
-    public void update() {
-        entityManager.update();
-    }
-
-    public void render(Graphics g) {
-        int xStart = (int) Math.max(0, handler.getGameCamera().getxOffset() / Tile.TILEWIDTH);
-        int xEnd = (int) Math.min(width,
-                (handler.getGameCamera().getxOffset() + handler.getWidth()) / Tile.TILEWIDTH + 1);
-        int yStart = (int) Math.max(0, handler.getGameCamera().getyOffset() / Tile.TILEHEIGHT);
-        int yEnd = (int) Math.min(height,
-                (handler.getGameCamera().getyOffset() + handler.getHeight()) / Tile.TILEHEIGHT + 1);
-
-        for (int i = 0; i < layers.size(); i++) {
-            if (i == layers.size() - 1) {
-                entityManager.render(g);
-                // break; // Hide
-            }
-            if (layers.get(i).isRegionLayer())
-                continue;
-            for (int y = yStart; y < yEnd; y++) {
-                for (int x = xStart; x < xEnd; x++) {
-                    if (layers.get(i).data[x][y] != 0)
-                        for (TileSet tileSet : tileSets) {
-                            if (layers.get(i).data[x][y] < tileSet.getFirstIndex() + tileSet.getTileCount()) {
-                                int xPos = (int) (x * Tile.TILEWIDTH - handler.getGameCamera().getxOffset());
-                                int yPos = (int) (y * Tile.TILEHEIGHT - handler.getGameCamera().getyOffset());
-                                g.drawImage(tileSet.crop(layers.get(i).data[x][y]), xPos, yPos, Tile.TILEWIDTH,
-                                        Tile.TILEHEIGHT, null);
-                                break;
-                            }
-                        }
-                }
-            }
-        }
-
-        int x = handler.getMap().getEntityManager().getPlayer().getGridX(),
-                y = handler.getMap().getEntityManager().getPlayer().getGridY();
-        String str = String.format("%d, %d", x, y);
-        Text.drawString(g, str, handler.getWidth() - g.getFontMetrics(Assets.regularFont.get(20)).stringWidth(str),
-                handler.getHeight() - g.getFontMetrics(Assets.regularFont.get(20)).getAscent(), true, Color.white,
-                Assets.regularFont.get(20));
     }
 
     // public Tile getTile(int x, int y) {

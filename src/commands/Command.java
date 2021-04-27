@@ -129,6 +129,7 @@ public class Command {
                 e.setCurrentSelfSwitch(currentSelfSwitch);
             }
         }
+        State.getHandler().getGame().update();
         return true;
     }
 
