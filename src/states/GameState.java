@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import src.commands.Command;
+import src.entities.creatures.Player;
 import src.global.Global;
 import src.maps.Map;
 import src.utils.JSONMapReader;
@@ -19,10 +20,11 @@ public class GameState extends State {
     public GameState() {
         super();
         setId(GameState.STATE_ID);
+        Player player = new Player(handler, 0, 0, null);
         // Load Maps
         maps = new ArrayList<Map>();
-        maps.add(JSONMapReader.loadMap(handler, "map01"));
-        maps.add(JSONMapReader.loadMap(handler, "house01"));
+        maps.add(JSONMapReader.loadMap(handler, player, "map01"));
+        maps.add(JSONMapReader.loadMap(handler, player, "house01"));
 
         currentMap = maps.get(0);
 

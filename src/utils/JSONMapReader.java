@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import src.Handler;
+import src.entities.creatures.Player;
 import src.gfx.ImageLoader;
 import src.gfx.SpriteSheet;
 import src.maps.Map;
@@ -19,7 +20,7 @@ import src.tiles.TileSet;
 
 public class JSONMapReader {
 
-    public static Map loadMap(Handler handler, String path) {
+    public static Map loadMap(Handler handler, Player player, String path) {
 
         // String path = new String("data\\tiles\\map01.json");
 
@@ -37,7 +38,7 @@ public class JSONMapReader {
             int width = ((Long) obj.get("width")).intValue();
             int height = ((Long) obj.get("height")).intValue();
 
-            map = new Map(handler, path, width, height, 0, 0);
+            map = new Map(handler, player, path, width, height);
 
             // System.out.println("\nMap Size: " + map.getWidth() + ", " + map.getHeight());
 

@@ -33,18 +33,16 @@ public class Map {
     public ArrayList<TileSet> tileSets;
     public ArrayList<Layer> layers;
 
-    public Map(Handler handler, String name, int width, int height, int spawnX, int spawnY) {
+    public Map(Handler handler, Player player, String name, int width, int height) {
         this.handler = handler;
         this.name = name;
         this.width = width;
         this.height = height;
-        this.spawnX = spawnX;
-        this.spawnY = spawnY;
 
         this.tileSets = new ArrayList<TileSet>();
         this.layers = new ArrayList<Layer>();
 
-        entityManager = new EntityManager(handler, new Player(handler, spawnX, spawnY, null));
+        entityManager = new EntityManager(handler, player);
 
         // Temporary
         addEvents();
@@ -169,7 +167,7 @@ public class Map {
             entityManager.addEntity(new Event(handler, 2, 23, 6, 'C',
                     new PageList(new Page(3, "People1", 6,
                             new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), false, 0,
-                            false, new CommandManager(new Command("setSwitch", 2, true),
+                            false, new CommandManager(new Command("setSwitch", 0, true),
                                     new Command("showText", "Talk to the Boy"))))));
 
             // Trade Event
