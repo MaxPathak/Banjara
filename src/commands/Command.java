@@ -16,6 +16,7 @@ import src.items.usable.Item;
 import src.maps.Map;
 import src.states.GameState;
 import src.states.State;
+import src.states.scenes.ChoiceScene;
 import src.states.scenes.TextScene;
 
 public class Command {
@@ -211,4 +212,10 @@ public class Command {
 
         return true;
     }
+
+    public static boolean showChoices(String choices, CommandManagerList commandManagerList) {
+        State.getState().changeState(new ChoiceScene(choices, commandManagerList));
+        return true;
+    }
+
 }

@@ -128,12 +128,12 @@ public class Map {
                                     false, 0, false, new CommandManager(new Command("showText", "Hi"))))));
 
             // Portal Event
-            entityManager.addEntity(new Event(handler, 3, 28, 8, 'T',
+            entityManager.addEntity(new Event(handler, 3, 28, 7, 'T',
                     new PageList(new Page(0, "!Door2", 4,
                             new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
                             true, new CommandManager(new Command("transferPlayer", 0, 2, 7, null))))));
 
-            entityManager.addEntity(new Event(handler, 4, 28, 10, 'T',
+            entityManager.addEntity(new Event(handler, 4, 28, 9, 'T',
                     new PageList(new Page(0, "!Door2", 4,
                             new Conditions(0, false, 0, false, 0, 0, false, "A", false, 0, false, 0, false), true, 1,
                             true, new CommandManager(new Command("transferPlayer", 0, 2, 7, null))))));
