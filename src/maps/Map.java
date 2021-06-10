@@ -2,25 +2,26 @@ package src.maps;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import src.Handler;
 import src.commands.Command;
 import src.commands.CommandManager;
 import src.commands.CommandManagerList;
-import src.entities.Conditions;
 import src.entities.EntityManager;
-import src.entities.Page;
-import src.entities.PageList;
 import src.entities.creatures.Player;
+import src.entities.events.Conditions;
 import src.entities.events.Event;
+import src.entities.events.Page;
+import src.entities.events.PageList;
 import src.gfx.Assets;
 import src.gfx.Text;
 import src.tiles.Layer;
 import src.tiles.Tile;
 import src.tiles.TileSet;
 
-public class Map {
+public class Map implements Serializable {
 
     private String name;
     private Handler handler;
@@ -84,14 +85,12 @@ public class Map {
             }
         }
 
-        // int x = handler.getMap().getEntityManager().getPlayer().getGridX(),
-        // y = handler.getMap().getEntityManager().getPlayer().getGridY();
-        // String str = String.format("%d, %d", x, y);
-        // Text.drawString(g, str, handler.getWidth() -
-        // g.getFontMetrics(Assets.regularFont.get(20)).stringWidth(str),
-        // handler.getHeight() -
-        // g.getFontMetrics(Assets.regularFont.get(20)).getAscent(), true, Color.white,
-        // Assets.regularFont.get(20));
+        int x = handler.getMap().getEntityManager().getPlayer().getGridX(),
+                y = handler.getMap().getEntityManager().getPlayer().getGridY();
+        String str = String.format("%d, %d", x, y);
+        Text.drawString(g, str, handler.getWidth() - g.getFontMetrics(Assets.regularFont.get(20)).stringWidth(str),
+                handler.getHeight() - g.getFontMetrics(Assets.regularFont.get(20)).getAscent(), true, Color.white,
+                Assets.regularFont.get(20));
     }
 
     public void addEvents() {

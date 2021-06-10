@@ -1,6 +1,5 @@
 package src.entities.creatures;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -8,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 import src.Handler;
 import src.entities.Entity;
-import src.entities.PageList;
 import src.entities.events.Event;
+import src.entities.events.PageList;
 import src.gfx.Animation;
 import src.gfx.Assets;
 import src.global.Global;
@@ -29,6 +28,10 @@ public class Player extends Creature {
     // Inventory
     private Inventory inventory;
     private int gold;
+
+    public Player() {
+        super();
+    }
 
     public Player(Handler handler, int x, int y, PageList pages) {
         super(handler, 0, x, y, Creature.DEFAULT_CREATURE_WIDTH, Creature.DEFAULT_CREATURE_HEIGHT, pages);
@@ -52,22 +55,22 @@ public class Player extends Creature {
         ar.x = (int) x;
         ar.y = (int) y;
         switch (direction) {
-        case UP:
-            ar.width = bounds.width;
-            ar.y -= arSize;
-            break;
-        case DOWN:
-            ar.width = bounds.width;
-            ar.y += bounds.height;
-            break;
-        case LEFT:
-            ar.height = bounds.height;
-            ar.x -= arSize;
-            break;
-        case RIGHT:
-            ar.height = bounds.height;
-            ar.x += bounds.width;
-            break;
+            case UP:
+                ar.width = bounds.width;
+                ar.y -= arSize;
+                break;
+            case DOWN:
+                ar.width = bounds.width;
+                ar.y += bounds.height;
+                break;
+            case LEFT:
+                ar.height = bounds.height;
+                ar.x -= arSize;
+                break;
+            case RIGHT:
+                ar.height = bounds.height;
+                ar.x += bounds.width;
+                break;
         }
 
         Entity e;
@@ -93,6 +96,9 @@ public class Player extends Creature {
         xMove = 0;
         yMove = 0;
 
+        // if (handler == null) {
+        // return;
+        // }
         direction = handler.getKeyManager().playerDirection;
 
         float newSpeed = speed;
@@ -111,18 +117,18 @@ public class Player extends Creature {
 
         if (handler.getKeyManager().moving) {
             switch (direction) {
-            case UP:
-                yMove -= newSpeed;
-                break;
-            case DOWN:
-                yMove += newSpeed;
-                break;
-            case LEFT:
-                xMove -= newSpeed;
-                break;
-            case RIGHT:
-                xMove += newSpeed;
-                break;
+                case UP:
+                    yMove -= newSpeed;
+                    break;
+                case DOWN:
+                    yMove += newSpeed;
+                    break;
+                case LEFT:
+                    xMove -= newSpeed;
+                    break;
+                case RIGHT:
+                    xMove += newSpeed;
+                    break;
             }
         }
     }
@@ -137,6 +143,9 @@ public class Player extends Creature {
         // Movement
         getInput();
         move();
+        if (handler == null) {
+            return;
+        }
         handler.getGameCamera().centerOnEntity(this);
 
         action();
@@ -144,7 +153,11 @@ public class Player extends Creature {
 
     @Override
     public void render(Graphics g) {
-
+        // if (this.bounds == null) {
+        // return;
+        // }
+        // g.drawImage(getCurrentAnimationFrame(), 10, 10, width, height, null);
+        // System.out.println(getCurrentAnimationFrame().toString());
         g.drawImage(getCurrentAnimationFrame(), (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
                 (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);
 
@@ -183,14 +196,14 @@ public class Player extends Creature {
 
     public Direction getOppositeDirection() {
         switch (direction) {
-        case DOWN:
-            return Direction.UP;
-        case LEFT:
-            return Direction.RIGHT;
-        case RIGHT:
-            return Direction.LEFT;
-        case UP:
-            return Direction.DOWN;
+            case DOWN:
+                return Direction.UP;
+            case LEFT:
+                return Direction.RIGHT;
+            case RIGHT:
+                return Direction.LEFT;
+            case UP:
+                return Direction.DOWN;
         }
         return null;
     }

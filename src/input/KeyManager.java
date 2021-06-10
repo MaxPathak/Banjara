@@ -2,6 +2,7 @@ package src.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
@@ -10,7 +11,7 @@ import src.global.Global.Direction;
 import src.states.GameState;
 import src.states.State;
 
-public class KeyManager implements KeyListener {
+public class KeyManager implements KeyListener, Serializable {
 
     private boolean[] keys, justPressed, cantPress;
     public Direction playerDirection = Direction.DOWN;
@@ -99,6 +100,7 @@ public class KeyManager implements KeyListener {
                 return;
             keys[e.getKeyCode()] = true;
             keyArr.add(e.getKeyCode());
+            // System.out.println(e.getKeyCode());
         }
     }
 

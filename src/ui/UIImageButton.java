@@ -1,16 +1,17 @@
 package src.ui;
 
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 public class UIImageButton extends UIObject {
 
-    private BufferedImage[] images;
+    private Image[] images;
     private ClickListener clicker;
 
     public UIImageButton(float x, float y, int width, int height, BufferedImage[] images, ClickListener clicker) {
         super(x, y, width, height);
-        this.images = images;
+        this.images = (Image[]) images;
         this.clicker = clicker;
     }
 

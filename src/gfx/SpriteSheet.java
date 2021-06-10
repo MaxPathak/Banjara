@@ -1,9 +1,15 @@
 package src.gfx;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class SpriteSheet {
-    private BufferedImage sheet;
+import javax.imageio.ImageIO;
+
+public class SpriteSheet implements Serializable {
+    transient private BufferedImage sheet;
 
     public SpriteSheet(BufferedImage sheet) {
         this.sheet = sheet;
@@ -26,6 +32,16 @@ public class SpriteSheet {
 
     public void setSheet(BufferedImage sheet) {
         this.sheet = sheet;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        ImageIO.write(sheet, "png", out); // png is lossless
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        sheet = ImageIO.read(in);
     }
 
 }

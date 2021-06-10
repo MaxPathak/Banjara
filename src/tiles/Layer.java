@@ -1,6 +1,8 @@
 package src.tiles;
 
-public class Layer {
+import java.io.Serializable;
+
+public class Layer implements Serializable {
 
     private String name;
     private int width, height;

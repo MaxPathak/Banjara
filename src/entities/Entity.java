@@ -2,11 +2,13 @@ package src.entities;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.io.Serializable;
 
 import src.Handler;
+import src.entities.events.PageList;
 import src.tiles.Tile;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
 
     protected Handler handler;
     protected int id;
@@ -19,6 +21,10 @@ public abstract class Entity {
     // ! 0: Action Button, 1: Player Touch, 2: Parallel, 3: Autorun
     // protected ArrayList<Direction> dFix;
     // protected CommandManager pages;
+
+    public Entity() {
+
+    }
 
     public Entity(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
         this.handler = handler;
@@ -72,6 +78,9 @@ public abstract class Entity {
     }
 
     public boolean checkEntityCollisions(float xOffset, float yOffset) {
+        if (handler == null) {
+            return false;
+        }
         for (Entity e : handler.getMap().getEntityManager().getEntities()) {
             if (e.equals(this))
                 continue;
@@ -102,10 +111,14 @@ public abstract class Entity {
     }
 
     public int getGridX() {
+        if (bounds == null)
+            return -1;
         return (int) ((x + 6 - (Tile.TILEWIDTH * 2 - bounds.width) / 2) / Tile.TILEWIDTH);
     }
 
     public int getGridY() {
+        if (bounds == null)
+            return -1;
         return (int) ((y + 6 - (Tile.TILEHEIGHT * 2 - bounds.height)) / Tile.TILEHEIGHT);
     }
 

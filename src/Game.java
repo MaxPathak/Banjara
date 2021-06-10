@@ -3,6 +3,7 @@ package src;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.Serializable;
 
 import src.databases.DatabaseManager;
 import src.display.Display;
@@ -11,24 +12,25 @@ import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
 import src.states.GameState;
+import src.states.MenuState;
 import src.states.State;
 import src.states.TitleState;
 
-public class Game implements Runnable {
+public class Game implements Runnable, Serializable {
     private Display display;
     public String title;
     private int width, height;
 
     private boolean running = false;
     private boolean released = false;
-    private Thread thread;
+    transient private Thread thread;
 
-    private BufferStrategy bs;
-    private Graphics g;
+    transient private BufferStrategy bs;
+    transient private Graphics g;
 
     // State
     public GameState gameState;
-    public State menuState;
+    public MenuState menuState;
 
     // Input
     private KeyManager keyManager;
@@ -100,7 +102,6 @@ public class Game implements Runnable {
         setReleased(false);
 
         keyManager.update();
-
         if (State.getState() != null) {
             State.getState().update();
         }

@@ -2,11 +2,12 @@ package src.ui;
 
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import src.Handler;
 
-public class UIManager {
+public class UIManager implements Serializable {
 
     private Handler handler;
     private ArrayList<UIObject> objects;

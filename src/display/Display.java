@@ -2,11 +2,12 @@ package src.display;
 
 import java.awt.Canvas;
 import java.awt.Dimension;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
-public class Display {
+public class Display implements Serializable {
 
     private JFrame frame;
     private Canvas canvas;

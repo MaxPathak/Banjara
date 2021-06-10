@@ -1,10 +1,12 @@
 package src.gfx;
 
+import java.io.Serializable;
+
 import src.Handler;
 import src.entities.Entity;
 import src.tiles.Tile;
 
-public class GameCamera {
+public class GameCamera implements Serializable {
 
     private Handler handler;
     private float xOffset, yOffset;

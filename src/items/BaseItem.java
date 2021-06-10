@@ -1,10 +1,11 @@
 package src.items;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import src.gfx.Assets;
 
-public abstract class BaseItem implements Cloneable {
+public abstract class BaseItem implements Cloneable, Serializable {
 
     protected BufferedImage icon;
     protected int id;

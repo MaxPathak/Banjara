@@ -1,8 +1,9 @@
 package src.commands;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class CommandManagerList {
+public class CommandManagerList implements Serializable {
     private LinkedList<CommandManager> managers;
 
     public CommandManagerList(CommandManager... commandManagers) {

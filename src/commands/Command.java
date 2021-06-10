@@ -1,5 +1,9 @@
 package src.commands;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.lang.reflect.Method;
 
 import src.databases.DatabaseManager;
@@ -19,10 +23,10 @@ import src.states.State;
 import src.states.scenes.ChoiceScene;
 import src.states.scenes.TextScene;
 
-public class Command {
+public class Command implements Serializable {
 
     private Object[] parameters;
-    private Method method;
+    transient private Method method;
 
     public Command() {
         parameters = null;
@@ -62,12 +66,12 @@ public class Command {
     public static boolean changeItems(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
-        case 0:
-            quantity = operandVal;
-            break;
-        case 1:
-            quantity = -operandVal;
-            break;
+            case 0:
+                quantity = operandVal;
+                break;
+            case 1:
+                quantity = -operandVal;
+                break;
         }
         Item item = (Item) BaseItem.copy(DatabaseManager.getItemsDatabase().getItemById(id));
         if (item == null)
@@ -79,12 +83,12 @@ public class Command {
     public static boolean changeWeapons(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
-        case 0:
-            quantity = operandVal;
-            break;
-        case 1:
-            quantity = -operandVal;
-            break;
+            case 0:
+                quantity = operandVal;
+                break;
+            case 1:
+                quantity = -operandVal;
+                break;
         }
         Weapon weapon = (Weapon) BaseItem.copy(DatabaseManager.getWeaponsDatabase().getItemById(id));
         if (weapon == null)
@@ -96,12 +100,12 @@ public class Command {
     public static boolean changeArmors(int id, int operand, int operandVal) {
         int quantity = 0;
         switch (operand) {
-        case 0:
-            quantity = operandVal;
-            break;
-        case 1:
-            quantity = -operandVal;
-            break;
+            case 0:
+                quantity = operandVal;
+                break;
+            case 1:
+                quantity = -operandVal;
+                break;
         }
         Armor armor = (Armor) BaseItem.copy(DatabaseManager.getArmorDatabase().getItemById(id));
         if (armor == null)
@@ -142,12 +146,12 @@ public class Command {
     public static boolean changeGold(int operand, int operandVal) {
         int amount = 0;
         switch (operand) {
-        case 0:
-            amount = operandVal;
-            break;
-        case 1:
-            amount = -operandVal;
-            break;
+            case 0:
+                amount = operandVal;
+                break;
+            case 1:
+                amount = -operandVal;
+                break;
         }
         int gold = State.getHandler().getMap().getEntityManager().getPlayer().getGold();
         if (gold + amount >= 0) {
@@ -216,6 +220,26 @@ public class Command {
     public static boolean showChoices(String choices, CommandManagerList commandManagerList) {
         State.getState().changeState(new ChoiceScene(choices, commandManagerList));
         return true;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeObject(method.getDeclaringClass());
+        out.writeUTF(method.getName());
+        out.writeObject(method.getParameterTypes());
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        Class<?> declaringClass = (Class<?>) in.readObject();
+        String methodName = in.readUTF();
+        Class<?>[] parameterTypes = (Class<?>[]) in.readObject();
+        try {
+            method = declaringClass.getMethod(methodName, parameterTypes);
+        } catch (Exception e) {
+            throw new IOException(String.format("Error occurred resolving deserialized method '%s.%s'",
+                    declaringClass.getSimpleName(), methodName), e);
+        }
     }
 
 }

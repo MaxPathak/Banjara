@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch SaveData",
+            "request": "launch",
+            "mainClass": "src.utils.SaveData",
+            "projectName": "Banjara_8531e22a"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"

@@ -9,6 +9,7 @@ import src.global.Global.Direction;
 import src.ui.ClickListener;
 import src.ui.UIObject;
 import src.ui.UITextButton;
+import src.utils.SaveData;
 
 public class TitleState extends State {
 
@@ -63,7 +64,9 @@ public class TitleState extends State {
                 buttonHeight, true, 3, new ClickListener() {
                     @Override
                     public void onClick() {
-                        // TODO
+                        if (SaveData.load(handler)) {
+                            changeState(handler.getGame().gameState);
+                        }
                     }
                 }));
         // // Options
@@ -152,24 +155,24 @@ public class TitleState extends State {
         }
 
         switch (direction) {
-        case UP:
-            if (i > 0) {
-                // System.out.println("UP");
-                uiManager.getObjects().get(i).setFocused(false);
-                uiManager.getObjects().get(i - 1).setFocused(true);
-            }
-            break;
-        case DOWN:
-            if (i < size - 1) {
-                // System.out.println("DOWN");
-                uiManager.getObjects().get(i).setFocused(false);
-                uiManager.getObjects().get(i + 1).setFocused(true);
-            }
-            break;
-        case LEFT:
-            break;
-        case RIGHT:
-            break;
+            case UP:
+                if (i > 0) {
+                    // System.out.println("UP");
+                    uiManager.getObjects().get(i).setFocused(false);
+                    uiManager.getObjects().get(i - 1).setFocused(true);
+                }
+                break;
+            case DOWN:
+                if (i < size - 1) {
+                    // System.out.println("DOWN");
+                    uiManager.getObjects().get(i).setFocused(false);
+                    uiManager.getObjects().get(i + 1).setFocused(true);
+                }
+                break;
+            case LEFT:
+                break;
+            case RIGHT:
+                break;
         }
     }
 

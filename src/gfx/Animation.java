@@ -1,11 +1,17 @@
 package src.gfx;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Animation {
+import javax.imageio.ImageIO;
+
+public class Animation implements Serializable {
     private int speed, index;
     private long lastTime, timer;
-    private BufferedImage[] frames;
+    transient private BufferedImage[] frames;
 
     public Animation(int speed, BufferedImage[] frames) {
         this.speed = speed;
@@ -45,6 +51,21 @@ public class Animation {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        for (BufferedImage frame : frames) {
+            ImageIO.write(frame, "png", out); // png is lossless
+        }
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        frames = new BufferedImage[3];
+        for (int i = 0; i < 3; i++) {
+            frames[i] = ImageIO.read(in);
+        }
     }
 
 }

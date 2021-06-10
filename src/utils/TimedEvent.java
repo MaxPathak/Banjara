@@ -1,10 +1,11 @@
 package src.utils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class TimedEvent {
+public class TimedEvent implements Serializable {
     public ArrayList<Timer> timers;
 
     public TimedEvent() {

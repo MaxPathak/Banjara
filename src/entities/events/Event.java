@@ -4,8 +4,6 @@ import java.awt.Graphics;
 
 import src.Handler;
 import src.entities.Entity;
-import src.entities.Page;
-import src.entities.PageList;
 import src.entities.creatures.Creature;
 import src.global.Global;
 import src.global.Global.Direction;
@@ -16,6 +14,10 @@ public class Event extends Entity {
     private String currentSelfSwitch;
     private Direction currentDirection;
     private char type;
+
+    public Event() {
+        super();
+    }
 
     public Event(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
         super(handler, id, x, y, width, height, pages);
@@ -38,6 +40,9 @@ public class Event extends Entity {
 
     @Override
     public void update() {
+        if (this.pageList == null) {
+            return;
+        }
         for (Page page : pageList.getPages()) {
             // if (page.getConditions().isActorValid()) {}
             // if (page.getConditions().isItemValid()) {}
@@ -63,6 +68,9 @@ public class Event extends Entity {
         if (currentPage.getAnimations() == null)
             return;
         int cDirection = currentDirection.ordinal();
+        if (this.bounds == null) {
+            return;
+        }
         g.drawImage(currentPage.getAnimations()[cDirection].getCurrentFrame(),
                 (int) (x - bounds.x - handler.getGameCamera().getxOffset()),
                 (int) (y - bounds.y - handler.getGameCamera().getyOffset()), width, height, null);

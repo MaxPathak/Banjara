@@ -1,5 +1,6 @@
 package src.inventory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import src.Handler;
@@ -8,7 +9,7 @@ import src.items.equip.Armor;
 import src.items.equip.Weapon;
 import src.items.usable.Item;
 
-public class Inventory {
+public class Inventory implements Serializable {
 
     private Handler handler;
     private boolean active = false;
@@ -115,34 +116,6 @@ public class Inventory {
     public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
-
-    // public void print() {
-    // System.out.println("\nInventory: ");
-    // System.out.print("Items: [ ");
-    // if (items.size() == 0)
-    // System.out.print("<Empty> ");
-    // else
-    // for (Item item : items) {
-    // System.out.print(item.getName() + " x" + item.getQuantity() + ", ");
-    // }
-    // System.out.println("\b\b ]");
-    // System.out.print("Weapons: [ ");
-    // if (weapons.size() == 0)
-    // System.out.print("<Empty> ");
-    // else
-    // for (Weapon weapon : weapons) {
-    // System.out.print(weapon.getName() + " x" + weapon.getQuantity() + ", ");
-    // }
-    // System.out.println("\b\b ]");
-    // System.out.print("Armors: [ ");
-    // if (armors.size() == 0)
-    // System.out.print("<Empty> ");
-    // else
-    // for (Armor armor : armors) {
-    // System.out.print(armor.getName() + " x" + armor.getQuantity() + ", ");
-    // }
-    // System.out.println("\b\b ]");
-    // }
 
     public boolean isActive() {
         return active;

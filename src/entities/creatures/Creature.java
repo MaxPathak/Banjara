@@ -2,7 +2,7 @@ package src.entities.creatures;
 
 import src.Handler;
 import src.entities.Entity;
-import src.entities.PageList;
+import src.entities.events.PageList;
 import src.tiles.Tile;
 
 public abstract class Creature extends Entity {
@@ -13,6 +13,10 @@ public abstract class Creature extends Entity {
     protected float speed;
     protected float xMove, yMove;
 
+    public Creature() {
+
+    }
+
     public Creature(Handler handler, int id, int x, int y, int width, int height, PageList pages) {
         super(handler, id, x, y, width, height, pages);
         speed = DEFAULT_SPEED;
@@ -21,6 +25,9 @@ public abstract class Creature extends Entity {
     }
 
     public void move() {
+        if (this.bounds == null) {
+            return;
+        }
         if (!checkEntityCollisions(xMove, 0))
             moveX();
         if (!checkEntityCollisions(0, yMove))

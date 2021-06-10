@@ -1,12 +1,13 @@
 package src.states;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 
 import src.Handler;
 import src.ui.UIManager;
 import src.utils.TimedEvent;
 
-public abstract class State {
+public abstract class State implements Serializable {
 
     private static State currentState = null;
 

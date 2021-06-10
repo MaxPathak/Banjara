@@ -1,7 +1,9 @@
 package src.ui;
 
-public interface ClickListener {
-    
+import java.io.Serializable;
+
+public interface ClickListener extends Serializable {
+
     public void onClick();
 
 }

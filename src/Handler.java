@@ -1,12 +1,14 @@
 package src;
 
+import java.io.Serializable;
+
 import src.gfx.GameCamera;
 import src.input.KeyManager;
 import src.input.MouseManager;
 import src.maps.Map;
 import src.utils.TimedEvent;
 
-public class Handler {
+public class Handler implements Serializable {
 
     private Game game;
     private Map map;

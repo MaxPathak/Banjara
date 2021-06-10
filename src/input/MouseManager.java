@@ -3,10 +3,11 @@ package src.input;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.Serializable;
 
 import src.ui.UIManager;
 
-public class MouseManager implements MouseListener, MouseMotionListener {
+public class MouseManager implements MouseListener, MouseMotionListener, Serializable {
 
     private boolean leftPressed, rightPressed;
     private int mouseX, mouseY;
@@ -37,7 +38,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         else if (e.getButton() == MouseEvent.BUTTON3)
             rightPressed = false;
 
-        if(uiManager != null) {
+        if (uiManager != null) {
             uiManager.onMouseRelease(e);
         }
     }
@@ -47,7 +48,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         mouseX = e.getX();
         mouseY = e.getY();
 
-        if(uiManager != null) {
+        if (uiManager != null) {
             uiManager.onMouseMove(e);
         }
     }
@@ -109,5 +110,5 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         // TODO Auto-generated method stub
 
     }
-    
+
 }

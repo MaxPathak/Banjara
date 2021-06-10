@@ -1,10 +1,11 @@
 package src.tiles;
 
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 import src.gfx.SpriteSheet;
 
-public class TileSet {
+public class TileSet implements Serializable {
 
     private SpriteSheet sheet;
     private int firstIndex;
